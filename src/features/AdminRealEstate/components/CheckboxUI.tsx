@@ -1,13 +1,18 @@
 import React from "react";
 
-const CustomCheckbox = ({ name, title, checked, onChange }) => {
-  const checkboxRef = React.useRef(null);
-  const checkedStyle = `flex items-center text-sm ${
-    checked ? "bg-green-700" : "bg-[#262626]"
-  }`;
+interface Props {
+  name: string;
+  title: string;
+  checked: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const CustomCheckbox: React.FC<Props> = ({ name, title, checked, onChange }) => {
+  const checkboxRef = React.useRef<HTMLInputElement>(null);
+  const checkedStyle = `flex items-center text-sm ${checked ? "bg-green-700" : "bg-[#262626]"}`;
 
   const handleClick = () => {
-    checkboxRef.current.click();
+    checkboxRef.current?.click();
   };
 
   return (
@@ -25,14 +30,7 @@ const CustomCheckbox = ({ name, title, checked, onChange }) => {
         transition: "all 0.3s ease",
       }}
     >
-      <input
-        name={name}
-        type="checkbox"
-        checked={checked}
-        onChange={onChange}
-        ref={checkboxRef}
-        style={{ display: "none" }}
-      />
+      <input name={name} type="checkbox" checked={checked} onChange={onChange} ref={checkboxRef} style={{ display: "none" }} />
       <span className="select-none">{title}</span>
     </div>
   );

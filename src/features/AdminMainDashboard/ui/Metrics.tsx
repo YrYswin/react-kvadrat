@@ -1,6 +1,7 @@
 import * as React from "react";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { GlobalStyles } from "@mui/material";
+import { statisticsState } from "../store/types";
 
 const globalStyles = (
   <GlobalStyles
@@ -22,7 +23,7 @@ const globalStyles = (
 );
 
 interface Props {
-  items: any;
+  items: statisticsState[];
 }
 
 const Metrics: React.FC<Props> = ({ items }) => {

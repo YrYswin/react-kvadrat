@@ -16,7 +16,7 @@ const drawerWidth = 240;
 
 interface Props {
   open: boolean;
-  handleDrawerToggle: any;
+  handleDrawerToggle: () => void;
 }
 
 const AdminSidebar: React.FC<Props> = ({ open, handleDrawerToggle }) => {

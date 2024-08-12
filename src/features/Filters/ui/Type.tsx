@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../app/store";
 import {
@@ -26,8 +24,10 @@ const Type = () => {
   const { typeHouse, comfort } = useSelector(selectFilter);
 
   const houseType = ["Все", "Дома", "Квартиры", "Участки", "Комерческое недвижиомть"];
-  const handleChange = (value) => {
-    const option = priceVariable.find((x) => x.id === value);
+
+  const handleChange = (value: string) => {
+    // Замените string на подходящий тип, если id — это число
+    const option = priceVariable.find((x) => x.id === Number(value));
     if (option) {
       dispatch(setPrice(option));
     }
@@ -41,7 +41,7 @@ const Type = () => {
       <hr className="my-5" />
       <div className="mt-5">
         <p className="mb-3">Местоположение</p>
-        <SelectUI items={addressArray} active={"Бишкек"} width={300} />
+        <SelectUI itemsAdress={addressArray} active={"Бишкек"} width={300} />
       </div>
       <hr className="mt-10 mb-5" />
       <div>
@@ -74,7 +74,7 @@ const Type = () => {
       <div>
         <div>Цена</div>
         <div>
-          <SelectUI items={priceVariable} isPrice={true} onChange={handleChange} active={priceVariable[0].id} />
+          <SelectUI itemsPrice={priceVariable} isPrice={true} onChange={handleChange} active={String(priceVariable[0].id)} />
         </div>
       </div>
       <hr className="mt-10 mb-5" />

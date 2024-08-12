@@ -1,20 +1,18 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "../../../app/store";
-
 import SelectAutoWidth from "./SelectAutoWidth";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import ModalUI from "../../../shared/helpers/ModalUI";
-
 import { getHouseById, postHouse, patchHouse } from "../store/action";
 import { itemClear, selectHouses } from "../store/slice";
-
 import CustomCheckbox from "./CheckboxUI";
+import { PostHouseState } from "../store/types";
 
-const PenModal = () => {
+const PenModal: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { houseId } = useParams();
@@ -30,11 +28,37 @@ const PenModal = () => {
     if (isEditing) {
       dispatch(getHouseById(Number(houseId)));
     }
-  }, [houseId, dispatch]);
+  }, [houseId, dispatch, isEditing]);
 
   const { item } = useSelector(selectHouses);
-  const { register, handleSubmit, reset } = useForm({
-    defaultValues: isEditing && item ? item : {},
+  const { register, handleSubmit, reset } = useForm<PostHouseState>({
+    defaultValues:
+      isEditing && item
+        ? {
+            title: item.title,
+            price: item.price,
+            category: item.category,
+            description: item.description,
+            city: item.city,
+            pool: item.pool,
+            gym: item.gym,
+            garage: item.garage,
+            parking: item.parking,
+            garden: item.garden,
+            fireplace: item.fireplace,
+            area: item.area,
+            elevator: item.elevator,
+            clubhouse: item.clubhouse,
+            bedrooms: item.bedrooms,
+            rooms: item.rooms,
+            garage_how_many: item.garage_how_many,
+            kitchen: item.kitchen,
+            image: item.image,
+            square_footage: item.square_footage,
+            bathroom: item.bathroom,
+            laundry: item.laundry,
+          }
+        : {},
   });
   const [selectedImage, setSelectedImage] = React.useState<string | ArrayBuffer | null>(null);
   const [image, setImage] = React.useState<File | null>(null);
@@ -64,14 +88,14 @@ const PenModal = () => {
     area: item?.area || false,
   });
 
-  const onCheckboxChange = (name) => {
+  const onCheckboxChange = (name: keyof typeof checkboxState) => {
     setCheckboxState((prevState) => ({
       ...prevState,
       [name]: !prevState[name],
     }));
   };
 
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<PostHouseState> = (data) => {
     const formData = {
       ...data,
       ...checkboxState,
@@ -99,7 +123,31 @@ const PenModal = () => {
 
   React.useEffect(() => {
     if (item) {
-      reset(item);
+      const formattedItem: PostHouseState = {
+        title: item.title,
+        price: item.price,
+        category: item.category,
+        description: item.description,
+        city: item.city,
+        pool: item.pool,
+        gym: item.gym,
+        garage: item.garage,
+        parking: item.parking,
+        garden: item.garden,
+        fireplace: item.fireplace,
+        area: item.area,
+        elevator: item.elevator,
+        clubhouse: item.clubhouse,
+        bedrooms: item.bedrooms,
+        rooms: item.rooms,
+        garage_how_many: item.garage_how_many,
+        kitchen: item.kitchen,
+        image: item.image,
+        square_footage: item.square_footage,
+        bathroom: item.bathroom,
+        laundry: item.laundry,
+      };
+      reset(formattedItem);
     }
   }, [item, reset]);
 
@@ -198,26 +246,66 @@ const PenModal = () => {
         <div className="pt-1">
           <h2 className="text-[10px] md:text-sm">Удобства</h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-[6px] my-2">
-            {[
-              { name: "pool", title: "Бассейн" },
-              { name: "gym", title: "Тренажерный зал" },
-              { name: "garage", title: "Гараж" },
-              { name: "parking", title: "Парковка" },
-              { name: "garden", title: "Сад" },
-              { name: "fireplace", title: "Камин" },
-              { name: "elevator", title: "Лифт" },
-              { name: "clubhouse", title: "Клубный зал" },
-              { name: "laundry", title: "Прачечная" },
-              { name: "area", title: "Площадка" },
-            ].map(({ name, title }) => (
-              <CustomCheckbox
-                key={name}
-                name={name}
-                title={title}
-                checked={checkboxState[name]}
-                onChange={() => onCheckboxChange(name)}
-              />
-            ))}
+            <CustomCheckbox
+              name={"area"}
+              title={"Площадь"}
+              checked={checkboxState.area}
+              onChange={() => onCheckboxChange("area")}
+            />
+            <CustomCheckbox
+              name={"clubhouse"}
+              title={"Клубное здание"}
+              checked={checkboxState.clubhouse}
+              onChange={() => onCheckboxChange("clubhouse")}
+            />
+            <CustomCheckbox
+              name={"elevator"}
+              title={"Лифт"}
+              checked={checkboxState.elevator}
+              onChange={() => onCheckboxChange("elevator")}
+            />
+            <CustomCheckbox
+              name={"fireplace"}
+              title={"Камин"}
+              checked={checkboxState.fireplace}
+              onChange={() => onCheckboxChange("fireplace")}
+            />
+            <CustomCheckbox
+              name={"garage"}
+              title={"Гараж"}
+              checked={checkboxState.garage}
+              onChange={() => onCheckboxChange("garage")}
+            />
+            <CustomCheckbox
+              name={"garden"}
+              title={"Сад"}
+              checked={checkboxState.garden}
+              onChange={() => onCheckboxChange("garden")}
+            />
+            <CustomCheckbox
+              name={"gym"}
+              title={"Тренажерный зал"}
+              checked={checkboxState.gym}
+              onChange={() => onCheckboxChange("gym")}
+            />
+            <CustomCheckbox
+              name={"laundry"}
+              title={"Прачечная"}
+              checked={checkboxState.laundry}
+              onChange={() => onCheckboxChange("laundry")}
+            />
+            <CustomCheckbox
+              name={"parking"}
+              title={"Парковка"}
+              checked={checkboxState.parking}
+              onChange={() => onCheckboxChange("parking")}
+            />
+            <CustomCheckbox
+              name={"pool"}
+              title={"Бассейн"}
+              checked={checkboxState.pool}
+              onChange={() => onCheckboxChange("pool")}
+            />
           </div>
         </div>
 

@@ -1,12 +1,26 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getMetricsReq } from "../api";
-import { DateParams } from "./types";
+import { DateParams, analyticsState, statisticsState } from "./types";
 
-export const getMetrics = createAsyncThunk<any, DateParams>("metric/getMetric", async (params, { rejectWithValue }) => {
+type MetricsResponse = {
+  analytics: analyticsState;
+  statistics: statisticsState[];
+};
+interface ErrorResponse {
+  message: string;
+}
+
+export const getMetrics = createAsyncThunk<
+  MetricsResponse,
+  DateParams,
+  {
+    rejectValue: ErrorResponse;
+  }
+>("metric/getMetric", async (params, { rejectWithValue }) => {
   try {
-    const res = await getMetricsReq(params);
+    const res: MetricsResponse = await getMetricsReq(params);
     return res;
   } catch (error) {
-    return rejectWithValue(error.response ? error.response.data : "Ошибка сервера");
+    return rejectWithValue(error as ErrorResponse);
   }
 });

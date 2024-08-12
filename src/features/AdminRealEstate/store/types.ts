@@ -55,7 +55,7 @@ interface HouseImageState {
 
 export interface PostHouseState {
   title: string;
-  price: string;
+  price: number;
   category: string;
   description: string;
   city: string;

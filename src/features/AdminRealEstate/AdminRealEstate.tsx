@@ -69,7 +69,7 @@ const AdminRealEstate = () => {
 
   React.useEffect(() => {
     dispatch(getHouses({ params: null, page: 0 }));
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

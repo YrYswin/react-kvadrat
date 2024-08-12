@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 interface Props {
   isOpen: boolean;
-  setIsOpen: any;
+  setIsOpen: (e: boolean) => void;
 }
 
 const Modal: React.FC<Props> = ({ isOpen, setIsOpen }) => {

@@ -27,7 +27,7 @@ const ProductFilters = () => {
         page: page || 0,
       })
     );
-  }, [price, typeHouse, comfort, page]);
+  }, [dispatch, price, typeHouse, comfort, page]);
 
   const productsList = items.map((item, index) => <ProductBlock key={index} {...item} />);
   const skeletonsList = [...new Array(8)].map((_, i) => <ProductBlockSkeleton key={i} />);

@@ -2,8 +2,8 @@ import React from "react";
 import { styled } from "@mui/material";
 
 interface Props {
-  onClickPrev: (e: any) => void;
-  onClickNext: (e: any) => void;
+  onClickPrev: (e: number) => void;
+  onClickNext: (e: number) => void;
   dateTitle: string;
   width: number;
 }

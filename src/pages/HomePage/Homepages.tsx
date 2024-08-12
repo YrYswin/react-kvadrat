@@ -1,6 +1,5 @@
 import React from "react";
 import Carousel from "../../features/Banner.jsx/Carousel";
-import { Link } from "react-router-dom";
 import Contacts from "../../shared/helpers/Contacts";
 
 export const Homepages: React.FC = () => {

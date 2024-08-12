@@ -1,10 +1,9 @@
-import React from "react";
-import { MenuItem, Select, Box, styled } from "@mui/material";
+import { MenuItem, Select, Box, styled, SelectChangeEvent } from "@mui/material";
 import { priceVariable } from "../../../utils/data";
 import { useDispatch } from "react-redux";
 import { setPrice } from "../store/slice";
 
-const CustomSelect = styled(Select)(({ theme }) => ({
+const CustomSelect = styled(Select)({
   backgroundColor: "#333",
   color: "white",
   width: "200px",
@@ -14,14 +13,14 @@ const CustomSelect = styled(Select)(({ theme }) => ({
   "& .MuiSvgIcon-root": {
     color: "white",
   },
-}));
+});
 
 function SaleMenu() {
   const dispatch = useDispatch();
 
-  const handleChange = (event) => {
+  const handleChange = (event: SelectChangeEvent<unknown>) => {
     const idPrice = event.target.value;
-    const option = priceVariable.find((x) => x.id === idPrice);
+    const option = priceVariable.find((x) => x.id === Number(idPrice));
     if (option) {
       dispatch(setPrice(option));
     }

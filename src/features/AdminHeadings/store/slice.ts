@@ -27,9 +27,9 @@ const headingSlice = createSlice({
         state.isLoading = false;
         state.items = payload.results;
       })
-      .addCase(getHeadings.rejected, (state, action) => {
+      .addCase(getHeadings.rejected, (state) => {
         state.isLoading = false;
-        state.error = action.payload;
+        state.error = "Error";
       });
 
     builder

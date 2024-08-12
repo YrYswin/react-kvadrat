@@ -13,7 +13,7 @@ export interface HeadingSliceState {
   items: HeadingState[] | null;
   item: HeadingState | null;
   isLoading: boolean;
-  error: any;
+  error: null | "Error";
 }
 
 export interface PatchHeadingState {

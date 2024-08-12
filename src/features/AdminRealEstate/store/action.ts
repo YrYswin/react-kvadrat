@@ -8,17 +8,13 @@ export const getHouses = createAsyncThunk(
   "get/getHouses",
   async ({ params, page }: { params?: FilterSliceState | null; page: number }, { rejectWithValue }) => {
     try {
-      let data: any;
       if (params) {
-        const response = await getHousesReqFilter(params, page);
-        data = response.data;
+        return (await getHousesReqFilter(params, page)).data;
       } else {
-        const response = await getHousesReq(page);
-        data = response.data;
+        return (await getHousesReq(page)).data;
       }
-      return data;
     } catch (err) {
-      return rejectWithValue(err.message || "An error occurred");
+      return rejectWithValue(err);
     }
   }
 );
@@ -42,7 +38,7 @@ export const postHouse = createAsyncThunk(
       return res.data;
     } catch (err) {
       console.error("Error occurred:", err);
-      return rejectWithValue(err.response?.data || err.message);
+      return rejectWithValue(err);
     }
   }
 );
@@ -57,7 +53,7 @@ export const patchHouse = createAsyncThunk(
       return res.data;
     } catch (err) {
       console.error("Error occurred:", err);
-      return rejectWithValue(err.response?.data || err.message);
+      return rejectWithValue(err);
     }
   }
 );
@@ -68,6 +64,6 @@ export const deleteHouse = createAsyncThunk("delete/deleteHouse", async (id, { r
     return res.data;
   } catch (err) {
     console.error("Error occurred:", err);
-    return rejectWithValue(err.response?.data || err.message);
+    return rejectWithValue(err);
   }
 });

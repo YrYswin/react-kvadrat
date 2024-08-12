@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Menu, MenuItem, Button, styled } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
@@ -11,26 +11,26 @@ const CustomButton = styled(Button)<{ selected: boolean }>(({ selected }) => ({
   },
 }));
 
-const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
+const CustomMenuItem = styled(MenuItem)({
   "&:hover": {
     backgroundColor: "#C8180C",
     color: "#ffffff",
   },
-}));
+});
 
-const CustomMenu = styled(Menu)(({ theme }) => ({
+const CustomMenu = styled(Menu)({
   "& .MuiPaper-root": {
     borderBottomLeftRadius: "42px",
     borderBottomRightRadius: "42px",
   },
-}));
+});
 
 const DropdownMenu = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [selected, setSelected] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [selected, setSelected] = React.useState<boolean>(false);
   const open = Boolean(anchorEl);
 
-  const handleClick = (event) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
     setAnchorEl(event.currentTarget);
     setSelected(!selected);
   };

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getHeadingsByIdReq, getHeadingsReq, postHeadingReq, patchHeadingReq, deleteHeadingReq } from "../api";
 import { PatchHeadingState, PostHeadingState } from "./types";
-import { AxiosError } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { NavigateFunction } from "react-router-dom";
 import { addNotification } from "../../notification-context/slice";
 
@@ -9,7 +9,7 @@ export const getHeadings = createAsyncThunk("heading/getHeading", async (_, { re
   try {
     return (await getHeadingsReq()).data;
   } catch (error) {
-    return rejectWithValue(error.response ? error.response.data : "Ошибка сервера");
+    return rejectWithValue(error);
   }
 });
 
@@ -21,22 +21,32 @@ export const getHeadingById = createAsyncThunk("heading/getHeadingById", async (
   }
 });
 
-export const postHeading = createAsyncThunk<any, { data: PostHeadingState; navigate: NavigateFunction }, { rejectValue: any }>(
-  "heading/postHeading",
-  async ({ data, navigate }, { rejectWithValue, dispatch }) => {
-    try {
-      const res = await postHeadingReq(data);
-      dispatch(addNotification({ type: "success", message: "Объявление cоздано" }));
-      navigate("/admin/headings");
-      return res.data;
-    } catch (err) {
-      const axiosError = err as AxiosError;
-      dispatch(addNotification({ type: "error", message: "Не удалось создать объявление" }));
-      console.error("Error occurred:", axiosError);
-      return rejectWithValue(axiosError.response?.data || axiosError.message);
-    }
+interface SuccessResponse {
+  data: string;
+}
+
+interface ErrorResponse {
+  message: string;
+}
+
+export const postHeading = createAsyncThunk<
+  SuccessResponse,
+  { data: PostHeadingState; navigate: NavigateFunction },
+  { rejectValue: ErrorResponse }
+>("heading/postHeading", async ({ data, navigate }, { rejectWithValue, dispatch }) => {
+  try {
+    const res: AxiosResponse<SuccessResponse> = await postHeadingReq(data);
+    dispatch(addNotification({ type: "success", message: "Объявление cоздано" }));
+    navigate("/admin/headings");
+    return res.data; // Верните данные ответа
+  } catch (err) {
+    const axiosError = err as AxiosError<ErrorResponse>;
+    dispatch(addNotification({ type: "error", message: "Не удалось создать объявление" }));
+    console.error("Error occurred:", axiosError);
+
+    return rejectWithValue(axiosError.response?.data || { message: axiosError.message });
   }
-);
+});
 
 export const patchHeading = createAsyncThunk(
   "heading/patchHeading",

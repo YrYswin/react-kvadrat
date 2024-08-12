@@ -30,7 +30,7 @@ const Header = () => {
     };
   }, [isOpen]);
 
-  const handleScroll = (section) => {
+  const handleScroll = (section: string) => {
     navigate("/");
     setTimeout(() => {
       if (scrollToSection) {

@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../app/store";
 import { getMetrics } from "../store/action";
-import { Card } from "@mui/material";
+import { Card, GlobalStyles } from "@mui/material";
 import { PieChart } from "@mui/x-charts/PieChart";
 import Metrics from "./Metrics";
-
-import { GlobalStyles } from "@mui/material";
 import FilterDate from "./FIlterDate";
 import { selectMetrics } from "../store/slice";
+import { MetricState } from "../store/types";
 
 const globalStyles = (
   <GlobalStyles
@@ -28,34 +27,39 @@ const globalStyles = (
   />
 );
 
-const MainMetrics = () => {
+const MainMetrics: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [currentWeekStart, setCurrentWeekStart] = React.useState(getMonday(new Date()));
-  const { analytics, statistics } = useSelector(selectMetrics);
+  const [currentWeekStart, setCurrentWeekStart] = useState<Date>(getMonday(new Date()));
+  const { analytics, statistics } = useSelector(selectMetrics) as MetricState;
 
   const monday = currentWeekStart;
-  const sunday = new Date(monday);
-  sunday.setDate(monday.getDate() + 6);
+  const sunday = React.useMemo(() => {
+    const endOfWeek = new Date(monday);
+    endOfWeek.setDate(monday.getDate() + 6);
+    return endOfWeek;
+  }, [monday]);
 
   useEffect(() => {
     dispatch(getMetrics({ monday, sunday }));
-  }, [dispatch, currentWeekStart]);
+  }, [dispatch, currentWeekStart, monday, sunday]);
 
-  function getMonday(date: Date) {
+  function getMonday(date: Date): Date {
     date = new Date(date);
     const day = date.getDay();
     const diff = date.getDate() - day + (day === 0 ? -6 : 1);
     return new Date(date.setDate(diff));
   }
-  function formatDate(date) {
-    const options = {
+
+  function formatDate(date: Date): string {
+    const options: Intl.DateTimeFormatOptions = {
       year: "numeric",
       month: "long",
       day: "numeric",
     };
     return date.toLocaleDateString("ru-RU", options);
   }
-  function updateWeek(offset) {
+
+  function updateWeek(offset: number): void {
     const newWeekStart = new Date(currentWeekStart);
     newWeekStart.setDate(currentWeekStart.getDate() + offset);
     setCurrentWeekStart(newWeekStart);
@@ -63,20 +67,20 @@ const MainMetrics = () => {
 
   const graphics = [
     {
-      value: analytics?.new_visitors_percentage,
+      value: analytics?.new_visitors_percentage || 0,
       name: "Новые посетители",
       color: "#dc2626",
       tw: "text-red-600",
     },
     {
-      value: analytics?.returning_visitors_percentage,
+      value: analytics?.returning_visitors_percentage || 0,
       name: "Повторные посетители",
       color: "blue",
       tw: "text-blue-600",
     },
   ];
 
-  const getExistingData = (arr) => {
+  const getExistingData = (arr: typeof graphics) => {
     return arr.filter((item) => item.value > 0);
   };
 

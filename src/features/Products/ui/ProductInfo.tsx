@@ -27,7 +27,7 @@ const ProductInfo: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(getHouseById(Number(id)));
-  }, [id]);
+  }, [dispatch, id]);
 
   const types = [
     {
@@ -55,23 +55,24 @@ const ProductInfo: React.FC = () => {
 
   const checkContainer = checkbox.map(({ label, name }, index) => {
     let checked = false;
-
+  
     if (house) {
       Object.keys(house).forEach((key) => {
         if (name === key) {
-          checked = house[key];
+          checked = house[key as keyof typeof house] as boolean;
         }
       });
     }
-
+  
     const styleTW = checked ? "bg-green-700" : "bg-[#262626] border border-gray-600";
-
+  
     return (
       <div key={index} className={`text-sm text-white ${styleTW} rounded-lg py-2 px-5 cursor-default select-none`}>
         <p>{label}</p>
       </div>
     );
   });
+  
 
   return (
     <Container>

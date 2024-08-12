@@ -25,9 +25,9 @@ const metricSlice = createSlice({
         state.analytics = payload.analytics;
         state.statistics = payload.statistics;
       })
-      .addCase(getMetrics.rejected, (state, action) => {
+      .addCase(getMetrics.rejected, (state) => {
         state.isLoading = false;
-        state.error = action.payload;
+        state.error = "Error";
       });
   },
 });

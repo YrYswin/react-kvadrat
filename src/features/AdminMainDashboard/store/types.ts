@@ -2,10 +2,15 @@ export interface MetricsSliceState {
   analytics: analyticsState | null;
   statistics: statisticsState[];
   isLoading: boolean;
-  error: any;
+  error: null | "Error";
 }
 
-interface statisticsState {
+export interface MetricState {
+  analytics: analyticsState;
+  statistics: statisticsState[];
+}
+
+export interface statisticsState {
   date: string;
   visits_count: number;
   page_views_count: number;
@@ -13,7 +18,7 @@ interface statisticsState {
   returning_visitors_count: number;
 }
 
-interface analyticsState {
+export interface analyticsState {
   new_visitors_percentage: number;
   returning_visitors_percentage: number;
   total_visits: number;

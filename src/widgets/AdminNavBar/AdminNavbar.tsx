@@ -11,7 +11,7 @@ import { useTheme } from "@mui/material/styles";
 import Modal from "../Header/Modal";
 
 interface Props {
-  handleDrawerToggle: any;
+  handleDrawerToggle: () => void;
   isOpen: boolean;
 }
 
