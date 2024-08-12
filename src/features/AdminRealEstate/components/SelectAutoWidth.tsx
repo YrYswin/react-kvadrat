@@ -1,15 +1,15 @@
-import * as React from "react";
-
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { UseFormRegisterReturn } from "react-hook-form";
 
-export default function SelectAutoWidth({
-  count,
-  register,
-  name,
-  defaultValue,
-}) {
+interface Props {
+  count: number;
+  register: UseFormRegisterReturn;
+  name: string;
+  defaultValue: number | undefined;
+}
+export default function SelectAutoWidth({ count, register, name, defaultValue }: Props) {
   const renderMenuItems = () => {
     const items = [];
     for (let i = 0; i <= count; i++) {
@@ -29,7 +29,7 @@ export default function SelectAutoWidth({
       <FormControl sx={{ minWidth: 50, marginLeft: 2 }}>
         <Select
           id="demo-simple-select-autowidth"
-          {...(register && name ? register(name) : {})}
+          {...(register && name ? register : {})}
           defaultValue={defaultValue || 0}
           autoWidth
           style={{ outline: "none", height: "17px", marginTop: 8 }}

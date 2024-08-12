@@ -203,35 +203,40 @@ const PenModal: React.FC = () => {
               <p className="pt-1 text-xs">Комнаты</p>
               <img className="ml-2" width={16} src="/svg/Rooms.svg" alt="Rooms" />
             </div>
-            <SelectAutoWidth count={5} register={register} name="rooms" defaultValue={item?.rooms} />
+            <SelectAutoWidth count={5} register={register("rooms")} name="rooms" defaultValue={item?.rooms} />
           </div>
           <div className="w-[20%]">
             <div className="flex bg-[#C8180C] p-1 items-center justify-center">
               <p className="pt-1 text-xs">Ванна</p>
               <img className="ml-2" width={16} src="/svg/Baths.svg" alt="bathroom" />
             </div>
-            <SelectAutoWidth count={5} register={register} name="bathroom" defaultValue={item?.bathroom} />
+            <SelectAutoWidth count={5} register={register("bathroom")} name="bathroom" defaultValue={item?.bathroom} />
           </div>
           <div className="w-[20%]">
             <div className="flex bg-[#C8180C] p-1 items-center justify-center">
               <p className="pt-1 text-xs">Спальня</p>
               <img className="ml-2" width={16} src="/svg/Bedroom.svg" alt="Bedroom" />
             </div>
-            <SelectAutoWidth count={5} register={register} name="bedrooms" defaultValue={item?.bedrooms} />
+            <SelectAutoWidth count={5} register={register("bedrooms")} name="bedrooms" defaultValue={item?.bedrooms} />
           </div>
           <div className="w-[20%]">
             <div className="flex bg-[#C8180C] p-1 items-center justify-center">
               <p className="pt-1 text-xs">Кухня</p>
               <img className="ml-2" width={16} src="/svg/kitchen.svg" alt="kitchen" />
             </div>
-            <SelectAutoWidth count={5} register={register} name="kitchen" defaultValue={item?.kitchen} />
+            <SelectAutoWidth count={5} register={register("kitchen")} name="kitchen" defaultValue={item?.kitchen} />
           </div>
           <div className="w-[20%]">
             <div className="flex bg-[#C8180C] p-1 items-center justify-center">
               <p className="pt-1 text-xs">Гараж</p>
               <img className="ml-2" width={16} src="/svg/Garage.svg" alt="garage_how_many" />
             </div>
-            <SelectAutoWidth count={5} register={register} name="garage_how_many" defaultValue={item?.garage_how_many} />
+            <SelectAutoWidth
+              count={5}
+              register={register("garage_how_many")}
+              name="garage_how_many"
+              defaultValue={item?.garage_how_many}
+            />
           </div>
         </div>
 

@@ -1,60 +1,57 @@
-import React, { useState } from 'react';
-import Slider from '@mui/material/Slider';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import React from "react";
+import Slider from "@mui/material/Slider";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 const StyledSlider = styled(Slider)({
-  color: 'red',
-  
+  color: "red",
   height: 8,
-  '& .MuiSlider-track': {
-    border: 'none',
-  
+  "& .MuiSlider-track": {
+    border: "none",
   },
-  '& .MuiSlider-thumb': {
+  "& .MuiSlider-thumb": {
     height: 16,
     width: 16,
-    
-    border: '2px solid currentColor',
-    '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
-      boxShadow: 'inherit',
+    border: "2px solid currentColor",
+    "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
+      boxShadow: "inherit",
     },
-    '&:before': {
-      display: 'none',
+    "&:before": {
+      display: "none",
     },
   },
-  '& .MuiSlider-rail': {
-    color: 'grey',
+  "& .MuiSlider-rail": {
+    color: "grey",
     opacity: 1,
     height: 8,
-    
   },
 });
 
-function valuetext(value) {
+function valuetext(value: number) {
   return `${value}`;
 }
 
-export default function RangeSlider() {
-  const [value, setValue] = useState([1500, 3000]);
+type Range = [number, number];
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+export default function RangeSlider() {
+  const [value, setValue] = React.useState<Range>([1500, 3000]);
+
+  const handleChange = (event: Event, newValue: number | number[], activeThumb?: number) => {
+    console.log(event, activeThumb);
+    if (Array.isArray(newValue)) {
+      setValue(newValue as Range);
+    }
   };
 
   return (
-   
-
-  
-    <Box >
+    <Box>
       <Typography id="range-slider" gutterBottom>
         Площадь земельного участка
       </Typography>
       <StyledSlider
         value={value}
         onChange={handleChange}
-        
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
@@ -63,6 +60,5 @@ export default function RangeSlider() {
       />
       <Box sx={{ mt: 2 }}>{`${value[0]} - ${value[1]}`}</Box>
     </Box>
-   
   );
 }

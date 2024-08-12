@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import Container from "../../../shared/helpers/Container";
 import Accordion from "@mui/material/Accordion";
@@ -8,12 +7,13 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 export default function AccordionUsage() {
   const [expanded, setExpanded] = useState("");
 
-  const handleChange = (panel: string) => (_event, isExpanded) => {
+  const handleChange = (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
+    console.log(_event);
     setExpanded(isExpanded ? panel : "");
   };
 
   const backgroundColor = "rgba(38, 38, 38, 1)";
-  const icon = (isExpanded) => <span style={{ color: "white" }}>{isExpanded ? "-" : "+"}</span>;
+  const icon = (isExpanded: boolean) => <span style={{ color: "white" }}>{isExpanded ? "-" : "+"}</span>;
 
   return (
     <Container>

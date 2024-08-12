@@ -6,7 +6,7 @@ import { HouseState } from "../../AdminRealEstate/store/types";
 
 const ProductBLock: React.FC<HouseState> = ({ image: imageUrl, price, title, id }) => {
   const navigate = useNavigate();
-  const clickInfo = (id) => {
+  const clickInfo = (id: number) => {
     window.scrollTo(0, 0);
     navigate(`/info/${id}`);
   };

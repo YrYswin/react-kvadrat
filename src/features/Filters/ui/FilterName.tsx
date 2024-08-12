@@ -1,6 +1,7 @@
 import React from "react";
 import ClearIcon from "@mui/icons-material/Clear";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../../app/store";
 import {
   setPriceClear,
   clearTypeHouse,
@@ -19,7 +20,7 @@ import {
 } from "../store/slice";
 
 const FilterName = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { price, typeHouse, comfort } = useSelector(selectFilter);
   const [filtered, setFiltered] = React.useState(false);
 
@@ -40,7 +41,13 @@ const FilterName = () => {
     setFiltered(hasActiveFilter);
   }, [price, typeHouse, comfort]);
 
-  const getFilters = (set, filter, name) => {
+  interface GetFilterState {
+    set: any;
+    filter: any;
+    name: string;
+  }
+
+  const GetFilters: React.FC<GetFilterState> = ({ set, filter, name }) => {
     if (!!filter || filter) {
       return (
         <div className="flex items-center gap-1 px-5 py-1 text-white bg-red-600 rounded-full shrink-0 whitespace-nowrap">
@@ -58,18 +65,18 @@ const FilterName = () => {
       <p className="mb-3">Активный фильтр</p>
       <div className="flex items-center justify-between gap-2 ">
         <div className="flex flex-wrap gap-4 lg:w-[550px] xl:w-full md:w-[290px]">
-          {getFilters(setPriceClear, price.max && price.min, price.label)}
-          {getFilters(clearTypeHouse, typeHouse, `Тип дома ${typeHouse}`)}
-          {getFilters(setPool, comfort.pool, "Бассейн")}
-          {getFilters(setGym, comfort.gym, "Cпортзал")}
-          {getFilters(setGarage, comfort.garage, "Гараж")}
-          {getFilters(setParking, comfort.parking, "Стоянка")}
-          {getFilters(setGarden, comfort.garden, "Сад")}
-          {getFilters(setFireplace, comfort.fireplace, "Камин")}
-          {getFilters(setElevator, comfort.elevator, "Лифт")}
-          {getFilters(setClubhouse, comfort.clubhouse, "Клубный дом")}
-          {getFilters(setLaundry, comfort.laundry, "Прачечная")}
-          {getFilters(setArea, comfort.area, "Дектская Площадка")}
+          <GetFilters set={setPriceClear} filter={price.max && price.min} name={price.label} />
+          <GetFilters set={clearTypeHouse} filter={typeHouse} name={typeHouse} />
+          <GetFilters set={setPool} filter={comfort.pool} name={"Бассейн"} />
+          <GetFilters set={setGym} filter={comfort.gym} name={"Тренажерный зал"} />
+          <GetFilters set={setGarage} filter={comfort.garage} name={"Гараж"} />
+          <GetFilters set={setParking} filter={comfort.parking} name={"Парковка"} />
+          <GetFilters set={setGarden} filter={comfort.garden} name={"Сад"} />
+          <GetFilters set={setFireplace} filter={comfort.fireplace} name={"Камин"} />
+          <GetFilters set={setElevator} filter={comfort.elevator} name={"Лифт"} />
+          <GetFilters set={setClubhouse} filter={comfort.clubhouse} name={"Клуб"} />
+          <GetFilters set={setLaundry} filter={comfort.laundry} name={"Прачечная"} />
+          <GetFilters set={setArea} filter={comfort.area} name={"Площадка"} />
         </div>
         <div className="relative inline-block whitespace-nowrap">
           {filtered && (

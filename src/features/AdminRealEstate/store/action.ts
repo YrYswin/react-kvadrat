@@ -58,7 +58,7 @@ export const patchHouse = createAsyncThunk(
   }
 );
 
-export const deleteHouse = createAsyncThunk("delete/deleteHouse", async (id, { rejectWithValue }) => {
+export const deleteHouse = createAsyncThunk("delete/deleteHouse", async (id: number, { rejectWithValue }) => {
   try {
     const res = await deleteHouseReq(id);
     return res.data;

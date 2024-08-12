@@ -1,14 +1,16 @@
 import { apiRoot, axiosWithFile } from "../../app/api";
 import { getUserLS } from "../../utils";
+import { FilterSliceState } from "../Filters/store/types";
+import { PostHouseState } from "./store/types";
 
-export const getHousesReq = (page) => {
+export const getHousesReq = (page: number) => {
   return apiRoot.get(`/houses/?limit=8&offset=${page}`);
 };
 
-export const getHousesReqFilter = (params, page) => {
+export const getHousesReqFilter = (params: FilterSliceState, page: number) => {
   const { price, typeHouse, comfort } = params;
   const type = typeHouse === "Все" ? "" : typeHouse;
-  function encodeIfInvalid(searchString) {
+  function encodeIfInvalid(searchString: string) {
     const invalidCharacters = /[^a-zA-Z0-9-_.~]/;
     if (invalidCharacters.test(searchString)) {
       return encodeURIComponent(searchString);
@@ -28,11 +30,11 @@ export const getHousesReqFilter = (params, page) => {
   );
 };
 
-export const getHouseByIdReq = (id) => {
+export const getHouseByIdReq = (id: number) => {
   return apiRoot.get(`/houses/${id}/`);
 };
 
-export const postHouseReq = (data) => {
+export const postHouseReq = (data: PostHouseState) => {
   const { username, password } = getUserLS();
   const token = btoa(`${username}:${password}`);
   return axiosWithFile.post("/houses/", data, {
@@ -42,10 +44,10 @@ export const postHouseReq = (data) => {
   });
 };
 
-export const patchHouseReq = (data, id) => {
+export const patchHouseReq = (data: PostHouseState, id: number) => {
   return axiosWithFile.put(`/houses/${id}/`, data);
 };
 
-export const deleteHouseReq = (id) => {
+export const deleteHouseReq = (id: number) => {
   return apiRoot.delete(`/houses/${id}/`);
 };

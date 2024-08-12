@@ -2,7 +2,7 @@ import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -28,21 +28,17 @@ const names = [
   "Kelly Snyder",
 ];
 
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName === name
-        ? theme.typography.fontWeightMedium
-        : theme.typography.fontWeightRegular,
-  };
-}
-
 export default function SingleSelect() {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState("");
 
-  const handleChange = (event) => {
-    setPersonName(event.target.value);
+  function getStyles(name: string, personName: string) {
+    return {
+      fontWeight: personName === name ? theme.typography.fontWeightMedium : theme.typography.fontWeightRegular,
+    };
+  }
+  const handleChange = (event: SelectChangeEvent<unknown>) => {
+    setPersonName(event.target.value as string);
   };
 
   return (
@@ -62,11 +58,7 @@ export default function SingleSelect() {
             <p>Выберите местоположение</p>
           </MenuItem>
           {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
+            <MenuItem key={name} value={name} style={getStyles(name, personName)}>
               {name}
             </MenuItem>
           ))}

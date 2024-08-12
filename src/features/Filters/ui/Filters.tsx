@@ -1,20 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import Type from "./Type";
 import Container from "../../../shared/helpers/Container";
 import ActiveFilter from "./ActiveFilter";
 import ClearIcon from "@mui/icons-material/Clear";
 
 const Filters = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   return (
     <Container>
       <div className="flex flex-col w-full gap-3 md:mt-20 md:flex-row">
         <div className={`md:block flex-col ${open ? "block" : "hidden"}`}>
           <div className="flex items-center justify-between pb-4 text-white md:hidden">
-            <ClearIcon
-              onClick={() => setOpen(!open)}
-              className="cursor-pointer"
-            />
+            <ClearIcon onClick={() => setOpen(!open)} className="cursor-pointer" />
             <h4 className="font-normal cursor-pointer ">Фильтр</h4>
             <p className="cursor-pointer">очистить</p>
           </div>
