@@ -1,13 +1,11 @@
-import React from "react";
-
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "../../widgets/layout/Layout";
+import Layout from "../../widgets/Layout/Layout";
 import NotFound from "../../widgets/NotFound/NotFound";
-import HomePage from "../../Pages/HomePage/HomePage";
+import HomePage from "../../pages/HomePage/HomePage";
 import Filters from "../../features/Filters/ui/Filters";
-import CompanyPage from "../../Pages/AboutCompany/CompanyPage";
-import InfoPage from "../../Pages/InfoPage/InfoPage";
-import AdminLayout from "../../widgets/layout/AdminLayout";
+import CompanyPage from "../../pages/AboutCompany/CompanyPage";
+import InfoPage from "../../pages/InfoPage/InfoPage";
+import AdminLayout from "../../widgets/Layout/AdminLayout";
 import AdminMainDashboard from "../../features/AdminMainDashboard/AdminMainDashboard";
 import AdminRealEstate from "../../features/AdminRealEstate/AdminRealEstate";
 import AdminHeadings from "../../features/AdminHeadings";

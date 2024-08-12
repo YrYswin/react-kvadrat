@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollContext } from "../layout/Layout";
+import { ScrollContext } from "../Layout/Layout";
 import { Link, useNavigate } from "react-router-dom";
 
 interface Props {

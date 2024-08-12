@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "../../shared/helpers/Container";
 import { Link, useNavigate } from "react-router-dom";
-import { ScrollContext } from "../layout/Layout";
+import { ScrollContext } from "../Layout/Layout";
 import Modal from "./Modal";
 
 const Header = () => {
