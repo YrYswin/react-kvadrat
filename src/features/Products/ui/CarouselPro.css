@@ -1,0 +1,26 @@
+/* CarouselPro.css */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #fff; 
+  width: 30px; 
+  height: 30px; 
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 12px; /* Размер иконок */
+}
+
+.swiper-pagination-bullet {
+  background: #fff; /* Белый цвет буллетов */
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ff0000; /* Красный цвет активного буллета */
+}
