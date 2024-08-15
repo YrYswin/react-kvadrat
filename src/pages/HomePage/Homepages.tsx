@@ -11,8 +11,8 @@ export const Homepages: React.FC = () => {
   return (
     <div className="relative">
       <Carousel />
-      <div className="absolute bottom-[70px] left-[10%] lg:left-[100px] z-10">
-        <div className="texts flex flex-col lg:flex-row gap-6 lg:gap-60 mb-10">
+      <div className="absolute bottom-[20px] lg:bottom-[80px] left-[4%] md:left-[50px] lg:left-[90px] w-[88%] z-10">
+        <div className="texts flex flex-col lg:flex-row gap-2 lg:gap-60 mb-3">
           {texts?.map((text, index) => (
             <div key={index} className="flex gap-2">
               <img className="p-1 bg-red-600 rounded-full" src="/svg/chekcbox.svg" alt="icon" />

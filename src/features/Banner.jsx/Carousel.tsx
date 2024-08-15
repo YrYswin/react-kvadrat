@@ -42,7 +42,7 @@ const Carousel: React.FC = () => {
             backgroundSize: "cover",
           }}
         >
-          <h1 className="absolute bottom-[250px] w-full md:w-3/4 text-4xl md:text-5xl font-semibold text-white ml-4 md:ml-[40px] lg:ml-[100px]">
+          <h1 className="absolute bottom-[200px] md:bottom-[250px] lg:bottom-[250px] w-full md:w-3/4 text-2xl md:text-5xl font-semibold text-white ml-4 md:ml-[40px] lg:ml-[100px]">
             {title}
           </h1>
         </div>
