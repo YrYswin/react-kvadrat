@@ -120,14 +120,27 @@ const ProductInfo: React.FC = () => {
           </p>
         </div>
         <div className="bg-[#262626] py-3 px-5 rounded-xl">
-          <h1 className="text-xl text-white font-medium ml-5 pb-5">ОБЗОР НЕДВИЖИМОСТИ</h1>
-          <div className="flex gap-4">
+          <h1 className="text-xl text-white font-medium ml-5 pb-5">
+            ОБЗОР НЕДВИЖИМОСТИ
+          </h1>
+          <div className="flex flex-wrap gap-4">
             {types.map((obj, index) => (
-              <div key={index} className="flex flex-1 bg-red-600 gap-2 rounded-lg hover:shadow-inner py-[4px] pl-[10px] h-[70px]">
-                <img src={obj.img} alt="job" className="p-2" />
+              <div
+                key={index}
+                className="flex flex-1 bg-red-600 gap-2 rounded-lg hover:shadow-inner py-[4px] pl-[10px] h-[70px] sm:h-[80px] md:h-[90px] lg:h-[100px] xl:h-[110px]"
+              >
+                <img
+                  src={obj.img}
+                  alt="job"
+                  className="p-2 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16"
+                />
                 <div className="flex flex-col items-start justify-center">
-                  <h1 className="text-white text-xl font-bold">{obj.name}</h1>
-                  <p className="text-gray-100 text-xl">{obj.number}</p>
+                  <h1 className="text-white text-md md:text-xl font-bold ">
+                    {obj.name}
+                  </h1>
+                  <p className="text-gray-100 text-xl sm:text-lg md:text-2xl lg:text-3xl">
+                    {obj.number}
+                  </p>
                 </div>
               </div>
             ))}
@@ -135,7 +148,9 @@ const ProductInfo: React.FC = () => {
         </div>
         <div className="bg-[#262626] py-3 px-5 rounded-xl">
           <h1 className="text-xl font-medium text-white ml-10">УДОБСТВА</h1>
-          <div className="grid grid-cols-5 py-5 gap-4">{checkContainer}</div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 py-5 gap-4">
+            {checkContainer}
+          </div>
         </div>
       </div>
     </Container>
