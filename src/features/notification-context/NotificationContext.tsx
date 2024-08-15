@@ -13,13 +13,13 @@ const NotificationComponent: React.FC = () => {
     if (notifications.length > 0) {
       const timer = setTimeout(() => {
         dispatch(removeNotification());
-      }, 7000); // Удаление уведомления через 7 секунд
+      }, 5000); // Удаление уведомления через 7 секунд
       return () => clearTimeout(timer);
     }
   }, [notifications, dispatch]);
 
   return (
-    <Stack sx={{ position: "fixed", bottom: 46, right: 46, width: "auto" }} spacing={2}>
+    <Stack sx={{ position: "fixed", bottom: 34, right: 34, width: "auto" }} spacing={2}>
       {notifications.map((notif, index) => (
         <Alert key={index} severity={notif.type}>
           {notif.message}

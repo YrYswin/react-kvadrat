@@ -48,14 +48,14 @@ const ProductInfo: React.FC = () => {
     { name: "Площадь (м2)", number: house?.square_footage, img: "/svg/kv.svg" },
     {
       name: "Гараж",
-      number: house?.garage,
+      number: house?.garage_how_many,
       img: "/svg/garaj.svg",
     },
   ];
 
   const checkContainer = checkbox.map(({ label, name }, index) => {
     let checked = false;
-  
+
     if (house) {
       Object.keys(house).forEach((key) => {
         if (name === key) {
@@ -63,16 +63,15 @@ const ProductInfo: React.FC = () => {
         }
       });
     }
-  
+
     const styleTW = checked ? "bg-green-700" : "bg-[#262626] border border-gray-600";
-  
+
     return (
       <div key={index} className={`text-sm text-white ${styleTW} rounded-lg py-2 px-5 cursor-default select-none`}>
         <p>{label}</p>
       </div>
     );
   });
-  
 
   return (
     <Container>

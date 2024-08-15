@@ -3,6 +3,7 @@ import { getHousesReq, getHousesReqFilter, postHouseReq, getHouseByIdReq, patchH
 import { FilterSliceState } from "../../Filters/store/types.ts";
 import { NavigateFunction } from "react-router-dom";
 import { PostHouseState } from "./types.ts";
+import { addNotification } from "../../notification-context/slice.ts";
 
 export const getHouses = createAsyncThunk(
   "get/getHouses",
@@ -30,13 +31,16 @@ export const getHouseById = createAsyncThunk("get/getHouseById", async (id: numb
 
 export const postHouse = createAsyncThunk(
   "post/postHouse",
-  async ({ data, navigate }: { data: PostHouseState; navigate: NavigateFunction }, { rejectWithValue }) => {
+  async ({ data, navigate }: { data: PostHouseState; navigate: NavigateFunction }, { rejectWithValue, dispatch }) => {
     try {
       console.log(data);
       const res = await postHouseReq(data);
       navigate("/admin/real-estate");
+      dispatch(addNotification({ type: "success", message: "Данные успешно сохранены" }));
       return res.data;
     } catch (err) {
+      navigate("/admin/real-estate");
+      dispatch(addNotification({ type: "error", message: "Не удалось сохранить данные" }));
       console.error("Error occurred:", err);
       return rejectWithValue(err);
     }
@@ -45,13 +49,19 @@ export const postHouse = createAsyncThunk(
 
 export const patchHouse = createAsyncThunk(
   "patch/patchHouse",
-  async ({ data, id, navigate }: { data: PostHouseState; id: number; navigate: NavigateFunction }, { rejectWithValue }) => {
+  async (
+    { data, id, navigate }: { data: PostHouseState; id: number; navigate: NavigateFunction },
+    { rejectWithValue, dispatch }
+  ) => {
     try {
       const res = await patchHouseReq(data, id);
       alert("Объявление обновлено");
       navigate("/admin/real-estate");
+      dispatch(addNotification({ type: "success", message: "Данные успешно обновлены" }));
       return res.data;
     } catch (err) {
+      navigate("/admin/real-estate");
+      dispatch(addNotification({ type: "error", message: "Не удалось обновить данные" }));
       console.error("Error occurred:", err);
       return rejectWithValue(err);
     }

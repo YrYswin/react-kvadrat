@@ -72,18 +72,21 @@ export const router = createBrowserRouter([
       {
         path: "real-estate",
         element: <AdminRealEstate />,
+        children: [
+          {
+            path: "add",
+            element: <PenModal />,
+          },
+          {
+            path: "edit/:houseId",
+            // element: <div className="text-white">safiosnadlf as</div>,
+            element: <PenModal />,
+          },
+        ],
       },
       {
         path: "settings",
         element: <AdminSettings />,
-      },
-      {
-        path: "house-edit/:houseId",
-        element: <PenModal />,
-      },
-      {
-        path: "house-add",
-        element: <PenModal />,
       },
     ],
   },

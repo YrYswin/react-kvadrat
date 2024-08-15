@@ -5,11 +5,15 @@ interface Props {
   title: string;
   checked: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isDoubleOne?: boolean;
+  isDoubleTwo?: boolean;
 }
 
-const CustomCheckbox: React.FC<Props> = ({ name, title, checked, onChange }) => {
+const CustomCheckbox: React.FC<Props> = ({ name, title, checked, onChange, isDoubleOne, isDoubleTwo }) => {
   const checkboxRef = React.useRef<HTMLInputElement>(null);
-  const checkedStyle = `flex items-center text-sm ${checked ? "bg-green-700" : "bg-[#262626]"}`;
+  const checkedStyle = `flex items-center text-sm ${checked ? "bg-green-700" : "bg-[#262626]"} ${
+    isDoubleOne && "col-start-1 col-end-3"
+  } ${isDoubleTwo && "col-start-3 col-end-5"}`;
 
   const handleClick = () => {
     checkboxRef.current?.click();

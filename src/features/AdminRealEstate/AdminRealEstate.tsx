@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/store";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { getHouses } from "./store/action";
 import { selectHouses } from "./store/slice";
 import { Status } from "./store/types";
@@ -10,6 +10,7 @@ import { Status } from "./store/types";
 import AddIcon from "@mui/icons-material/Add";
 import NotFoundProduct from "../../shared/helpers/NotFoundProduct";
 import AdminProSkeleton from "../../shared/helpers/AdminProSkeleton";
+import InputTest from "./inputTest";
 
 const AdminRealEstate = () => {
   const dispatch = useAppDispatch();
@@ -40,15 +41,12 @@ const AdminRealEstate = () => {
                 <img className="w-full h-full object-cover" src={obj.image ? obj.image : "/svg/upload.svg"} alt="Photos" />
               </div>
               <p className="w-[190px]">{obj.title || "3 - комнатная квартира на улице Киевская 30"}</p>
-              <p className="w-[220px]">
-                {`Площадь: ${obj.square_footage || "м2.77.3"}
-                }`}
-              </p>
+              <p className="w-[220px]">{`Площадь: ${obj.square_footage || "м2.77.3"}`}</p>
               <p>{obj.price || "12млн.$"}</p>
               <div className="flex gap-5 ">
                 <img
                   src="/svg/pen.svg"
-                  onClick={() => navigate(`/admin/house-edit/${obj.id}`)}
+                  onClick={() => navigate(`/admin/real-estate/edit/${obj.id}`)}
                   alt="Pen"
                   className="cursor-pointer hover:scale-125 transition-transform duration-150 pen-icon"
                 />
@@ -73,6 +71,7 @@ const AdminRealEstate = () => {
 
   return (
     <>
+      <Outlet />
       <Box
         sx={{
           paddingLeft: { xs: "30px", md: "70px" },
@@ -90,7 +89,7 @@ const AdminRealEstate = () => {
           <h1 className="text-white text-sm md:text-2xl">Публикация недвижимости</h1>
 
           <button
-            onClick={() => navigate("/admin/house-add")}
+            onClick={() => navigate("/admin/real-estate/add")}
             className="text-[10px] h-[25px] md:text-[17px] w-[150px] md:w-[215px] md:h-[57px] bg-[#C8180C] text-white rounded-[30px] flex items-center justify-center gap-3"
           >
             <AddIcon />
@@ -133,6 +132,7 @@ const AdminRealEstate = () => {
           )}
         </Box>
       </Box>
+      <InputTest />
     </>
   );
 };
