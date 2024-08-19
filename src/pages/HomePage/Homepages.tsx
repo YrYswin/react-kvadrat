@@ -15,7 +15,7 @@ export const Homepages: React.FC = () => {
         <div className="texts flex flex-col lg:flex-row gap-2 lg:gap-60 mb-3">
           {texts?.map((text, index) => (
             <div key={index} className="flex gap-2">
-              <img className="p-1 bg-red-600 rounded-full" src="/svg/chekcbox.svg" alt="icon" />
+              <img className="p-1 bg-red-600 rounded-full w-[20px] h-[20px] md:w-[34px] md:h-[34px]" src="/svg/chekcbox.svg" alt="icon" />
               <p className="text-xs md:text-sm font-medium text-white">{text}</p>
             </div>
           ))}
