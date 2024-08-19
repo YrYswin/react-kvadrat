@@ -27,7 +27,7 @@ const Argument: React.FC = () => {
               <span className="text-white bg-[#DC2215]"> именно нам </span>
             </div>
 
-            <div style={{ backgroundImage: "url('/img/argument.png')" }} className={`${style}`}>
+            <div style={{ backgroundImage: "url('/img/argument.png')" }} className={`${style2}`}>
               <div className="w-[374px] h-[168px] flex flex-col gap-2 lg:gap-[14px]">
                 <h2 className={`${h2} text-sm `}>С нами быстро!</h2>
                 <p className={`${p} `}>
@@ -40,7 +40,7 @@ const Argument: React.FC = () => {
 
             <div className="hidden w-full h-full row-span-1 md:block"></div>
 
-            <div style={{ backgroundImage: "url('/img/argument3.png')" }} className={`${style}`}>
+            <div style={{ backgroundImage: "url('/img/argument3.png')" }} className={`${style2}`}>
               <div className="w-[374px] h-[115px] flex flex-col gap-2 lg:gap-[14px]">
                 <h2 className={`${h2}`}>С нами приятно!</h2>
                 <p className={`${p} `}>
@@ -58,7 +58,7 @@ const Argument: React.FC = () => {
 
 export default Argument;
 
-const style =
-  "bg-cover bg-center rounded-md shadow-lg col-span-1 row-span-3   md:w-[218px] md:h-[290px]  lg:w-[330px] lg:h-[420px]  xl:w-[420px] xl:h-[531px] md:px-2 w-[265px] h-[333px]  lg:px-8 px-4 flex md:items-end py-6";
+const style ="bg-cover bg-center rounded-md shadow-lg col-span-1 row-span-3   md:w-[218px] md:h-[290px]  lg:w-[330px] lg:h-[420px]  xl:w-[420px] xl:h-[531px] md:px-2 w-[265px] h-[333px]  lg:px-8 px-4 flex md:items-end py-6";
+const style2 ="bg-cover bg-center rounded-md shadow-lg col-span-1 row-span-3   md:w-[218px] md:h-[290px]  lg:w-[330px] lg:h-[420px]  xl:w-[420px] xl:h-[531px] md:px-2 w-[265px] h-[333px]  lg:px-8 px-4 flex md:items-end py-6 md:py-24";
 const h2 = "lg:text-[22px] md:text-[18px] font-bold ";
-const p = "w-full h-full text-sm  lg:text-md";
+const p = "w-full h-full text-[10px] md:text-[12px] lg:text-[16px]";

@@ -15,13 +15,15 @@ const ProductBLock: React.FC<HouseState> = ({ image: imageUrl, price, title, id 
       <div className="w-[100%]">
         <CarouselPro images={Array(4).fill(imageUrl)} />
       </div>
-      <div className="p-2 flex flex-col gap-7">
-        <p className="font-bold text-lg">{title}</p>
-        <div className="flex flex-col gap-2">
-          <div className="flex justify-between">
-            <b>Площадь:</b> <b>190(м2)</b>
+      <div className="p-2 flex flex-col gap-2">
+        <div className=" text-center font-medium text-[18px]">
+          <p className="">{title}</p>
+        </div>
+        <div className="flex flex-col gap-8">
+          <div className="flex justify-center text-center">
+            <p>Площадь:</p> <p>190(м2)</p>
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-between text-[20px] font-medium px-2">
             <b>Цена:</b>
             <b>$ {price}</b>
           </div>

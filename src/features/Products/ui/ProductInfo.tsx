@@ -123,28 +123,29 @@ const ProductInfo: React.FC = () => {
           <h1 className="text-xl text-white font-medium ml-5 pb-5">
             ОБЗОР НЕДВИЖИМОСТИ
           </h1>
-          <div className="flex flex-wrap gap-4">
+          <div className="grid grid-cols-2 gap-4">
             {types.map((obj, index) => (
               <div
                 key={index}
-                className="flex flex-1 bg-red-600 gap-2 rounded-lg hover:shadow-inner py-[4px] pl-[10px] h-[70px] sm:h-[80px] md:h-[90px] lg:h-[100px] xl:h-[110px]"
+                className="flex items-center justify-center bg-red-600 gap-2 rounded-lg py-[4px] pl-[9px] h-[70px] sm:h-[80px] md:h-[90px] lg:h-[80px] xl:h-[90px]"
               >
                 <img
                   src={obj.img}
                   alt="job"
-                  className="p-2 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16"
+                  className="p-2 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-14 lg:h-14 xl:w-16 xl:h-16"
                 />
-                <div className="flex flex-col items-start justify-center">
-                  <h1 className="text-white text-md md:text-xl font-bold ">
+                <div className="flex flex-col items-start justify-center text-center">
+                  <h1 className="text-white text-[15px] md:text-xl lg:text-lg xl:text-xl font-bold">
                     {obj.name}
                   </h1>
-                  <p className="text-gray-100 text-xl sm:text-lg md:text-2xl lg:text-3xl">
+                  <p className="text-gray-100 text-xl sm:text-lg md:text-2xl lg:text-xl xl:text-2xl">
                     {obj.number}
                   </p>
                 </div>
               </div>
             ))}
           </div>
+
         </div>
         <div className="bg-[#262626] py-3 px-5 rounded-xl">
           <h1 className="text-xl font-medium text-white ml-10">УДОБСТВА</h1>
