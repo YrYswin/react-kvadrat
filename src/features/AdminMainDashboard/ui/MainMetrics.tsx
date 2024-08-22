@@ -88,9 +88,9 @@ const MainMetrics: React.FC = () => {
     <div className={`h-auto my-10 bg-[#222224] text-white w-[100%]`}>
       {globalStyles}
       <Card className="!bg-[#222224] !shadow-none">
-        <div className="text-[10px] md:text-[15px] w-[338px] md:w-[400px] mx-auto">
+        <div className="text-[10px] md:text-[15px] text-center flex justify-center w-[338px] md:w-[400px] mx-auto">
           <FilterDate
-            width={27}
+            width={50}
             onClickNext={() => updateWeek(7)}
             onClickPrev={() => updateWeek(-7)}
             dateTitle={`${formatDate(monday)} - ${formatDate(sunday)}`}

@@ -23,14 +23,14 @@ const ProductBLock: React.FC<HouseState> = ({ image: imageUrl, price, title, id 
           <div className="flex justify-center text-center">
             <p>Площадь:</p> <p>190(м2)</p>
           </div>
-          <div className="flex justify-between text-[20px] font-medium px-2">
+          <div className="flex justify-between text-[14px] md:text-[20px] font-medium px-2">
             <b>Цена:</b>
             <b>$ {price}</b>
           </div>
         </div>
         <div className="flex justify-center">
           <button
-            className="bg-red-700 text-lg text-white mt-2 px-16 py-2 rounded-full hover:bg-red-600 active:bg-red-800"
+            className="bg-red-700 text-[14px] md:text-[18px] text-white mt-2 px-[40px] md:px-16 py-2 rounded-full hover:bg-red-600 active:bg-red-800"
             onClick={() => clickInfo(id)}
           >
             Подробнее

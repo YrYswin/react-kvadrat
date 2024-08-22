@@ -1,9 +1,8 @@
 import React from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
-import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import { Input } from "@mui/material";
 
 interface Props {
   name: string;
@@ -13,34 +12,22 @@ interface Props {
   register: UseFormRegisterReturn;
 }
 
-const Selectors: React.FC<Props> = ({ count, register, value, label, name }) => {
-  const renderMenuItems = () => {
-    const items = [];
-    for (let i = 0; i <= count; i++) {
-      items.push(
-        <MenuItem key={i} value={i}>
-          {i}
-        </MenuItem>
-      );
-    }
-    return items;
-  };
+const Selectors: React.FC<Props> = ({ register,label, name }) => {
+
 
   const color = name ? "bg-[#292929]" : "bg-[#000000]";
   return (
-    <div className="w-[20%]">
+    <div className="">
       <div className="flex bg-[#C8180C] p-1 items-center justify-center">
         <p className="pt-1 text-xs">{label}</p>
         <img className="ml-2" width={16} src="/svg/Baths.svg" alt="bathroom" />
       </div>
       <div className={`${color} text-white  h-[30px]`}>
-        <FormControl sx={{ minWidth: 50, marginLeft: 2 }}>
-          <Select
-            id="demo-simple-select-autowidth"
+        <FormControl sx={{ minWidth: 50, marginLeft: 2, marginRight: 2 }}>
+          <Input
             {...(register && name ? register : {})}
-            value={value || 0}
-            autoWidth
             style={{ outline: "none", height: "17px", marginTop: 8 }}
+            placeholder="0"
             sx={{
               color: "white",
               ".MuiSvgIcon-root": { color: "white" },
@@ -58,10 +45,7 @@ const Selectors: React.FC<Props> = ({ count, register, value, label, name }) => 
                 color: "white",
               },
             }}
-            displayEmpty
-          >
-            {renderMenuItems()}
-          </Select>
+          />
         </FormControl>
       </div>
     </div>

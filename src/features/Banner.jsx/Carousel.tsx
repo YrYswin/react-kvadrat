@@ -35,7 +35,7 @@ const Carousel: React.FC = () => {
     return items?.map(({ title, image, id }) => (
       <SwiperSlide key={id}>
         <div
-          className="relative w-full h-screen bg-cover bg-center"
+          className="relative w-full h-[500px] md:h-screen bg-cover bg-center"
           style={{
             backgroundImage: `linear-gradient(#0001, #000), url(${image})`,
             backgroundPosition: "center center",
