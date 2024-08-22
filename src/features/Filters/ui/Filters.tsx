@@ -8,7 +8,7 @@ const Filters = () => {
   const [open, setOpen] = React.useState(false);
   return (
     <Container>
-      <div className="flex flex-col w-full gap-3 md:mt-20 md:flex-row">
+      <div className="flex flex-col w-full gap-3 mt-[30px] md:mt-20 md:flex-row">
         <div className={`md:block flex-col ${open ? "block" : "hidden"}`}>
           <div className="flex items-center justify-between pb-4 text-white md:hidden">
             <ClearIcon onClick={() => setOpen(!open)} className="cursor-pointer" />

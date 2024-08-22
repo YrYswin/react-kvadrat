@@ -20,7 +20,7 @@ const AdminLayout: React.FC = () => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-      <div className="w-full top-0 z-50 hidden md:block">
+      <div className="w-full top-0 z-1000 hidden md:block sticky">
         <Header />
       </div>
       <AdminNavbar handleDrawerToggle={handleDrawerToggle} isOpen={mobileOpen} />
