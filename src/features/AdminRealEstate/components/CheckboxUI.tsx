@@ -35,7 +35,7 @@ const CustomCheckbox: React.FC<Props> = ({ name, title, checked, onChange, isDou
       }}
     >
       <input name={name} type="checkbox" checked={checked} onChange={onChange} ref={checkboxRef} style={{ display: "none" }} />
-      <span className="select-none">{title}</span>
+      <span className="select-none text-[9px] md:text-[13px]">{title}</span>
     </div>
   );
 };

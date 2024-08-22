@@ -28,7 +28,7 @@ const Modal: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   }
 
   return (
-    <div onClick={() => setIsOpen(false)} className="absolute inset-0 bg-black bg-opacity-50 z-[99]  h-full mt-[50px]">
+    <div onClick={() => setIsOpen(false)} className="absolute inset-0 bg-black bg-opacity-50 z-[99] h-full mt-[65px]">
       <div className="w-[219px] h-[380px] bg-red-700 text-md text-white absolute rounded-l-b-md rounded-bl-3xl right-0 py-[19px]  z-[100]">
         <div className="flex flex-col">
           <Link to="/">

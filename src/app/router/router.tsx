@@ -14,6 +14,7 @@ import SignIn from "../../features/Sign-In/Sign-In";
 import PenModal from "../../features/AdminRealEstate/components/PenModal";
 import AddHeading from "../../features/AdminHeadings/ui/AddHeading";
 import DeleteModal from "../../shared/helpers/DeleteModal";
+import PrivateRoute from "../../features/PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -45,48 +46,53 @@ export const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: <PrivateRoute />, // Защищаем административные маршруты
     children: [
       {
         path: "",
-        element: <AdminMainDashboard />,
-      },
-      {
-        path: "headings",
-        element: <AdminHeadings />,
+        element: <AdminLayout />,
         children: [
           {
-            path: "add",
-            element: <AddHeading />,
+            path: "",
+            element: <AdminMainDashboard />,
           },
           {
-            path: "edit/:headingId",
-            element: <AddHeading />,
+            path: "headings",
+            element: <AdminHeadings />,
+            children: [
+              {
+                path: "add",
+                element: <AddHeading />,
+              },
+              {
+                path: "edit/:headingId",
+                element: <AddHeading />,
+              },
+              {
+                path: "delete/:headingId",
+                element: <DeleteModal />,
+              },
+            ],
           },
           {
-            path: "delete/:headingId",
-            element: <DeleteModal />,
+            path: "real-estate",
+            element: <AdminRealEstate />,
+            children: [
+              {
+                path: "add",
+                element: <PenModal />,
+              },
+              {
+                path: "edit/:houseId",
+                element: <PenModal />,
+              },
+            ],
+          },
+          {
+            path: "settings",
+            element: <AdminSettings />,
           },
         ],
-      },
-      {
-        path: "real-estate",
-        element: <AdminRealEstate />,
-        children: [
-          {
-            path: "add",
-            element: <PenModal />,
-          },
-          {
-            path: "edit/:houseId",
-            // element: <div className="text-white">safiosnadlf as</div>,
-            element: <PenModal />,
-          },
-        ],
-      },
-      {
-        path: "settings",
-        element: <AdminSettings />,
       },
     ],
   },

@@ -18,7 +18,9 @@ const Layout: React.FC = () => {
 
   return (
     <ScrollContext.Provider value={scrollToSection}>
-      <Header />
+      <div className="top-0 sticky z-50">
+        <Header />
+      </div>
       <Outlet />
       <Footer />
     </ScrollContext.Provider>

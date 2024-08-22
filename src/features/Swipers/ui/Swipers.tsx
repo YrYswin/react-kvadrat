@@ -9,11 +9,12 @@ import Container from "../../../shared/helpers/Container";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Link } from "react-router-dom";
 
 const TestimonialSlider = () => {
   return (
     <Container>
-      <div className="mt-40 ">
+      <div className="mt-[60px] md:mt-40">
         <div className="flex flex-col items-center w-full mb-3 text-white">
           <h2 className="text-lg text-center md:text-4xl">
             Что говорят <span className="bg-[#DC2215] px-4">ЛЮДИ</span>
@@ -42,8 +43,8 @@ const TestimonialSlider = () => {
           className="gap-2 "
         >
           {testimonials.map((testimonial) => (
-            <SwiperSlide key={testimonial.id} className="transition-transform duration-300 group ">
-              <div className="p-1 text-white transition-all duration-300 bg-gray-800 rounded-lg sm:p-2 md:p-3 lg:p-4 shadow-mdgroup-hover:bg-red-500 ">
+            <SwiperSlide key={testimonial.id} className="transition-transform duration-300">
+              <div className="p-1 text-white transition-all duration-300 bg-gray-800 rounded-lg sm:p-2 md:p-3 lg:p-4 shadow-md hover:bg-red-600">
                 <div className="flex flex-col gap-3 ">
                   <div className="flex gap-2 sm:gap-3 ">
                     <img
@@ -53,17 +54,19 @@ const TestimonialSlider = () => {
                     />
                     <div>
                       <h3 className=" text-[7.7px] lg:text-xl font-semibold  md:text-sm sm:text-md ">{testimonial.name}</h3>
-                      <p className="w-full text-[7px] sm:text-sm text-gray-400">{testimonial.username}</p>
+                      <p className="w-full text-[7px] text-gray-400">{testimonial.username}</p>
                     </div>
                   </div>
-                  <p className="text-base  sm:text-sm overflow-y-auto lg:h-[100px] md:h-[90px] sm:h-[70px]   h-[50px]">
+                  <p className="text-[7px] md:text-base overflow-y-auto lg:h-[100px] md:h-[90px] sm:h-[70px]   h-[50px]">
                     {testimonial.text}
                   </p>
                 </div>
                 <hr className="my-0 lg:my-3 md:my-2" />
-                <a href="#" className="text-[8px] text-blue-400 sm:text-sm md:text-md lg:text-lg lg:mt-4 hover:text-white">
-                  Посмотреть больше квартир
-                </a>
+                <Link to={'/watch'}>
+                  <a className="text-[8px] text-blue-400 sm:text-sm md:text-md lg:text-lg lg:mt-4 hover:text-white">
+                    Посмотреть больше квартир
+                  </a>
+                </Link>
               </div>
             </SwiperSlide>
           ))}

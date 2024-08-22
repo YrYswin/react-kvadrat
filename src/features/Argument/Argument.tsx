@@ -5,7 +5,7 @@ import Container from "../../shared/helpers/Container";
 const Argument: React.FC = () => {
   return (
     <Container>
-      <div className="text-white mt-[136px] flex flex-col  items-center justify-center w-full ">
+      <div className="text-white mt-[30px] md:mt-[136px] flex flex-col  items-center justify-center w-full ">
         <div className="block py-5 text-sm font-semibold uppercase shadow-lg md:hidden">
           <span className="">3 аргумента почему вам стоит доверить решение вашего квартирног вопроса </span>
           <span className="text-white bg-[#DC2215]"> именно нам </span>

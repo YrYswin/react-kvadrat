@@ -40,7 +40,7 @@ const AdminNavbar: React.FC<Props> = ({ handleDrawerToggle, isOpen }) => {
 
   return (
     <AppBar
-      position="static"
+      position="sticky"
       sx={{
         width: isMobile ? "100%" : isOpen ? "calc(100% - 240px)" : "100%",
         transition: "width 0.3s, margin 0.3s",
