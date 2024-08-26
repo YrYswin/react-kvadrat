@@ -43,8 +43,8 @@ const Type = () => {
         <p className="mb-3">Местоположение</p>
         <SelectUI itemsAdress={addressArray} active={"Бишкек"} width={300} />
       </div>
-      <hr className="mt-10 mb-5" />
-      <div>
+      {/* <hr className="mt-10 mb-5" /> */}
+      {/* <div>
         <p>Cтатус собственности</p>
         <div>
           <div className="flex gap-3 pt-3">
@@ -56,7 +56,7 @@ const Type = () => {
             <p>Продавать</p>
           </div>
         </div>
-      </div>
+      </div> */}
       <hr className="mt-10 mb-5" />
       <div>
         <p>Тип недвижимости</p>
