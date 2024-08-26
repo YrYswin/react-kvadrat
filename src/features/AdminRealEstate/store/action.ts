@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getHousesReq, getHousesReqFilter, postHouseReq, getHouseByIdReq, patchHouseReq, deleteHouseReq } from "../api.ts";
+import { getHousesReq, getHousesReqFilter, postHouseReq, getHouseByIdReq, patchHouseReq, deleteHouseReq, getHousesReqCategory } from "../api.ts";
 import { FilterSliceState } from "../../Filters/store/types.ts";
 import { NavigateFunction } from "react-router-dom";
 import { PostHouseState } from "./types.ts";
@@ -7,11 +7,13 @@ import { addNotification } from "../../notification-context/slice.ts";
 
 export const getHouses = createAsyncThunk(
   "get/getHouses",
-  async ({ params, page }: { params?: FilterSliceState | null; page: number }, { rejectWithValue }) => {
+  async ({ params, page, category }: { params?: FilterSliceState | null; page: number, category?: string }, { rejectWithValue }) => {
     try {
       if (params) {
         return (await getHousesReqFilter(params, page)).data;
-      } else {
+      } else if (category) {
+        return (await getHousesReqCategory(page, category)).data;
+      }else {
         return (await getHousesReq(page)).data;
       }
     } catch (err) {

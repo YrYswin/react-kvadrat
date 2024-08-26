@@ -112,7 +112,7 @@ const PenModal: React.FC = () => {
 
   return (
 <ModalUI borderColor={isEditing ? "#00008b" : "green"}>
-  <form onSubmit={handleSubmit(onSubmit)} className="text-white py-2 px-2 md:py-0 md:px-0 relative w-full max-w-[950px] h-[480px] md:h-[580px]">
+  <form onSubmit={handleSubmit(onSubmit)} className="text-white py-2 px-2 md:py-0 md:px-0 relative w-full max-w-[950px] h-[540px] md:h-[580px]">
     <div className="bg-red-600 p-4 hidden sm:block">
       <p className="text-2xl">Создать новую карточку для недвижимости</p>
     </div>

@@ -3,20 +3,26 @@ import { getUserLS } from "../../utils";
 import { FilterSliceState } from "../Filters/store/types";
 import { PostHouseState } from "./store/types";
 
+function encodeIfInvalid(searchString: string) {
+  const invalidCharacters = /[^a-zA-Z0-9-_.~]/;
+  if (invalidCharacters.test(searchString)) {
+    return encodeURIComponent(searchString);
+  }
+  return searchString;
+}
+
 export const getHousesReq = (page: number) => {
   return apiRoot.get(`/houses/?limit=8&offset=${page}`);
 };
 
+export const getHousesReqCategory = (page: number, category: string) => {
+  return apiRoot.get(`/houses/?limit=9&offset=${page}&category=${encodeIfInvalid(category)}`)
+}
+
 export const getHousesReqFilter = (params: FilterSliceState, page: number) => {
   const { price, typeHouse, comfort } = params;
   const type = typeHouse === "Все" ? "" : typeHouse;
-  function encodeIfInvalid(searchString: string) {
-    const invalidCharacters = /[^a-zA-Z0-9-_.~]/;
-    if (invalidCharacters.test(searchString)) {
-      return encodeURIComponent(searchString);
-    }
-    return searchString;
-  }
+  
   return apiRoot.get(
     `/houses/?limit=9&offset=${page}&has_pool=${comfort.pool ? "true" : ""}&has_gym=${comfort.gym ? "true" : ""}&has_garage=${
       comfort.garage ? "true" : ""
