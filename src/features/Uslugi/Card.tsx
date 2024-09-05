@@ -14,7 +14,7 @@ const Card: React.FC<Props> = ({ data }) => {
       <div className={descr}>
         <p className="w-[176px] text-center">{description}</p>
       </div>
-      <button className={button}>Получить услугу</button>
+      <a href="https://wa.me/996708242906" className={button}>Получить услугу</a>
     </div>
   );
 };
