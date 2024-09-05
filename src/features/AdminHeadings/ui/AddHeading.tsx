@@ -67,7 +67,7 @@ const AddHeading: React.FC = () => {
 
   return (
     <ModalUI bgColor="#222224" borderColor={isEditing ? "blue" : "lime"}>
-      <h2 className="text-[14px] sm:text-[18px] md:text-[24px] font-semibold text-center mb-4 ">
+      <h2 className="text-[14px] text-white sm:text-[18px] md:text-[24px] font-semibold text-center mb-4 z-9999">
         {isEditing ? "Редактировать обзор активности" : "Добавить обзор активности"}
       </h2>
       <CancelIcon

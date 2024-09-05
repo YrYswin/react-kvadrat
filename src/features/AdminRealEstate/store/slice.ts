@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getHouses, getHouseById } from "./action";
+import { getHouses, getHouseById} from "./action";
 import { RootState } from "../../../app/store";
-import { HouseSliceState, Status } from "./types";
+import { HouseSliceState, Status, } from "./types";
 
 const initialState: HouseSliceState = {
   items: [],
