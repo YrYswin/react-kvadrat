@@ -11,6 +11,9 @@ import { itemClear, selectHouses } from "../store/slice";
 import CustomCheckbox from "./CheckboxUI";
 import { PostHouseState } from "../store/types";
 import Selectors from "./Selectors";
+import PenModSelect from "./PenModSelect";
+import EstateType from "./EstateType";
+
 
 const PenModal: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -18,6 +21,8 @@ const PenModal: React.FC = () => {
   const { houseId } = useParams();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [image, setImage] = useState<File | null>(null);
+  const [activeAddress, setActiveAddress] = useState<string>("")
+  const [estate, setEstate] = useState<string>("")
   const [checkboxState, setCheckboxState] = useState({
     pool: false,
     gym: false,
@@ -32,6 +37,14 @@ const PenModal: React.FC = () => {
   });
 
   const isEditing = Boolean(houseId);
+
+  const handleChangeAddress = (value: string) => {
+    setActiveAddress(value);
+  };
+
+  const handleChangeEstate = (value: string) => {
+    setEstate(value)
+  }
 
   const cancel = () => {
     navigate("/admin/real-estate");
@@ -71,9 +84,10 @@ const PenModal: React.FC = () => {
       ...data,
       ...checkboxState,
       image: image,
-      category: "Дома",
-      city: "Бишкек",
+      category: estate,
+      city: activeAddress,
     };
+    console.log(formData)
     if (isEditing) {
       dispatch(
         patchHouse({
@@ -112,7 +126,7 @@ const PenModal: React.FC = () => {
 
   return (
 <ModalUI borderColor={isEditing ? "#00008b" : "green"}>
-  <form onSubmit={handleSubmit(onSubmit)} className="text-white py-2 px-2 md:py-0 md:px-0 relative w-full max-w-[950px] h-[480px] md:h-[580px]">
+  <form onSubmit={handleSubmit(onSubmit)} className="text-white py-2 px-2 md:py-0 md:px-0 relative w-full max-w-[950px] h-[540px] md:h-[580px]">
     <div className="bg-red-600 p-4 hidden sm:block">
       <p className="text-2xl">Создать новую карточку для недвижимости</p>
     </div>
@@ -239,8 +253,13 @@ const PenModal: React.FC = () => {
             />
           </div>
         </div>
-      </div>
 
+        <div className="flex gap-4">
+          <PenModSelect active={activeAddress}  onChange={handleChangeAddress}/>
+          <EstateType active={estate} onChange={handleChangeEstate}/>
+        </div>
+      </div>
+      
       <div className="flex-1">
         <div className="flex md:flex-col md:items-center gap-1 h-[150px] md:h-[430px]">
           {/* {item?.image && <img className="w-[230px] h-[130px] object-cover" src={item.image} alt="image" />} */}
@@ -276,8 +295,6 @@ const PenModal: React.FC = () => {
     </div>
   </form>
 </ModalUI>
-
-
   );
 };
 

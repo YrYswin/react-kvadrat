@@ -1,12 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import ExpandMoreTwoToneIcon from "@mui/icons-material/KeyboardArrowUpTwoTone";
 import ExpandMoreSharpIcon from "@mui/icons-material/ExpandMoreSharp";
+import { useAppDispatch } from "../../../app/store";
+import { setTypeHouse } from "../../Filters/store/slice";
 
-function DropDownMen() {
+interface Props {
+  category: string;
+  setCat: (e: string) => void
+}
+
+const DropDownMen: React.FC<Props> = ({category, setCat}) => {
+  const dispatch = useAppDispatch();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [selName, setSelName] = useState("");
-  const options = ["Дома", "Квартиры", "Коммерческое недвижимость", "Участки"];
+  const options = ["Все", "Дома", "Квартиры", "Коммерческое недвижимость", "Участки"];
   const [open, setOpen] = useState(false);
   const sortRef = useRef<HTMLDivElement>(null);
 
@@ -14,25 +22,19 @@ function DropDownMen() {
     setSelName(name);
     setSelectedIndex(index);
     setOpen(false);
+    dispatch(setTypeHouse(name));  
   };
 
   useEffect(() => {
-    // Вспомогательная функция для обработки кликов
     const handleClick = (event: MouseEvent) => {
-      // Получение пути событий
       const path = event.composedPath ? event.composedPath() : (event as any).path;
-
-      // Проверка, что клик был вне элемента
       if (path && !path.includes(sortRef.current)) {
         setOpen(false);
-        console.log("click outside");
       }
     };
 
-    // Добавление обработчика кликов
     document.body.addEventListener("click", handleClick);
 
-    // Удаление обработчика кликов при размонтировании компонента
     return () => {
       document.body.removeEventListener("click", handleClick);
     };
@@ -46,7 +48,7 @@ function DropDownMen() {
           open ? "bg-red-600 text-white" : "bg-red-600 text-white"
         }`}
       >
-        <p className={`${selName === "Коммерческое недвижимость" ? "text-sm" : "text-md"}`}>{selName || "Категории"}</p>
+        <p className={`${category === "Коммерческое недвижимость" ? "text-sm" : "text-md"}`}>{selName || "Категории"}</p>
         {open ? <ExpandMoreTwoToneIcon className="text-black" /> : <ExpandMoreSharpIcon />}
       </div>
       {open && (
@@ -54,7 +56,7 @@ function DropDownMen() {
           {options.map((item, index) => (
             <p
               key={index}
-              onClick={() => handleName(item, index)}
+              onClick={() => setCat(item)}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
               className={`w-full py-3 px-4 rounded-lg  ${

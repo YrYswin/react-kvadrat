@@ -1,32 +1,26 @@
-import React from "react";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { styled } from "@mui/material/styles";
-import { PriceVariableState } from "../../../utils/dataTypes";
 
 interface Props {
-  itemsPrice?: PriceVariableState[];
-  itemsAdress?: string[];
   active: string;
   onChange?: (e: string) => void;
   width?: number;
-  isPrice?: boolean;
 }
 
-const SelectUI: React.FC<Props> = ({ itemsPrice, itemsAdress, active, onChange, width, isPrice }) => {
-  // Обработчик изменения выбора
+const EstateType: React.FC<Props> = ({ active, onChange, width }) => {
+
   const handleChange = (event: SelectChangeEvent<unknown>) => {
     if (onChange) {
       onChange(event.target.value as string);
     }
   };
 
-  // Установим значение для Select
-  const value = active || "None"; // Если active пустое, используем "None"
+  const value = active || "";
 
   return (
-    <FormControl sx={{ width: width || 180, height: 30 }}>
+    <FormControl sx={{ width: width || 290, height: 30 }}>
       <CustomSelect
         value={value}
         onChange={handleChange}
@@ -34,27 +28,27 @@ const SelectUI: React.FC<Props> = ({ itemsPrice, itemsAdress, active, onChange, 
         inputProps={{ "aria-label": "Without label" }}
         size="small"
       >
-        {!isPrice && (
-          <MenuItemStyle value="None">
-            <em>Не выбрано</em>
-          </MenuItemStyle>
-        )}
-        {itemsPrice?.map((item, index) => (
-          <MenuItemStyle key={index} value={item.id}>
-            {item.label}
-          </MenuItemStyle>
-        ))}
-        {itemsAdress?.map((item, index) => (
-          <MenuItemStyle key={index} value={item}>
-            {item}
-          </MenuItemStyle>
-        ))}
+        <MenuItemStyle value="">
+          <em>Выберите тип недвижимости</em>
+        </MenuItemStyle>
+        <MenuItemStyle value="Houses">
+          <em>Дома</em>
+        </MenuItemStyle>
+        <MenuItemStyle value="Apartments">
+          <em>Квартиры</em>
+        </MenuItemStyle>
+        <MenuItemStyle value="Land">
+          <em>Участки</em>
+        </MenuItemStyle>
+        <MenuItemStyle value="Commercial">
+          <em>Коммерческая недвижимость</em>
+        </MenuItemStyle>
       </CustomSelect>
     </FormControl>
   );
 };
 
-export default SelectUI;
+export default EstateType;
 
 const CustomSelect = styled(Select)({
   background: "#262626",
