@@ -1,5 +1,5 @@
 import { apiRoot } from "../../app/api";
-import { getUserLS } from "../../utils";
+import TokenService from "../../utils";
 import { DateParams } from "./store/types";
 
 function formatDate(date: Date) {
@@ -21,8 +21,8 @@ export const getMetricsReq = async (params: DateParams) => {
       throw new Error("Invalid date parameters");
     }
 
-    const { username, password } = getUserLS();
-    const token = btoa(`${username}:${password}`);
+    const user = TokenService.getUserLS();
+    const token = btoa(`${user?.username}:${user?.password}`);
 
     const response = await apiRoot.get(
       `/metrics/visits-statistics/?end_date=${formatDate(sunday)}&start_date=${formatDate(monday)}`,

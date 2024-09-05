@@ -4,7 +4,6 @@ export interface loginState {
 }
 
 export interface loginSliceState {
-  users: loginState | null;
   status: Status;
 }
 

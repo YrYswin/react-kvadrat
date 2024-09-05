@@ -10,7 +10,6 @@ import { Status } from "./store/types";
 import AddIcon from "@mui/icons-material/Add";
 import NotFoundProduct from "../../shared/helpers/NotFoundProduct";
 import AdminProSkeleton from "../../shared/helpers/AdminProSkeleton";
-import InputTest from "./inputTest";
 
 const AdminRealEstate = () => {
   const dispatch = useAppDispatch();
@@ -29,7 +28,7 @@ const AdminRealEstate = () => {
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
-                width: "94%",
+                marginRight: "10px",
                 color: "white",
                 alignItems: "center",
                 backgroundColor: "#262626",
@@ -121,7 +120,11 @@ const AdminRealEstate = () => {
             flexDirection: "column",
             gap: "10px",
             marginTop: "10px",
+            width: "94%",
+            height: "calc(100vh - 300px)",
+            overflow: "auto",
           }}
+          className="scroll-container-x"
         >
           {status == Status.LOADING ? (
             skeletonsList
@@ -132,7 +135,6 @@ const AdminRealEstate = () => {
           )}
         </Box>
       </Box>
-      <InputTest />
     </>
   );
 };

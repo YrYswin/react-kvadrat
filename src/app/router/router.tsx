@@ -14,6 +14,7 @@ import SignIn from "../../features/Sign-In/Sign-In";
 import PenModal from "../../features/AdminRealEstate/components/PenModal";
 import AddHeading from "../../features/AdminHeadings/ui/AddHeading";
 import DeleteModal from "../../shared/helpers/DeleteModal";
+import ProtectedRoute from "../../shared/helpers/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -45,7 +46,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: (
+      <ProtectedRoute>
+        <AdminLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "",

@@ -1,5 +1,5 @@
 import { apiRoot, axiosWithFile } from "../../app/api";
-import { getUserLS } from "../../utils";
+import TokenService from "../../utils";
 import { FilterSliceState } from "../Filters/store/types";
 import { PostHouseState } from "./store/types";
 
@@ -35,8 +35,8 @@ export const getHouseByIdReq = (id: number) => {
 };
 
 export const postHouseReq = (data: PostHouseState) => {
-  const { username, password } = getUserLS();
-  const token = btoa(`${username}:${password}`);
+  const user = TokenService.getUserLS();
+  const token = btoa(`${user?.username}:${user?.password}`);
   return axiosWithFile.post("/houses/", data, {
     headers: {
       Authorization: `Basic ${token}`,

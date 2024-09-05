@@ -2,6 +2,7 @@ import * as React from "react";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { GlobalStyles } from "@mui/material";
 import { statisticsState } from "../store/types";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const globalStyles = (
   <GlobalStyles
@@ -24,9 +25,18 @@ const globalStyles = (
 
 interface Props {
   items: statisticsState[];
+  isLoading: boolean;
 }
 
-const Metrics: React.FC<Props> = ({ items }) => {
+const Metrics: React.FC<Props> = ({ items, isLoading }) => {
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-[250px]">
+        <CircularProgress color="primary" />
+      </div>
+    );
+  }
+
   const dateArray = items.map((x) => x.date);
   const itemArray = items.map((x) => x.visits_count);
 

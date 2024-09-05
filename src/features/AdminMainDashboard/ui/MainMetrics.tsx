@@ -31,6 +31,7 @@ const MainMetrics: React.FC = () => {
   const dispatch = useAppDispatch();
   const [currentWeekStart, setCurrentWeekStart] = useState<Date>(getMonday(new Date()));
   const { analytics, statistics } = useSelector(selectMetrics) as MetricState;
+  const { isLoading } = useSelector(selectMetrics);
 
   const monday = currentWeekStart;
   const sunday = React.useMemo(() => {
@@ -96,18 +97,18 @@ const MainMetrics: React.FC = () => {
             dateTitle={`${formatDate(monday)} - ${formatDate(sunday)}`}
           />
         </div>
-        <Metrics items={statistics} />
+        <Metrics items={statistics} isLoading={isLoading} />
       </Card>
 
       <div className="flex flex-col lg:flex-row justify-between px-4 lg:px-10 py-5 gap-5">
         <div className="flex flex-col lg:flex-row gap-2">
           <div className="bg-[#1d1d1d] text-center px-8 py-4">
             <p>Посещения</p>
-            <span>{analytics?.total_visits}</span>
+            <span>{isLoading ? 0 : analytics?.total_visits}</span>
           </div>
           <div className="bg-[#1d1d1d] text-center px-8 py-4">
             <p>Просмотр страницы</p>
-            <span>{analytics?.total_page_views}</span>
+            <span>{isLoading ? 0 : analytics?.total_page_views}</span>
           </div>
         </div>
         <div className="flex flex-col lg:flex-row gap-5 bg-[#1d1d1d] p-4 w-full lg:w-auto">
@@ -116,7 +117,7 @@ const MainMetrics: React.FC = () => {
             <ul className="flex flex-col">
               {graphics.map((obj, i) => (
                 <li key={i} className={`${obj.tw} flex justify-between w-full lg:w-36`}>
-                  <p>{obj.name}:</p> <span>{obj.value}%</span>
+                  <p>{obj.name}:</p> <span>{isLoading ? 0 : obj.value}%</span>
                 </li>
               ))}
             </ul>
