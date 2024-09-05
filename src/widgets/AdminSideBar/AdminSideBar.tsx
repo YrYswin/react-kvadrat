@@ -8,7 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import HomeIcon from "@mui/icons-material/Home";
 import BusinessIcon from "@mui/icons-material/Business";
-import SettingsIcon from "@mui/icons-material/Settings";
+// import SettingsIcon from "@mui/icons-material/Settings";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AirplayIcon from "@mui/icons-material/Airplay";
 import { Box, useTheme, useMediaQuery } from "@mui/material";
@@ -33,7 +33,7 @@ const AdminSidebar: React.FC<Props> = ({ open, handleDrawerToggle }) => {
     { path: "/admin", name: "Главная", icon: HomeIcon },
     { path: "/admin/headings", name: "Заголовки", icon: AirplayIcon },
     { path: "/admin/real-estate", name: "Обьекты Недвижимости", icon: BusinessIcon },
-    { path: "/admin/settings", name: "Настройки", icon: SettingsIcon },
+    // { path: "/admin/settings", name: "Настройки", icon: SettingsIcon },
   ];
 
   const logout = () => {
@@ -74,8 +74,8 @@ const AdminSidebar: React.FC<Props> = ({ open, handleDrawerToggle }) => {
               })}
             >
               <ListItem>
-                <ListItemIcon sx={{ color: "white", minWidth: isMobile ? "40px" : "56px" }}>
-                  <IconComponent fontSize={isMobile ? "large" : "medium"} />
+                <ListItemIcon sx={{ color: "white", minWidth: isMobile ? "56px" : "40px" }}>
+                  <IconComponent fontSize={isMobile ? "small" : "medium"} />
                 </ListItemIcon>
                 <ListItemText primary={item.name} />
               </ListItem>

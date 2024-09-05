@@ -33,26 +33,27 @@ const AdminRealEstate = () => {
                 alignItems: "center",
                 backgroundColor: "#262626",
                 padding: "10px 20px",
+                // paddingRight: {sm:"10px", md: "0"}
               }}
               key={obj.id}
             >
-              <div className="w-[150px] h-[90px] overflow-hidden">
+              <div className="w-[70px] md:w-[150px] h-[60px] md:h-[90px] overflow-hidden">
                 <img className="w-full h-full object-cover" src={obj.image ? obj.image : "/svg/upload.svg"} alt="Photos" />
               </div>
-              <p className="w-[190px]">{obj.title || "3 - комнатная квартира на улице Киевская 30"}</p>
-              <p className="w-[220px]">{`Площадь: ${obj.square_footage || "м2.77.3"}`}</p>
-              <p>{obj.price || "12млн.$"}</p>
-              <div className="flex gap-5 ">
+              <p className=" text-[9px] md:text-lg">{obj.title || "3 - комнатная квартира на улице Киевская 30"}</p>
+              <p className=" text-[9px] md:text-lg">{`Площадь: ${obj.square_footage || "м2.77.3"}`}</p>
+              <p className="text-[9px] md:text-lg">{obj.price || "12млн.$"}</p>
+              <div className="flex gap-2 md:gap-5">
                 <img
                   src="/svg/pen.svg"
                   onClick={() => navigate(`/admin/real-estate/edit/${obj.id}`)}
                   alt="Pen"
-                  className="cursor-pointer hover:scale-125 transition-transform duration-150 pen-icon"
+                  className="cursor-pointer hover:scale-125 transition-transform duration-150 pen-icon md:w-[27px] w-[15px] h-[15px] md:h-[27px]"
                 />
                 <img
                   src="/svg/trash.svg"
                   alt="Trash"
-                  className="cursor-pointer hover:scale-125 transition-transform duration-150 pen-icon"
+                  className="cursor-pointer hover:scale-125 transition-transform duration-150 pen-icon md:w-[27px] w-[15px] h-[15px] md:h-[27px]"
                 />
               </div>
             </Box>
@@ -85,7 +86,10 @@ const AdminRealEstate = () => {
             padding: "0 10px",
           }}
         >
-          <h1 className="text-white text-sm md:text-2xl">Публикация недвижимости</h1>
+          <div>
+            <h1 className="text-white text-sm md:text-2xl">Публикация недвижимости</h1>
+            <div className="text-red-600 text-[10px] md:text-[17px]">Количество товаров({items.length})</div>
+          </div>
 
           <button
             onClick={() => navigate("/admin/real-estate/add")}

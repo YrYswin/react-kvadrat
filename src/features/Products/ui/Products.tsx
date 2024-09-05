@@ -15,10 +15,11 @@ import { selectHouses } from "../../AdminRealEstate/store/slice";
 const Products: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items, status } = useSelector(selectHouses);
+  const [category, setCategory] = React.useState<string>('')
 
   React.useEffect(() => {
-    dispatch(getHouses({ params: null, page: 0 }));
-  }, [dispatch]);
+    dispatch(getHouses({ params: null, page: 0, category }));
+  }, [dispatch, category]);
 
   const scrollToTop = () => {
     window.scrollTo(0, 0);
@@ -39,12 +40,10 @@ const Products: React.FC = () => {
   return (
     <Container>
       <div className="flex flex-col md:flex-row items-start gap-7 justify-between md:items-end mt-[-90px]">
-        <DropDownMen />
+        <DropDownMen category={category} setCat={setCategory}/>
         <div className="max-w-[808px] min-h-[74px] font-inter text-sm md:text-[20px] font-semibold text-white">
-          <span className="top-[30px] relative w-[670px] uppercase bg-black">
-            выбирайте квартиру для жизни или инвестиций. предложение доступно
-          </span>
-          <span className="bg-[#DC2215] px-5 rounded-sm top-[30px] relative uppercase">к покупке прямо сейчас</span>
+          <span className="top-[30px] relative w-[670px] uppercase bg-black">выбирайте квартиру для жизни или инвестиций. предложение доступно к </span>
+          <span className="bg-[#DC2215] px-5 rounded-sm top-[30px] relative uppercase">покупке прямо сейчас</span>
         </div>
       </div>
       <div className="w-full">
