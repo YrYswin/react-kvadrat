@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/store";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getHouses } from "./store/action";
 import { selectHouses } from "./store/slice";
 import { Status } from "./store/types";
@@ -51,6 +51,7 @@ const AdminRealEstate = () => {
                   className="cursor-pointer hover:scale-125 transition-transform duration-150 pen-icon md:w-[27px] w-[15px] h-[15px] md:h-[27px]"
                 />
                 <img
+                  onClick={() => navigate(`/admin/real-estate/delete/${obj.id}`)}
                   src="/svg/trash.svg"
                   alt="Trash"
                   className="cursor-pointer hover:scale-125 transition-transform duration-150 pen-icon md:w-[27px] w-[15px] h-[15px] md:h-[27px]"
@@ -71,7 +72,6 @@ const AdminRealEstate = () => {
 
   return (
     <>
-      <Outlet />
       <Box
         sx={{
           paddingLeft: { xs: "30px", md: "70px" },

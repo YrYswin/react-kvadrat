@@ -59,37 +59,37 @@ export const router = createBrowserRouter([
       {
         path: "headings",
         element: <AdminHeadings />,
-        children: [
-          {
-            path: "add",
-            element: <AddHeading />,
-          },
-          {
-            path: "edit/:headingId",
-            element: <AddHeading />,
-          },
-          {
-            path: "delete/:headingId",
-            element: <DeleteModal />,
-          },
-        ],
+      },
+      {
+        path: "headings/add",
+        element: <AddHeading />,
+      },
+      {
+        path: "headings/edit/:headingId",
+        element: <AddHeading />,
+      },
+      {
+        path: "headings/delete/:headingId",
+        element: <DeleteModal />,
       },
       {
         path: "real-estate",
         element: <AdminRealEstate />,
-        children: [
-          {
-            path: "add",
-            element: <PenModal />,
-          },
-          {
-            path: "edit/:houseId",
-            element: <PenModal />,
-          },
-        ],
       },
       {
-        path: "settings",
+        path: "real-estate/add",
+        element: <PenModal />,
+      },
+      {
+        path: "real-estate/edit/:houseId",
+        element: <PenModal />,
+      },
+      {
+        path: "real-estate/delete/:houseId",
+        element: <DeleteModal />,
+      },
+      {
+        path: "real-estate/settings",
         element: <AdminSettings />,
       },
     ],

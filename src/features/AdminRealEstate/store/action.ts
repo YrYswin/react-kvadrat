@@ -80,12 +80,16 @@ export const patchHouse = createAsyncThunk(
   }
 );
 
-export const deleteHouse = createAsyncThunk("delete/deleteHouse", async (id: number, { rejectWithValue }) => {
-  try {
-    const res = await deleteHouseReq(id);
-    return res.data;
-  } catch (err) {
-    console.error("Error occurred:", err);
-    return rejectWithValue(err);
+export const deleteHouse = createAsyncThunk(
+  "delete/deleteHouse",
+  async ({ id, navigate }: { id: number; navigate: NavigateFunction }, { rejectWithValue }) => {
+    try {
+      const res = await deleteHouseReq(id);
+      navigate("/admin/real-estate");
+      return res.data;
+    } catch (err) {
+      console.error("Error occurred:", err);
+      return rejectWithValue(err);
+    }
   }
-});
+);

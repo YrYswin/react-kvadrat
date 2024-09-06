@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/store";
 
@@ -18,6 +18,7 @@ const AdminHeadings = () => {
   React.useEffect(() => {
     dispatch(getHeadings());
   }, [dispatch]);
+
   return (
     <div className="h-[80vh] scroll-container-x overflow-auto relative">
       <div className="flex justify-between py-2 px-[50px] md:px-24 text-white sticky top-0 bg-black z-10">
@@ -33,13 +34,12 @@ const AdminHeadings = () => {
           Добавить новое объявление
         </button>
       </div>
-      
+
       <div className="px-[62px] md:px-24 py-5 flex flex-col gap-5">
         {items?.map((obj, index) => (
           <HeadingsBlock key={index} {...obj} />
         ))}
       </div>
-      <Outlet />
     </div>
   );
 };

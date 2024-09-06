@@ -38,12 +38,10 @@ export const postHeading = createAsyncThunk<
     const res: AxiosResponse<SuccessResponse> = await postHeadingReq(data);
     dispatch(addNotification({ type: "success", message: "Объявление cоздано" }));
     navigate("/admin/headings");
-    return res.data; // Верните данные ответа
+    return res.data;
   } catch (err) {
     const axiosError = err as AxiosError<ErrorResponse>;
     dispatch(addNotification({ type: "error", message: "Не удалось создать объявление" }));
-    console.error("Error occurred:", axiosError);
-
     return rejectWithValue(axiosError.response?.data || { message: axiosError.message });
   }
 });

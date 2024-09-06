@@ -3,6 +3,7 @@ import ModalUI from "./ModalUI";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "../../app/store";
 import { deleteHeading } from "../../features/AdminHeadings/store/action";
+import { deleteHouse } from "../../features/AdminRealEstate/store/action";
 
 const DeleteModal: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -16,8 +17,11 @@ const DeleteModal: React.FC = () => {
     navigate(isHeading ? `/admin/headings` : `/admin/real-estate`);
   };
   const deleteItem = (id: number) => {
-    // dispatch(isHeading ? deleteHeading(id) : "deleteHouse(id)");
-    dispatch(deleteHeading({ id, navigate }));
+    if (isHeading) {
+      dispatch(deleteHeading({ id, navigate }));
+    } else if (!isHeading) {
+      dispatch(deleteHouse({ id, navigate }));
+    }
   };
 
   return (
