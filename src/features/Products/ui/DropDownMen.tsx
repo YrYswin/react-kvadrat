@@ -1,29 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import ExpandMoreTwoToneIcon from "@mui/icons-material/KeyboardArrowUpTwoTone";
 import ExpandMoreSharpIcon from "@mui/icons-material/ExpandMoreSharp";
-import { useAppDispatch } from "../../../app/store";
-import { setTypeHouse } from "../../Filters/store/slice";
 
 interface Props {
   category: string;
-  setCat: (e: string) => void
+  setCat: (e: string) => void;
 }
 
-const DropDownMen: React.FC<Props> = ({category, setCat}) => {
-  const dispatch = useAppDispatch();
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+const DropDownMen: React.FC<Props> = ({ category, setCat }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [selName, setSelName] = useState("");
   const options = ["Все", "Дома", "Квартиры", "Коммерческое недвижимость", "Участки"];
   const [open, setOpen] = useState(false);
   const sortRef = useRef<HTMLDivElement>(null);
-
-  const handleName = (name: string, index: number) => {
-    setSelName(name);
-    setSelectedIndex(index);
-    setOpen(false);
-    dispatch(setTypeHouse(name));  
-  };
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
@@ -48,7 +36,7 @@ const DropDownMen: React.FC<Props> = ({category, setCat}) => {
           open ? "bg-red-600 text-white" : "bg-red-600 text-white"
         }`}
       >
-        <p className={`${category === "Коммерческое недвижимость" ? "text-sm" : "text-md"}`}>{selName || "Категории"}</p>
+        <p className={`${category === "Коммерческое недвижимость" ? "text-sm" : "text-md"}`}>"Категории"</p>
         {open ? <ExpandMoreTwoToneIcon className="text-black" /> : <ExpandMoreSharpIcon />}
       </div>
       {open && (
@@ -60,7 +48,7 @@ const DropDownMen: React.FC<Props> = ({category, setCat}) => {
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
               className={`w-full py-3 px-4 rounded-lg  ${
-                index === selectedIndex ? "bg-white text-black" : index === hoveredIndex ? "bg-white text-black" : "text-white"
+                index ? "bg-white text-black" : index === hoveredIndex ? "bg-white text-black" : "text-white"
               }`}
             >
               {item}
@@ -70,6 +58,6 @@ const DropDownMen: React.FC<Props> = ({category, setCat}) => {
       )}
     </div>
   );
-}
+};
 
 export default DropDownMen;

@@ -1,23 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/store";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { adminLogin } from "./store/action";
 import { loginState } from "./store/types";
-import { getUserLS } from "../../utils";
 
 const SignIn: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const { handleSubmit, register } = useForm<loginState>();
-
-  useEffect(() => {
-    const user = getUserLS();
-    if (user) {
-      navigate("/admin");
-    }
-  }, [navigate]);
 
   const onSubmit: SubmitHandler<loginState> = (values) => {
     dispatch(adminLogin({ data: values, navigate }));
@@ -51,7 +43,8 @@ const SignIn: React.FC = () => {
         <div className="flex items-center gap-2">
           <input className="cursor-pointer" type="checkbox" />
           <span className="flex gap-1 text-white ">
-            <p className="text-gray-500 text-[10px] md:text-[17px]">Я согласен с </p> <p className="text-[10px] md:text-[17px]">Условиями предоставления услуг</p>
+            <p className="text-gray-500 text-[10px] md:text-[17px]">Я согласен с </p>{" "}
+            <p className="text-[10px] md:text-[17px]">Условиями предоставления услуг</p>
           </span>
         </div>
         <button

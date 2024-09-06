@@ -11,6 +11,7 @@ const adminLoginReq = (data: loginState) => {
 export const adminLogin = createAsyncThunk(
   "post/adminLogin",
   async ({ data, navigate }: { data: loginState; navigate: NavigateFunction }, { rejectWithValue }) => {
+    TokenService.deleteUserLS();
     try {
       const res = await adminLoginReq(data);
       if (res.status === 200) {

@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
     element: <SignIn />,
   },
   {
-    path: "/admin",
+    path: "admin",
     element: (
       <ProtectedRoute>
         <AdminLayout />
@@ -54,49 +54,43 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <AdminLayout />,
+        element: <AdminMainDashboard />,
+      },
+      {
+        path: "headings",
+        element: <AdminHeadings />,
         children: [
           {
-            path: "",
-            element: <AdminMainDashboard />,
+            path: "add",
+            element: <AddHeading />,
           },
           {
-            path: "headings",
-            element: <AdminHeadings />,
-            children: [
-              {
-                path: "add",
-                element: <AddHeading />,
-              },
-              {
-                path: "edit/:headingId",
-                element: <AddHeading />,
-              },
-              {
-                path: "delete/:headingId",
-                element: <DeleteModal />,
-              },
-            ],
+            path: "edit/:headingId",
+            element: <AddHeading />,
           },
           {
-            path: "real-estate",
-            element: <AdminRealEstate />,
-            children: [
-              {
-                path: "add",
-                element: <PenModal />,
-              },
-              {
-                path: "edit/:houseId",
-                element: <PenModal />,
-              },
-            ],
-          },
-          {
-            path: "settings",
-            element: <AdminSettings />,
+            path: "delete/:headingId",
+            element: <DeleteModal />,
           },
         ],
+      },
+      {
+        path: "real-estate",
+        element: <AdminRealEstate />,
+        children: [
+          {
+            path: "add",
+            element: <PenModal />,
+          },
+          {
+            path: "edit/:houseId",
+            element: <PenModal />,
+          },
+        ],
+      },
+      {
+        path: "settings",
+        element: <AdminSettings />,
       },
     ],
   },
