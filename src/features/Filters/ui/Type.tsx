@@ -14,40 +14,46 @@ import {
   setLaundry,
   setArea,
   selectFilter,
+  setPlace,
 } from "../store/slice";
 import SelectUI from "./SelectUI";
 import { priceVariable } from "../../../utils/data";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export interface Adress {
+export interface Address {
   id: number;
   region: string;
 }
 
-const Type = () => {
+interface Props {
+  open: (open: boolean) => void;
+}
+
+const Type: React.FC<Props> = ({ open }) => {
   const API = "http://167.172.74.113/addresses/";
   const dispatch = useAppDispatch();
-  const { typeHouse, comfort, price } = useSelector(selectFilter); // Добавил price из стейта
-  const [address, setAddress] = useState<Adress[]>([]);
+  const { typeHouse, comfort, price } = useSelector(selectFilter);
+  const [address, setAddress] = useState<Address[]>([]);
   const [activeAddress, setActiveAddress] = useState<string>("");
 
-  const houseType = ["Все", "Дома", "Квартиры", "Участки", "Комерческое недвижимость"];
+  const houseType = ["Все", "Дома", "Квартиры", "Участки", "Коммерческое недвижимость"];
 
   const handleChange = (value: string) => {
     const option = priceVariable.find((x) => x.id === Number(value));
     if (option) {
-      dispatch(setPrice(option)); // Устанавливаем цену через Redux
+      dispatch(setPrice(option));
     }
   };
 
   const handleChangeAddress = (value: string) => {
     setActiveAddress(value);
+    dispatch(setPlace(value));
   };
 
   async function getAddress(): Promise<void> {
     try {
-      const res = await axios.get<{ results: Adress[] }>(API);
+      const res = await axios.get<{ results: Address[] }>(API);
       if (Array.isArray(res.data.results)) {
         setAddress(res.data.results);
       } else {
@@ -56,7 +62,7 @@ const Type = () => {
       }
     } catch (error) {
       console.log(error);
-      setAddress([]); // Обработка ошибок
+      setAddress([]);
     }
   }
 
@@ -67,14 +73,14 @@ const Type = () => {
   const addressStrings = Array.isArray(address) ? address.map((item) => item.region) : [];
 
   return (
-    <div className="text-white bg-[#111111] lg:w-[350px] md:w-[20px] p-5 rounded">
+    <div className="text-white bg-[#111111] lg:w-[350px] md:w-[850px] p-5 rounded">
       <div>
         <h2>Найти свою недвижимость</h2>
       </div>
       <hr className="my-5" />
       <div className="mt-5">
         <p className="mb-3">Местоположение</p>
-        <SelectUI itemsAdress={addressStrings} active={activeAddress} onChange={handleChangeAddress} width={300} />
+        <SelectUI itemsAdress={addressStrings} active={activeAddress} onChange={handleChangeAddress}  width={300} />
       </div>
       <hr className="mt-10 mb-5" />
       <div>
@@ -96,7 +102,7 @@ const Type = () => {
             itemsPrice={priceVariable}
             isPrice={true}
             onChange={handleChange}
-            active={String(price?.id ?? "")} // Отображаем выбранную цену
+            active={String(price?.id ?? "")}
           />
         </div>
       </div>
@@ -150,6 +156,12 @@ const Type = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div
+        onClick={() => open(false)} 
+        className="mt-3 w-[170px] flex justify-center items-center h-[30px] bg-red-700 rounded-xl hover:bg-red-600 lg:hidden"
+      >
+        Найти
       </div>
     </div>
   );

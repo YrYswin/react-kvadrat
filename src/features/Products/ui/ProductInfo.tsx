@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import { getHouseById } from "../../AdminRealEstate/store/action";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../app/store";
-import { useParams } from "react-router-dom";
-
+import {  useParams } from "react-router-dom";
+import chackedSVG from "../../../shared/assets/checked.svg"
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import Container from "../../../shared/helpers/Container";
 import { selectHouse } from "../../AdminRealEstate/store/slice";
 
@@ -19,15 +20,26 @@ const checkbox = [
   { label: "Площадка", name: "area" },
   { label: "Прачечная", name: "laundry" },
 ];
+
+interface HandleType {
+  (): void;
+}
+
+const handleClickBack: HandleType = () => {
+  window.history.go(-1)
+}
+
 const ProductInfo: React.FC = () => {
+  const house = useSelector(selectHouse);
+  const [image, setImage] = useState("");
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  const house = useSelector(selectHouse);
-  console.log(house);
-
+  // console.log(house);
+  
   React.useEffect(() => {
     dispatch(getHouseById(Number(id)));
-  }, [dispatch, id]);
+    setImage(house?.image as string);
+  }, [dispatch, id, house?.image]);
 
   const types = [
     {
@@ -64,18 +76,23 @@ const ProductInfo: React.FC = () => {
       });
     }
 
+
     const styleTW = checked ? "bg-green-700" : "bg-[#262626] border border-gray-600";
 
     return (
-      <div key={index} className={`text-sm text-white ${styleTW} rounded-lg py-2 px-5 cursor-default select-none`}>
+      <div key={index} className={`flex gap-2 items-center text-sm text-white ${styleTW} rounded-lg py-2 px-5 cursor-default select-none`}>
         <p>{label}</p>
+        {checked && <img className="w-5 h-5" src={chackedSVG} alt="Checked Icon" />}
       </div>
     );
   });
 
   return (
     <Container>
-      <div className="py-[56px] flex flex-col  gap-7">
+      <div className="py-[30px] flex flex-col  gap-7">
+        <div onClick={handleClickBack} className="cursor-pointer">
+          <KeyboardBackspaceIcon fontSize="large" sx={{color: "white",}}/>
+        </div>
         <div className="flex flex-col px-[10px]  sm:px-[30px] py-[26px] justify-between  bg-zinc-800 md:w-[611px]  w-full rounded-md gap-3 sm:gap-6">
           <div className="flex items-center justify-between ">
             <h1 className="text-xs font-medium text-white sm:text-xl ">{house?.title || "РОСКОШНАЯ ВИЛЛА НА ЗАКАТЕ"}</h1>
@@ -97,20 +114,25 @@ const ProductInfo: React.FC = () => {
           <div className="text-sm font-medium text-white sm:text-xl">$ {house?.price}</div>
         </div>
         <div className="flex flex-col gap-2 lg:flex-row ">
-          <img className="lg:w-[75%] lg:h-[655px] h-full w-full red-500" src={house?.image} alt="Product" />
+          <img className="lg:w-[75%] lg:h-[655px] h-full w-full red-500" src={image} alt="Product" />
 
           <div
-            className="flex items-center lg:h-[655px] justify-between gap-2 overflow-x-scroll lg:flex-col lg:overflow-y-scroll "
+            className="flex items-center lg:h-[655px] justify-between gap-2 overflow-x-scroll lg:flex-col lg:overflow-y-scroll"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {house?.images.map((obj, index) => (
               <img
                 key={index}
                 src={obj.image}
-                className="md:w-[313px] md:h-[159px] sm:w-[295px] sm:h-[100px] w-[103px] h-[68px] cursor-pointer "
+                onClick={() => setImage(obj.image)}
+                className="md:w-[313px] md:h-[159px] sm:w-[295px] sm:h-[100px] w-[103px] h-[68px] cursor-pointer"
                 alt={`thumbnail-${obj.id}`}
               />
+              
             ))}
+            <img
+              className="md:w-[313px] md:h-[159px] sm:w-[295px] sm:h-[100px] w-[103px] h-[68px] cursor-pointer"
+              onClick={() => setImage(house?.image ?? "")} src={house?.image}/>
           </div>
         </div>
         <div className="flex flex-col gap-3 text-white ">

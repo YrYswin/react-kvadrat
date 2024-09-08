@@ -27,7 +27,7 @@ const AdminHeadings = () => {
         </div>
         <button
           onClick={() => navigate("/admin/headings/add")}
-          className="bg-red-700 text-[8px] md:text-lg px-2 py-2 md:px-7 md:py-3 rounded-full flex items-center gap-1 md:gap-3"
+          className="bg-red-700 text-[8px] md:text-lg px-2 py-2 lg:px-7 lg:py-3 rounded-full flex items-center gap-1 md:gap-3"
         >
           <AddIcon />
           Добавить новое объявление

@@ -53,7 +53,7 @@ const AdminSidebar: React.FC<Props> = ({ open, handleDrawerToggle }) => {
           boxSizing: "border-box",
           backgroundColor: "#222224",
           color: "white",
-          top: isMobile ? "50px" : "64px",
+          top: {lg:"64px",},
           height: "calc(100vh - 60px)",
           padding: isMobile ? "10px" : "20px",
           zIndex: 1000,

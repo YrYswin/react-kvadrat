@@ -86,6 +86,10 @@ export const router = createBrowserRouter([
             path: "edit/:houseId",
             element: <PenModal />,
           },
+          {
+            path: "delete/:houseId",
+            element: <DeleteModal />,
+          }
         ],
       },
       {

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material";
 
 import { HeadingState } from "../store/types";
-import Contacts from "../../../shared/helpers/Contacts";
 
 const HeadingsBlock: React.FC<HeadingState> = ({ id, image, title }) => {
   const navigate = useNavigate();
@@ -23,7 +22,6 @@ const HeadingsBlock: React.FC<HeadingState> = ({ id, image, title }) => {
         <div className="absolute bottom-5 left-5 md:bottom-10 md:left-10 w-full flex flex-col gap-5 md:gap-10">
           <h1 className="text-[24px] md:text-[45px] w-[90%] md:w-[70%] text-white">{title}</h1>
           <div className="w-full md:w-[90%]">
-            <Contacts />
           </div>
         </div>
       </div>

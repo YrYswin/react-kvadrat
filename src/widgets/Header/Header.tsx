@@ -57,7 +57,7 @@ const Header = () => {
             <p className="cursor-pointer" onClick={() => handleScroll("uslugi")}>
               Услуги
             </p>
-            <Link to="/AboutCompany">О компании</Link>
+            <Link onClick={() => window.scrollTo( 0,0)} to="/AboutCompany">О компании</Link>
             <p className="cursor-pointer" onClick={() => handleScroll("faq")}>
               FAQ
             </p>
