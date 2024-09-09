@@ -7,9 +7,7 @@ export interface serviceState {
 export interface testimonialsState {
   id: number;
   name: string;
-  username: string;
   text: string;
-  img: string;
 }
 
 export interface PriceVariableState {
