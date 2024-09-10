@@ -16,13 +16,13 @@ export const getHousesReq = (page: number) => {
 };
 
 export const getHousesReqCategory = (page: number, category: string) => {
-  return apiRoot.get(`/houses/?limit=9&offset=${page}&category=${encodeIfInvalid(category)}`)
-}
+  return apiRoot.get(`/houses/?limit=9&offset=${page}&category=${encodeIfInvalid(category)}`);
+};
 
 export const getHousesReqFilter = (params: FilterSliceState, page: number) => {
-  const { price, typeHouse, comfort } = params;
+  const { price, typeHouse, comfort, place } = params;
   const type = typeHouse === "Все" ? "" : typeHouse;
-  
+
   return apiRoot.get(
     `/houses/?limit=9&offset=${page}&has_pool=${comfort.pool ? "true" : ""}&has_gym=${comfort.gym ? "true" : ""}&has_garage=${
       comfort.garage ? "true" : ""

@@ -17,8 +17,6 @@ const ProductFilters = () => {
   const { price, typeHouse, comfort, page, place } = useSelector(selectFilter);
 
   React.useEffect(() => {
-    console.log("Фильтры:", { price, typeHouse, comfort, page, place });
-
     dispatch(
       getHouses({
         params: {
@@ -32,9 +30,7 @@ const ProductFilters = () => {
     );
   }, [dispatch, price, typeHouse, comfort, page, place]);
 
-  const productsList = items.map((item, index) => (
-    <ProductBlock key={item.id || index} {...item} />
-  ));
+  const productsList = items.map((item, index) => <ProductBlock key={item.id || index} {...item} />);
 
   const skeletonsList = [...new Array(8)].map((_, i) => <ProductBlockSkeleton key={i} />);
 

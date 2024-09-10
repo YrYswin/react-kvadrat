@@ -13,6 +13,8 @@ import { PostHouseState } from "../store/types";
 import Selectors from "./Selectors";
 import PenModSelect from "./PenModSelect";
 import EstateType from "./EstateType";
+import { CircularProgress } from "@mui/material";
+import { selectHouseStatus } from "../store/slice";
 
 const PenModal: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -36,6 +38,9 @@ const PenModal: React.FC = () => {
   });
 
   const isEditing = Boolean(houseId);
+  const status = useSelector(selectHouseStatus);
+
+  const isLoading = status === "loading";
 
   const handleChangeAddress = (value: string) => {
     setActiveAddress(value);
@@ -300,10 +305,19 @@ const PenModal: React.FC = () => {
 
               <button
                 type="submit"
-                className="bg-red-600 rounded-full py-1 px-3 md:py-2 md:px-4 flex items-center gap-3 text-[10px] md:text-sm"
+                // disabled={isLoading}
+                className={`bg-red-600 rounded-full py-1 px-3 md:py-2 md:px-4 flex items-center gap-3 text-[10px] md:text-sm ${
+                  isLoading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
               >
-                <AddIcon />
-                Добавить
+                {isLoading ? (
+                  <CircularProgress size={16} color="inherit" />
+                ) : (
+                  <>
+                    <AddIcon />
+                    Добавить
+                  </>
+                )}
               </button>
             </div>
           </div>

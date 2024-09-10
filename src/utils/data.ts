@@ -1,6 +1,5 @@
 import { serviceState, testimonialsState, PriceVariableState } from "./dataTypes";
 
-
 export const services: serviceState[] = [
   {
     id: 1,
@@ -17,11 +16,6 @@ export const services: serviceState[] = [
     id: 3,
     image: "/svg/monay.svg",
     description: "Инвестиции в недвижимость",
-  },
-  {
-    id: 3,
-    image: "/svg/monay.svg",
-    description: "Подобрать недвижимость",
   },
   {
     id: 4,

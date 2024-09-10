@@ -37,7 +37,7 @@ const Type: React.FC<Props> = ({ open }) => {
   const [address, setAddress] = useState<Address[]>([]);
   const [activeAddress, setActiveAddress] = useState<string>("");
 
-  const houseType = ["Все", "Дома", "Квартиры", "Участки", "Коммерческое недвижимость"];
+  const houseType = ["Все", "Дома", "Квартиры", "Участки", "Комерческая недвижимость"];
 
   const handleChange = (value: string) => {
     const option = priceVariable.find((x) => x.id === Number(value));
@@ -80,7 +80,7 @@ const Type: React.FC<Props> = ({ open }) => {
       <hr className="my-5" />
       <div className="mt-5">
         <p className="mb-3">Местоположение</p>
-        <SelectUI itemsAdress={addressStrings} active={activeAddress} onChange={handleChangeAddress}  width={300} />
+        <SelectUI itemsAdress={addressStrings} active={activeAddress} onChange={handleChangeAddress} width={300} />
       </div>
       <hr className="mt-10 mb-5" />
       <div>
@@ -98,12 +98,7 @@ const Type: React.FC<Props> = ({ open }) => {
       <div>
         <div>Цена</div>
         <div>
-          <SelectUI
-            itemsPrice={priceVariable}
-            isPrice={true}
-            onChange={handleChange}
-            active={String(price?.id ?? "")}
-          />
+          <SelectUI itemsPrice={priceVariable} isPrice={true} onChange={handleChange} active={String(price?.id ?? "")} />
         </div>
       </div>
       <hr className="mt-10 mb-5" />
@@ -158,7 +153,7 @@ const Type: React.FC<Props> = ({ open }) => {
         </div>
       </div>
       <div
-        onClick={() => open(false)} 
+        onClick={() => open(false)}
         className="mt-3 w-[170px] flex justify-center items-center h-[30px] bg-red-700 rounded-xl hover:bg-red-600 lg:hidden"
       >
         Найти
