@@ -9,16 +9,23 @@ interface Props {
   itemsPrice?: PriceVariableState[];
   itemsAdress?: string[];
   active: string;
-  onChange?: (e: string) => void;
+  onChange?: (value: string) => void;
   width?: number;
   isPrice?: boolean;
 }
 
-const SelectUI: React.FC<Props> = ({ itemsPrice, itemsAdress, active, onChange, width, isPrice }) => {
+const SelectUI: React.FC<Props> = ({
+  itemsPrice,
+  itemsAdress,
+  active,
+  onChange,
+  width,
+  isPrice,
+}) => {
   // Обработчик изменения выбора
   const handleChange = (event: SelectChangeEvent<unknown>) => {
     if (onChange) {
-      onChange(event.target.value as string);
+      onChange(event.target.value as string); // Приведение типа к string
     }
   };
 
@@ -39,16 +46,17 @@ const SelectUI: React.FC<Props> = ({ itemsPrice, itemsAdress, active, onChange, 
             <em>Не выбрано</em>
           </MenuItemStyle>
         )}
-        {itemsPrice?.map((item, index) => (
-          <MenuItemStyle key={index} value={item.id}>
-            {item.label}
-          </MenuItemStyle>
-        ))}
-        {itemsAdress?.map((item, index) => (
-          <MenuItemStyle key={index} value={item}>
-            {item}
-          </MenuItemStyle>
-        ))}
+        {isPrice
+          ? itemsPrice?.map((item) => (
+              <MenuItemStyle key={item.id} value={item.id}>
+                {item.label}
+              </MenuItemStyle>
+            ))
+          : itemsAdress?.map((item, index) => (
+              <MenuItemStyle key={index} value={item}>
+                {item}
+              </MenuItemStyle>
+            ))}
       </CustomSelect>
     </FormControl>
   );

@@ -8,6 +8,7 @@ const initialState: FilterSliceState = {
   filterType: "По популярности",
   price: priceVariable[0],
   typeHouse: "Все",
+  place: "Все",
   comfort: {
     pool: false,
     gym: false,
@@ -50,6 +51,11 @@ const filterSlice = createSlice({
     },
     clearTypeHouse: (state) => {
       state.typeHouse = "Все";
+    },
+
+    // place
+    setPlace: (state, { payload }) => {
+      state.place = payload;
     },
 
     // comfort
@@ -99,6 +105,7 @@ export const {
   setFilterType,
   setPrice,
   setTypeHouse,
+  setPlace,
   setPool,
   setGym,
   setGarage,

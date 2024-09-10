@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { apiRoot } from "../../../app/api";
 import { loginState } from "./types";
 import { NavigateFunction } from "react-router-dom";
+import TokenService from "../../../utils";
 
 const adminLoginReq = (data: loginState) => {
   return apiRoot.post("api/admin/login/", data);
@@ -10,9 +11,11 @@ const adminLoginReq = (data: loginState) => {
 export const adminLogin = createAsyncThunk(
   "post/adminLogin",
   async ({ data, navigate }: { data: loginState; navigate: NavigateFunction }, { rejectWithValue }) => {
+    TokenService.deleteUserLS();
     try {
       const res = await adminLoginReq(data);
       if (res.status === 200) {
+        TokenService.setUserLS(data);
         navigate("/admin");
         alert("Вы успешно вошли в систему");
         return data;

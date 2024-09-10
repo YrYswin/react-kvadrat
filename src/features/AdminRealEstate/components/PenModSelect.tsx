@@ -1,10 +1,7 @@
-import React,{useState, useEffect} from "react";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { styled } from "@mui/material/styles";
+import React, { useState, useEffect } from "react";
 import { Adress } from "../../Filters/ui/Type";
 import axios from "axios";
+import { CustomSelect, MenuItemStyle } from "../styles";
 
 interface Props {
   active: string;
@@ -13,12 +10,12 @@ interface Props {
 }
 const API = "http://167.172.74.113/addresses/";
 
-const PenModSelect: React.FC<Props> = ({ active, onChange, width, }) => {
+const PenModSelect: React.FC<Props> = ({ active, onChange }) => {
   const [address, setAddress] = useState<Adress[]>([]);
 
-  const handleChange = (event: SelectChangeEvent<unknown>) => {
+  const handleChange = (event: string) => {
     if (onChange) {
-      onChange(event.target.value as string);
+      onChange(event);
     }
   };
 
@@ -35,7 +32,7 @@ const PenModSelect: React.FC<Props> = ({ active, onChange, width, }) => {
       }
     } catch (error) {
       console.log(error);
-      setAddress([]); // Обработка ошибок
+      setAddress([]);
     }
   }
 
@@ -44,61 +41,14 @@ const PenModSelect: React.FC<Props> = ({ active, onChange, width, }) => {
   }, []);
 
   return (
-    <FormControl sx={{ width: width || 290, height: 30 }}>
-        <CustomSelect
-        value={value}
-        onChange={handleChange}
-        displayEmpty
-        inputProps={{ "aria-label": "Without label" }}
-        size="small"
-        >
-        <MenuItemStyle value="None">
-            <em>Выберите Местоположение</em>
+    <CustomSelect value={value} onChange={(e) => handleChange(e.target.value)}>
+      {address.map((item, index) => (
+        <MenuItemStyle key={index} value={item.region}>
+          {item.region}
         </MenuItemStyle>
-        {address.map((item,) => (
-            <MenuItemStyle key={item.id} value={item.region}>
-            {item.region}
-            </MenuItemStyle>
-        ))}
-        </CustomSelect>
-    </FormControl>
+      ))}
+    </CustomSelect>
   );
 };
 
 export default PenModSelect;
-
-const CustomSelect = styled(Select)({
-  background: "#262626",
-  width: "100%",
-  border: "1px solid gray",
-  color: "#fff",
-  "& .MuiSelect-select": {
-    color: "#fff",
-  },
-  "& .MuiOutlinedInput-notchedOutline": {
-    borderColor: "gray",
-  },
-  "&:hover .MuiOutlinedInput-notchedOutline": {
-    borderColor: "lightgray",
-  },
-  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-    borderColor: "lightgray",
-  },
-  "& .MuiMenuItem-root": {
-    color: "#fff",
-    "&.Mui-selected": {
-      backgroundColor: "red",
-      color: "#fff",
-      "&:hover": {
-        backgroundColor: "red",
-      },
-    },
-  },
-});
-
-const MenuItemStyle = styled(MenuItem)({
-  fill: "#fff",
-  "*": {
-    fill: "#fff",
-  },
-});

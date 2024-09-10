@@ -1,5 +1,6 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -12,6 +13,9 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AirplayIcon from "@mui/icons-material/Airplay";
 import { Box, useTheme, useMediaQuery } from "@mui/material";
 
+import { ExitButton } from "../style/styles";
+import TokenService from "../../utils";
+
 const drawerWidth = 240;
 
 interface Props {
@@ -20,6 +24,7 @@ interface Props {
 }
 
 const AdminSidebar: React.FC<Props> = ({ open, handleDrawerToggle }) => {
+  const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const location = useLocation();
@@ -30,6 +35,11 @@ const AdminSidebar: React.FC<Props> = ({ open, handleDrawerToggle }) => {
     { path: "/admin/real-estate", name: "Обьекты Недвижимости", icon: BusinessIcon },
     // { path: "/admin/settings", name: "Настройки", icon: SettingsIcon },
   ];
+
+  const logout = () => {
+    TokenService.deleteUserLS();
+    navigate("/admin/sign-in");
+  };
 
   return (
     <Drawer
@@ -43,9 +53,10 @@ const AdminSidebar: React.FC<Props> = ({ open, handleDrawerToggle }) => {
           boxSizing: "border-box",
           backgroundColor: "#222224",
           color: "white",
-          top: isMobile ? "50px" : "60px",
-          height: `(100vh - 64px)`,
+          top: {lg:"64px",},
+          height: "calc(100vh - 60px)",
           padding: isMobile ? "10px" : "20px",
+          zIndex: 1000,
         },
       }}
     >
@@ -74,16 +85,14 @@ const AdminSidebar: React.FC<Props> = ({ open, handleDrawerToggle }) => {
       </List>
       <Box sx={{ flexGrow: 1 }} />
 
-      <NavLink to="/">
-        <List sx={{ position: "absolute", bottom: 8, padding: 0 }}>
-          <ListItem>
-            <ListItemIcon sx={{ color: "white", minWidth: isMobile ? "40px" : "56px" }}>
-              <ExitToAppIcon fontSize={isMobile ? "large" : "medium"} />
-            </ListItemIcon>
-            <ListItemText primary="Выход" />
-          </ListItem>
-        </List>
-      </NavLink>
+      <ExitButton onClick={logout}>
+        <ListItem>
+          <ListItemIcon sx={{ color: "white", minWidth: isMobile ? "40px" : "56px" }}>
+            <ExitToAppIcon fontSize={isMobile ? "large" : "medium"} />
+          </ListItemIcon>
+          <ListItemText sx={{ color: "white" }} primary="Выход" />
+        </ListItem>
+      </ExitButton>
     </Drawer>
   );
 };

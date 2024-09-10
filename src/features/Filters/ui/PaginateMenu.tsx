@@ -1,4 +1,6 @@
 import React from "react";
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 interface PaginateMenuProps {
   changePage: (page: number) => void;
@@ -24,29 +26,29 @@ const PaginateMenu: React.FC<PaginateMenuProps> = ({ changePage, active, maxvalu
   return (
     <div className="flex gap-3 mt-5 text-white">
       <button
-        className="text-[10px] md:text-[15px] w-10 h-10 rounded flex justify-center items-center bg-slate-300 cursor-pointer disabled:bg-[#262626] disabled:text-slate-500"
+        className="text-[10px] md:text-[15px] w-10 h-10 rounded flex justify-center items-center cursor-pointer bg-[#262626] disabled:text-slate-500"
         onClick={() => changePage(active - 9)}
         disabled={active === 0}
       >
-        PREV
+        <NavigateBeforeIcon />
       </button>
       {generatePagesArr.map((obj, i) => (
         <button
           key={i}
           className={`${
-            obj.page === active && "bg-green-400"
-          } w-10 h-10 rounded flex justify-center items-center bg-slate-300 cursor-pointer text-xl`}
+            obj.page === active ? "bg-green-400" : ""
+          } w-10 h-10 rounded flex justify-center items-center bg-slate-600 cursor-pointer text-xl disabled:bg-slate-400`}
           onClick={() => changePage(obj.page)}
         >
           {i + 1}
         </button>
       ))}
       <button
-        className="text-[10px] md:text-[15px] w-10 h-10 rounded flex justify-center items-center bg-slate-300 cursor-pointer disabled:bg-[#262626] disabled:text-slate-500"
+        className="text-[10px] md:text-[15px] w-10 h-10 rounded flex justify-center items-center cursor-pointer bg-[#262626] disabled:text-slate-500"
         onClick={() => changePage(active + 9)}
         disabled={active === generatePagesArr[generatePagesArr.length - 1].page}
       >
-        NEXT
+        <NavigateNextIcon />
       </button>
     </div>
   );

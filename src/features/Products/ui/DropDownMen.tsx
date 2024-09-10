@@ -1,29 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import ExpandMoreTwoToneIcon from "@mui/icons-material/KeyboardArrowUpTwoTone";
 import ExpandMoreSharpIcon from "@mui/icons-material/ExpandMoreSharp";
-import { useAppDispatch } from "../../../app/store";
-import { setTypeHouse } from "../../Filters/store/slice";
 
 interface Props {
   category: string;
-  setCat: (e: string) => void
+  setCat: (e: string) => void;
 }
 
-const DropDownMen: React.FC<Props> = ({category, setCat}) => {
-  const dispatch = useAppDispatch();
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+const DropDownMen: React.FC<Props> = ({ category, setCat }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [selName, setSelName] = useState("");
   const options = ["Все", "Дома", "Квартиры", "Коммерческое недвижимость", "Участки"];
   const [open, setOpen] = useState(false);
   const sortRef = useRef<HTMLDivElement>(null);
-
-  const handleName = (name: string, index: number) => {
-    setSelName(name);
-    setSelectedIndex(index);
-    setOpen(false);
-    dispatch(setTypeHouse(name));  
-  };
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
@@ -41,14 +29,12 @@ const DropDownMen: React.FC<Props> = ({category, setCat}) => {
   }, []);
 
   return (
-    <div ref={sortRef} className="flex flex-col items-center gap-1">
+    <div ref={sortRef} className="flex flex-col items-center gap-1 relative">
       <div
         onClick={() => setOpen(!open)}
-        className={`flex items-center justify-between w-[150px] sm:w-[200px] md:w-[250px] lg:w-[283px] rounded-full py-2 px-2 sm:px-4 md:px-5 lg:px-7 ${
-          open ? "bg-red-600 text-white" : "bg-red-600 text-white"
-        }`}
+        className={`flex items-center justify-between w-[250px] md:w-[283px] rounded-full py-2 px-2 sm:px-4 md:px-5 lg:px-7 bg-red-600 text-white cursor-pointer`}
       >
-        <p className={`${category === "Коммерческое недвижимость" ? "text-sm" : "text-md"}`}>{selName || "Категории"}</p>
+        <p className={`${category === "Коммерческое недвижимость" ? "text-sm" : "text-md"}`}>{category || "Категории"}</p>
         {open ? <ExpandMoreTwoToneIcon className="text-black" /> : <ExpandMoreSharpIcon />}
       </div>
       {open && (
@@ -56,11 +42,18 @@ const DropDownMen: React.FC<Props> = ({category, setCat}) => {
           {options.map((item, index) => (
             <p
               key={index}
-              onClick={() => setCat(item)}
+              onClick={() => {
+                setCat(item === "Все" ? "" : item); // Если выбрано "Все", устанавливаем пустую строку
+                setOpen(false);
+              }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
-              className={`w-full py-3 px-4 rounded-lg  ${
-                index === selectedIndex ? "bg-white text-black" : index === hoveredIndex ? "bg-white text-black" : "text-white"
+              className={`w-full py-3 px-4 rounded-lg cursor-pointer ${
+                item === category || (item === "Все" && category === "")
+                  ? "bg-white text-black"
+                  : hoveredIndex === index
+                  ? "bg-gray-200 text-black"
+                  : "text-white"
               }`}
             >
               {item}
@@ -70,6 +63,6 @@ const DropDownMen: React.FC<Props> = ({category, setCat}) => {
       )}
     </div>
   );
-}
+};
 
 export default DropDownMen;

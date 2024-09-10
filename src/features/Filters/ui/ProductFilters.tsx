@@ -14,7 +14,7 @@ import { selectFilter } from "../store/slice";
 const ProductFilters = () => {
   const dispatch = useAppDispatch();
   const { items, status, count } = useSelector(selectHouses);
-  const { price, typeHouse, comfort, page } = useSelector(selectFilter);
+  const { price, typeHouse, comfort, page, place } = useSelector(selectFilter);
 
   React.useEffect(() => {
     dispatch(
@@ -23,20 +23,22 @@ const ProductFilters = () => {
           price,
           typeHouse,
           comfort,
+          place,
         },
         page: page || 0,
       })
     );
-  }, [dispatch, price, typeHouse, comfort, page]);
+  }, [dispatch, price, typeHouse, comfort, page, place]);
 
-  const productsList = items.map((item, index) => <ProductBlock key={index} {...item} />);
+  const productsList = items.map((item, index) => <ProductBlock key={item.id || index} {...item} />);
+
   const skeletonsList = [...new Array(8)].map((_, i) => <ProductBlockSkeleton key={i} />);
 
   return status === Status.ERROR ? (
     <NotFoundProduct title="Ошибка с сервером" />
   ) : (
-    <Box className="grid grid-cols-4 gap-2 gap-y-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 max-500:grid-cols-2">
-      {status === Status.LOADING ? skeletonsList : count > 0 ? productsList : <NotFoundProduct title="Ничего не найдено" />}
+    <Box className="grid grid-cols-2 gap-2 gap-y-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 max-500:grid-cols-2">
+      {status === Status.LOADING ? skeletonsList : count > 0 ? productsList : <NotFoundProduct title="Ничего не найдено" />}
     </Box>
   );
 };

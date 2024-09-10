@@ -14,7 +14,7 @@ import SignIn from "../../features/Sign-In/Sign-In";
 import PenModal from "../../features/AdminRealEstate/components/PenModal";
 import AddHeading from "../../features/AdminHeadings/ui/AddHeading";
 import DeleteModal from "../../shared/helpers/DeleteModal";
-import PrivateRoute from "../../features/PrivateRoute/PrivateRoute";
+import ProtectedRoute from "../../shared/helpers/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -45,54 +45,56 @@ export const router = createBrowserRouter([
     element: <SignIn />,
   },
   {
-    path: "/admin",
-    element: <PrivateRoute />, // Защищаем административные маршруты
+    path: "admin",
+    element: (
+      <ProtectedRoute>
+        <AdminLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "",
-        element: <AdminLayout />,
+        element: <AdminMainDashboard />,
+      },
+      {
+        path: "headings",
+        element: <AdminHeadings />,
         children: [
           {
-            path: "",
-            element: <AdminMainDashboard />,
+            path: "add",
+            element: <AddHeading />,
           },
           {
-            path: "headings",
-            element: <AdminHeadings />,
-            children: [
-              {
-                path: "add",
-                element: <AddHeading />,
-              },
-              {
-                path: "edit/:headingId",
-                element: <AddHeading />,
-              },
-              {
-                path: "delete/:headingId",
-                element: <DeleteModal />,
-              },
-            ],
+            path: "edit/:headingId",
+            element: <AddHeading />,
           },
           {
-            path: "real-estate",
-            element: <AdminRealEstate />,
-            children: [
-              {
-                path: "add",
-                element: <PenModal />,
-              },
-              {
-                path: "edit/:houseId",
-                element: <PenModal />,
-              },
-            ],
-          },
-          {
-            path: "settings",
-            element: <AdminSettings />,
+            path: "delete/:headingId",
+            element: <DeleteModal />,
           },
         ],
+      },
+      {
+        path: "real-estate",
+        element: <AdminRealEstate />,
+        children: [
+          {
+            path: "add",
+            element: <PenModal />,
+          },
+          {
+            path: "edit/:houseId",
+            element: <PenModal />,
+          },
+          {
+            path: "delete/:houseId",
+            element: <DeleteModal />,
+          }
+        ],
+      },
+      {
+        path: "settings",
+        element: <AdminSettings />,
       },
     ],
   },

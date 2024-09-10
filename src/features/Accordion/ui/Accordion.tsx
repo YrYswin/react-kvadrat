@@ -8,7 +8,7 @@ export default function AccordionUsage() {
   const [expanded, setExpanded] = useState("");
 
   const handleChange = (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
-    console.log(_event);
+    // console.log(_event);
     setExpanded(isExpanded ? panel : "");
   };
 

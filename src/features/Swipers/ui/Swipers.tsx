@@ -4,6 +4,7 @@ import { testimonials } from "../../../utils/data";
 
 import CustomPrevButton from "./CustomPrevButton";
 import CustomNextButton from "./CustomNextButton";
+import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import Container from "../../../shared/helpers/Container";
 
 import "swiper/css";
@@ -47,14 +48,16 @@ const TestimonialSlider = () => {
               <div className="p-1 text-white transition-all duration-300 bg-gray-800 rounded-lg sm:p-2 md:p-3 lg:p-4 shadow-md hover:bg-red-600">
                 <div className="flex flex-col gap-3 ">
                   <div className="flex gap-2 sm:gap-3 ">
-                    <img
+                    {/* <img
                       className=" lg:w-[73px] lg:h-[73px] rounded-full  sm:w-[48px]  md:w-[62px]  md:h-[62px]h-[35px] w-[35px] "
-                      src={testimonial.img}
+                      src={AccountCircleSharpIcon}
                       alt=""
-                    />
+                    /> */}
+                    <div className="lg:w-[35px] lg:h-[35px] w-[20px] h-[20px] rounded-full">
+                      <AccountCircleSharpIcon sx={{width: "100%", height: "100%",}}/>
+                    </div>
                     <div>
-                      <h3 className=" text-[7.7px] lg:text-xl font-semibold  md:text-sm sm:text-md ">{testimonial.name}</h3>
-                      <p className="w-full text-[7px] text-gray-400">{testimonial.username}</p>
+                      <h3 className=" text-[7.7px] lg:text-xl mt-2 md:mt-0 font-semibold  md:text-sm sm:text-md ">{testimonial.name}</h3>
                     </div>
                   </div>
                   <p className="text-[7px] md:text-base overflow-y-auto lg:h-[100px] md:h-[90px] sm:h-[70px]   h-[50px]">

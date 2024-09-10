@@ -5,6 +5,7 @@ export interface FilterSliceState {
   filterType?: string;
   price: PriceVariableState;
   typeHouse: "Все" | "Дома" | "Квартиры" | "Комерческое недвижиомть" | "Участки";
+  place: string;
   comfort: ComfortState;
 }
 

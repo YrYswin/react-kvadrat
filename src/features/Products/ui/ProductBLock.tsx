@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CarouselPro from "./CarouselPro";
 import { HouseState } from "../../AdminRealEstate/store/types";
 
-const ProductBLock: React.FC<HouseState> = ({ image: imageUrl, price, title, id }) => {
+const ProductBLock: React.FC<HouseState> = ({ image: imageUrl, price, title, id, square_footage }) => {
   const navigate = useNavigate();
   const clickInfo = (id: number) => {
     window.scrollTo(0, 0);
@@ -21,7 +21,7 @@ const ProductBLock: React.FC<HouseState> = ({ image: imageUrl, price, title, id 
         </div>
         <div className="flex flex-col gap-8">
           <div className="flex justify-center text-center">
-            <p>Площадь:</p> <p>190(м2)</p>
+            <p>Площадь:</p> <p>{square_footage}(м2)</p>
           </div>
           <div className="flex justify-between text-[14px] md:text-[20px] font-medium px-2">
             <b>Цена:</b>

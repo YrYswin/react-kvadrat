@@ -35,6 +35,7 @@ const ModalUI: React.FC<Props> = ({ children, bgColor, borderColor }) => {
           [theme.breakpoints.down("lg")]: {
             width: "80%",
           },
+          zIndex: 1110,
         }}
       >
         {children}

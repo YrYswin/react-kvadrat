@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/store";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { getHouses } from "./store/action";
 import { selectHouses } from "./store/slice";
 import { Status } from "./store/types";
@@ -10,11 +10,19 @@ import { Status } from "./store/types";
 import AddIcon from "@mui/icons-material/Add";
 import NotFoundProduct from "../../shared/helpers/NotFoundProduct";
 import AdminProSkeleton from "../../shared/helpers/AdminProSkeleton";
-// import InputTest from "./inputTest";
 
-const AdminRealEstate = () => {
+interface Props {
+  id?: number;
+}
+
+const AdminRealEstate: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { hauseId } = useParams<{ hauseId: string }>(); 
+
+  const clickDelete = () => {
+    navigate(`/admin/real-estate/delete/${hauseId}`);
+  };
 
   const { items, status, count } = useSelector(selectHouses);
 
@@ -29,12 +37,11 @@ const AdminRealEstate = () => {
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
-                width: "94%",
+                marginRight: "10px",
                 color: "white",
                 alignItems: "center",
                 backgroundColor: "#262626",
                 padding: "10px 20px",
-                // paddingRight: {sm:"10px", md: "0"}
               }}
               key={obj.id}
             >
@@ -42,8 +49,8 @@ const AdminRealEstate = () => {
                 <img className="w-full h-full object-cover" src={obj.image ? obj.image : "/svg/upload.svg"} alt="Photos" />
               </div>
               <p className=" text-[9px] md:text-lg">{obj.title || "3 - комнатная квартира на улице Киевская 30"}</p>
-              <p className=" text-[9px] md:text-lg">{`Площадь: ${obj.square_footage || "м2.77.3"}`}</p>
-              <p className="text-[9px] md:text-lg">{obj.price || "12млн.$"}</p>
+              <p className=" text-[9px] md:text-lg">{`${obj.square_footage  || "м2.77.3"}м2`}</p>
+              <p className="text-[9px] md:text-lg">{obj.price || "12млн.$"}$</p>
               <div className="flex gap-2 md:gap-5">
                 <img
                   src="/svg/pen.svg"
@@ -53,6 +60,7 @@ const AdminRealEstate = () => {
                 />
                 <img
                   src="/svg/trash.svg"
+                  onClick={clickDelete}
                   alt="Trash"
                   className="cursor-pointer hover:scale-125 transition-transform duration-150 pen-icon md:w-[27px] w-[15px] h-[15px] md:h-[27px]"
                 />
@@ -125,7 +133,11 @@ const AdminRealEstate = () => {
             flexDirection: "column",
             gap: "10px",
             marginTop: "10px",
+            width: "94%",
+            height: "calc(100vh - 300px)",
+            overflow: "auto",
           }}
+          className="scroll-container-x"
         >
           {status == Status.LOADING ? (
             skeletonsList
@@ -136,7 +148,6 @@ const AdminRealEstate = () => {
           )}
         </Box>
       </Box>
-      {/* <InputTest /> */}
     </>
   );
 };
