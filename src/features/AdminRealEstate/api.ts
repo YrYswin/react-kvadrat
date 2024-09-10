@@ -20,7 +20,7 @@ export const getHousesReqCategory = (page: number, category: string) => {
 };
 
 export const getHousesReqFilter = (params: FilterSliceState, page: number) => {
-  const { price, typeHouse, comfort, place } = params;
+  const { price, typeHouse, comfort } = params;
   const type = typeHouse === "Все" ? "" : typeHouse;
 
   return apiRoot.get(

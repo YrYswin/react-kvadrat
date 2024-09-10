@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../app/store";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getHouses } from "./store/action";
 import { selectHouses } from "./store/slice";
 import { Status } from "./store/types";
@@ -18,7 +18,6 @@ interface Props {
 const AdminRealEstate: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { hauseId } = useParams<{ hauseId: string }>();
 
   const { items, status, count } = useSelector(selectHouses);
 
