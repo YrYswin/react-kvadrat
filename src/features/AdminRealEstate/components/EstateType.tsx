@@ -25,8 +25,8 @@ const EstateType: React.FC<Props> = ({ active, onChange }) => {
       <MenuItemStyle value="Участки">
         <em>Участки</em>
       </MenuItemStyle>
-      <MenuItemStyle value="Коммерческая недвижимость">
-        <em>Коммерческая недвижимость</em>
+      <MenuItemStyle value="Комерческая недвижимость">
+        <em>Комерческая недвижимость</em>
       </MenuItemStyle>
     </CustomSelect>
   );

@@ -45,7 +45,7 @@ const AdminNavbar: React.FC<Props> = ({ handleDrawerToggle, isOpen }) => {
         width: isMobile ? "100%" : isOpen ? "calc(100% - 240px)" : "100%",
         transition: "width 0.3s, margin 0.3s",
         backgroundColor: "#9A0A00",
-        top: isMobile ? "0px" : "60px",
+        top: {lg:"60px"},
         marginLeft: isMobile ? isOpen ? "0px" : "0px" : isOpen ? "240px" : "0px"
       }} 
     >

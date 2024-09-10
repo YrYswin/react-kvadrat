@@ -29,14 +29,12 @@ const DropDownMen: React.FC<Props> = ({ category, setCat }) => {
   }, []);
 
   return (
-    <div ref={sortRef} className="flex flex-col items-center gap-1">
+    <div ref={sortRef} className="flex flex-col items-center gap-1 relative">
       <div
         onClick={() => setOpen(!open)}
-        className={`flex items-center justify-between w-[150px] sm:w-[200px] md:w-[250px] lg:w-[283px] rounded-full py-2 px-2 sm:px-4 md:px-5 lg:px-7 ${
-          open ? "bg-red-600 text-white" : "bg-red-600 text-white"
-        }`}
+        className={`flex items-center justify-between w-[250px] md:w-[283px] rounded-full py-2 px-2 sm:px-4 md:px-5 lg:px-7 bg-red-600 text-white cursor-pointer`}
       >
-        <p className={`${category === "Коммерческое недвижимость" ? "text-sm" : "text-md"}`}>"Категории"</p>
+        <p className={`${category === "Коммерческое недвижимость" ? "text-sm" : "text-md"}`}>{category || "Категории"}</p>
         {open ? <ExpandMoreTwoToneIcon className="text-black" /> : <ExpandMoreSharpIcon />}
       </div>
       {open && (
@@ -44,11 +42,18 @@ const DropDownMen: React.FC<Props> = ({ category, setCat }) => {
           {options.map((item, index) => (
             <p
               key={index}
-              onClick={() => setCat(item)}
+              onClick={() => {
+                setCat(item === "Все" ? "" : item); // Если выбрано "Все", устанавливаем пустую строку
+                setOpen(false);
+              }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
-              className={`w-full py-3 px-4 rounded-lg  ${
-                index ? "bg-white text-black" : index === hoveredIndex ? "bg-white text-black" : "text-white"
+              className={`w-full py-3 px-4 rounded-lg cursor-pointer ${
+                item === category || (item === "Все" && category === "")
+                  ? "bg-white text-black"
+                  : hoveredIndex === index
+                  ? "bg-gray-200 text-black"
+                  : "text-white"
               }`}
             >
               {item}
