@@ -8,23 +8,27 @@ import { selectHeadings } from "./store/selectors";
 
 import HeadingsBlock from "./ui/HeadingsBlock";
 import AddIcon from "@mui/icons-material/Add";
+import PaginateMenu from "../Filters/ui/PaginateMenu";
 
 const AdminHeadings = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [page, setPage] = React.useState(0);
 
-  const { items } = useSelector(selectHeadings);
+  const { items, count } = useSelector(selectHeadings);
 
   React.useEffect(() => {
-    dispatch(getHeadings());
-  }, [dispatch]);
+    dispatch(getHeadings(page));
+  }, [dispatch, page]);
 
   return (
     <div className="h-[80vh] scroll-container-x overflow-auto relative">
       <div className="flex justify-between py-2 px-[50px] md:px-24 text-white sticky top-0 bg-black z-10">
         <div>
           <h1 className="text-sm md:text-3xl">Все объявления</h1>
-          <div className="sticky top-4 z-11 text-[7px] md:text-[18px] text-red-700">Баннеры ({items?.length})</div>
+          <div className="sticky top-4 z-11 text-[7px] md:text-[18px] text-red-700">
+            {page === 0 ? page + 1 : page}-{page === 0 ? page + 8 : count <= page ? count : page + 1} из {count} результатов
+          </div>
         </div>
         <button
           onClick={() => navigate("/admin/headings/add")}
@@ -39,6 +43,7 @@ const AdminHeadings = () => {
         {items?.map((obj, index) => (
           <HeadingsBlock key={index} {...obj} />
         ))}
+        <PaginateMenu changePage={setPage} active={page} maxvalue={count} />
       </div>
     </div>
   );

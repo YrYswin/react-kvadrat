@@ -22,7 +22,7 @@ const PenModal: React.FC = () => {
   const { houseId } = useParams();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [image, setImage] = useState<File | null>(null);
-  const [activeAddress, setActiveAddress] = useState<string>("");
+  const [activeAddress, setActiveAddress] = useState<string>("Микрарайоны");
   const [estate, setEstate] = useState<string>("");
   const [checkboxState, setCheckboxState] = useState({
     pool: false,

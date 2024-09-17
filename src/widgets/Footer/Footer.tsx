@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Container from "../../shared/helpers/Container";
+import { contact } from "../../utils/data";
 
 const Footer = () => {
   return (
@@ -10,45 +11,29 @@ const Footer = () => {
             <img src="/svg/Footer.svg" alt="" />
             <p className="pt-5">Наши социальные сети</p>
             <div className="flex gap-3 pt-5">
-            <Link to="https://www.instagram.com/tunduk.312?igsh=MXYzdjd1M2d6OHc4ZQ%3D%3D&utm_source=qr">
-              <img src="/svg/ivertor.svg" alt="" />
-            </Link>
-            <Link to="https://wa.me/996708242906">
-              <img src="/svg/wvertor.svg" alt="" />
-            </Link>
-            <Link to="https://web.telegram.org/a/">
-              <img src="/svg/tvertor.svg" alt="" />
-            </Link>
+              <Link to={contact.instagram}>
+                <img src="/svg/ivertor.svg" alt="" />
+              </Link>
+              <Link to={contact.whatsapp}>
+                <img src="/svg/wvertor.svg" alt="" />
+              </Link>
+              <Link to={contact.telegram}>
+                <img src="/svg/tvertor.svg" alt="" />
+              </Link>
             </div>
           </div>
-          <Link to={"/watch"} onClick={() => window.scrollTo(0, 0)}>
-            <div className="flex gap-[64px] mb-5">
-              <div className="leading-10">
-                <p>Квартиры</p>
-                <p>Офис продаж</p>
-                <p>Ипотека</p>
-                <p>Инвестиции</p>
-              </div>
-              <div className="leading-10">
-                <p>Застройщики</p>
-                <p>Акции</p>
-                <p>Контакты</p>
-                <p>Жилые комплексы</p>
-              </div>
-            </div>
-          </Link>
           <div className="flex items-center justify-between mb-8">
             <div className="hidden sm:block md:hidden">
               <img src="/svg/Footer.svg" alt="" />
               <p className="pt-5">Наши социальные сети</p>
               <div className="flex gap-3 pt-5">
-                <Link to="https://www.instagram.com/tunduk.312?igsh=MXYzdjd1M2d6OHc4ZQ%3D%3D&utm_source=qr">
-                  <img src="/svg/ivertor.svg" alt="" />    
+                <Link to={contact.instagram}>
+                  <img src="/svg/ivertor.svg" alt="" />
                 </Link>
-                <Link to="https://wa.me/996708242906">
+                <Link to={contact.whatsapp}>
                   <img src="/svg/wvertor.svg" alt="" />
                 </Link>
-                <Link to="https://web.telegram.org/a/">
+                <Link to={contact.telegram}>
                   <img src="/svg/tvertor.svg" alt="" />
                 </Link>
               </div>
@@ -62,12 +47,12 @@ const Footer = () => {
 
               <div className="flex gap-3">
                 <img src="/svg/gmail.svg" alt="" />
-                <p>kvadrat_kg@gmail.com</p>
+                <p>kvadrat.kg312@mail.ru</p>
               </div>
 
               <div className="flex gap-3">
                 <img src="/svg/vertor.svg" alt="" />
-                <p>г.Бишкек </p>
+                <p>г.Бишкек Темирязева 97</p>
               </div>
             </div>
           </div>

@@ -10,6 +10,7 @@ import { Status } from "./store/types";
 import AddIcon from "@mui/icons-material/Add";
 import NotFoundProduct from "../../shared/helpers/NotFoundProduct";
 import AdminProSkeleton from "../../shared/helpers/AdminProSkeleton";
+import PaginateMenu from "../Filters/ui/PaginateMenu";
 
 interface Props {
   id?: number;
@@ -18,6 +19,7 @@ interface Props {
 const AdminRealEstate: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [page, setPage] = React.useState(0);
 
   const { items, status, count } = useSelector(selectHouses);
 
@@ -70,8 +72,8 @@ const AdminRealEstate: React.FC<Props> = () => {
   };
 
   React.useEffect(() => {
-    dispatch(getHouses({ params: null, page: 0 }));
-  }, [dispatch]);
+    dispatch(getHouses({ params: null, page }));
+  }, [dispatch, page]);
 
   return (
     <>
@@ -91,7 +93,9 @@ const AdminRealEstate: React.FC<Props> = () => {
         >
           <div>
             <h1 className="text-white text-sm md:text-2xl">Публикация недвижимости</h1>
-            <div className="text-red-600 text-[10px] md:text-[17px]">Количество товаров({items.length})</div>
+            <div className="text-red-600 text-[10px] md:text-[17px]">
+              {page === 0 ? page + 1 : page}-{page === 0 ? page + 8 : count <= page ? count : page + 1} из {count} результатов
+            </div>
           </div>
 
           <button
@@ -128,7 +132,7 @@ const AdminRealEstate: React.FC<Props> = () => {
             gap: "10px",
             marginTop: "10px",
             width: "94%",
-            height: "calc(100vh - 300px)",
+            height: "calc(100vh - 360px)",
             overflow: "auto",
           }}
           className="scroll-container-x"
@@ -141,6 +145,7 @@ const AdminRealEstate: React.FC<Props> = () => {
             <NotFoundProduct title="Пока нет недвижимости" />
           )}
         </Box>
+        <PaginateMenu active={page} changePage={setPage} maxvalue={count} />
       </Box>
     </>
   );

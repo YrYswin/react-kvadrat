@@ -12,7 +12,7 @@ function encodeIfInvalid(searchString: string) {
 }
 
 export const getHousesReq = (page: number) => {
-  return apiRoot.get(`/houses/?limit=8&offset=${page}`);
+  return apiRoot.get(`/houses/?limit=8&offset=${page !== 0 ? page - 1 : page}`);
 };
 
 export const getHousesReqCategory = (page: number, category: string) => {

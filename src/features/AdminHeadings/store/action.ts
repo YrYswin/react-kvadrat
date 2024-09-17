@@ -5,9 +5,9 @@ import { AxiosError, AxiosResponse } from "axios";
 import { NavigateFunction } from "react-router-dom";
 import { addNotification } from "../../notification-context/slice";
 
-export const getHeadings = createAsyncThunk("heading/getHeading", async (_, { rejectWithValue }) => {
+export const getHeadings = createAsyncThunk("heading/getHeading", async (page: number, { rejectWithValue }) => {
   try {
-    return (await getHeadingsReq()).data;
+    return (await getHeadingsReq(page)).data;
   } catch (error) {
     return rejectWithValue(error);
   }

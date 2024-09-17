@@ -11,6 +11,7 @@ export interface HeadingState {
 
 export interface HeadingSliceState {
   items: HeadingState[] | null;
+  count: number;
   item: HeadingState | null;
   isLoading: boolean;
   error: null | "Error";

@@ -1,8 +1,8 @@
 import { apiRoot, axiosWithFile } from "../../app/api";
 import { PostHeadingState, PatchHeadingState } from "./store/types";
 
-export const getHeadingsReq = () => {
-  return apiRoot.get("/headings/");
+export const getHeadingsReq = (page: number) => {
+  return apiRoot.get(`/headings/?limit=8&offset=${page !== 0 ? page - 1 : page}`);
 };
 export const getHeadingsByIdReq = (id: number) => {
   return apiRoot.get(`/headings/${id}`);

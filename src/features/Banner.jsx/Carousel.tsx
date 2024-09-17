@@ -17,7 +17,7 @@ const Carousel: React.FC = () => {
   const { items, isLoading, error } = useSelector(selectHeadings);
 
   React.useEffect(() => {
-    dispatch(getHeadings());
+    dispatch(getHeadings(0));
   }, [dispatch]);
 
   if (isLoading) return <p>Loading...</p>;

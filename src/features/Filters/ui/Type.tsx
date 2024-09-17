@@ -31,7 +31,7 @@ interface Props {
 }
 
 const Type: React.FC<Props> = ({ open }) => {
-  const API = "http://167.172.74.113/addresses/";
+  const API = "http://167.172.74.113/addresses/?limit=1000";
   const dispatch = useAppDispatch();
   const { typeHouse, comfort, price } = useSelector(selectFilter);
   const [address, setAddress] = useState<Address[]>([]);

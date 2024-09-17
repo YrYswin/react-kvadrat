@@ -4,6 +4,7 @@ import { HeadingSliceState } from "./types";
 
 const initialState: HeadingSliceState = {
   items: [],
+  count: 0,
   item: null,
   isLoading: false,
   error: null,
@@ -25,6 +26,7 @@ const headingSlice = createSlice({
       })
       .addCase(getHeadings.fulfilled, (state, { payload }) => {
         state.isLoading = false;
+        state.count = payload.count;
         state.items = payload.results;
       })
       .addCase(getHeadings.rejected, (state) => {

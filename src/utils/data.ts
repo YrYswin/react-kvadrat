@@ -1,5 +1,12 @@
 import { serviceState, testimonialsState, PriceVariableState } from "./dataTypes";
 
+export const contact = {
+  whatsapp: "https://wa.me/996708242906",
+  telegram: "https://t.me/+996708242906",
+  instagram: "https://www.instagram.com/_kvadrat_kg?igsh=MXYzdjd1M2d6OHc4ZQ%3D%3D&utm_source=qr",
+  youtube: "https://youtube.com/@Tunduk312",
+};
+
 export const services: serviceState[] = [
   {
     id: 1,
