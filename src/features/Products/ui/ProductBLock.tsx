@@ -4,16 +4,17 @@ import { useNavigate } from "react-router-dom";
 import CarouselPro from "./CarouselPro";
 import { HouseState } from "../../AdminRealEstate/store/types";
 
-const ProductBLock: React.FC<HouseState> = ({ image: imageUrl, price, title, id, square_footage }) => {
+const ProductBLock: React.FC<HouseState> = ({ image, price, title, id, square_footage,images }) => {
   const navigate = useNavigate();
   const clickInfo = (id: number) => {
     window.scrollTo(0, 0);
     navigate(`/info/${id}`);
   };
+  const imagesArray = [...images.map((image) => image.image), image];
   return (
     <div className="mw-[30cwq]  rounded-lg overflow-hidden bg-[#eee]">
       <div className="w-[100%]">
-        <CarouselPro images={Array(4).fill(imageUrl)} />
+        <CarouselPro images={imagesArray} />
       </div>
       <div className="p-2 flex flex-col gap-2">
         <div className=" text-center font-medium text-[18px]">

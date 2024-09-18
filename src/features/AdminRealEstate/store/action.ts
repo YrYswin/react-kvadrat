@@ -7,10 +7,11 @@ import {
   patchHouseReq,
   deleteHouseReq,
   getHousesReqCategory,
+  postHouseImageReq
 } from "../api.ts";
 import { FilterSliceState } from "../../Filters/store/types.ts";
 import { NavigateFunction } from "react-router-dom";
-import { PostHouseState } from "./types.ts";
+import { PostHouseState , HouseImageState} from "./types.ts";
 import { addNotification } from "../../notification-context/slice.ts";
 
 export const getHouses = createAsyncThunk(
@@ -44,12 +45,18 @@ export const getHouseById = createAsyncThunk("get/getHouseById", async (id: numb
 
 export const postHouse = createAsyncThunk(
   "post/postHouse",
-  async ({ data, navigate }: { data: PostHouseState; navigate: NavigateFunction }, { rejectWithValue, dispatch }) => {
+  async ({ house,images, navigate }: { house: PostHouseState;images: File[]; navigate: NavigateFunction }, { rejectWithValue, dispatch }) => {
     try {
-      const res = await postHouseReq(data);
-      navigate("/admin/real-estate");
+      const {data} = await postHouseReq(house);
+      if (data.id) {
+        for (const image of images) {
+          const res = await postImage({image, house: data.id});
+          console.log(res);
+        }
+      }
       dispatch(addNotification({ type: "success", message: "Данные успешно сохранены" }));
-      return res.data;
+      navigate("/admin/real-estate");
+      return data;
     } catch (err) {
       navigate("/admin/real-estate");
       dispatch(addNotification({ type: "error", message: "Не удалось сохранить данные" }));
@@ -58,6 +65,15 @@ export const postHouse = createAsyncThunk(
     }
   }
 );
+
+const postImage = async (image: HouseImageState) => {
+  try {
+    const res = await postHouseImageReq(image);
+    return res.data;
+  } catch (err) {
+    console.error("Error occurred:", err);
+  }
+};
 
 export const patchHouse = createAsyncThunk(
   "patch/patchHouse",
