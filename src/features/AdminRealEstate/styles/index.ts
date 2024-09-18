@@ -7,6 +7,7 @@ export const CustomSelect = styled("select")({
   padding: "5px",
   borderRadius: "5px",
   color: "#fff",
+  width: "100%",
   "& .MuiSelect-select": {
     color: "#fff",
   },
