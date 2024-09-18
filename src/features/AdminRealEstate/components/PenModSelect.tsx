@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Adress } from "../../Filters/ui/Type";
+import { Address } from "../../Filters/ui/Type";
 import axios from "axios";
 import { CustomSelect, MenuItemStyle } from "../styles";
 
@@ -8,10 +8,10 @@ interface Props {
   onChange?: (e: string) => void;
   width?: number;
 }
-const API = "http://167.172.74.113/addresses/";
+const API = "http://167.172.74.113/addresses?limit=100";
 
 const PenModSelect: React.FC<Props> = ({ active, onChange }) => {
-  const [address, setAddress] = useState<Adress[]>([]);
+  const [address, setAddress] = useState<Address[]>([]);
 
   const handleChange = (event: string) => {
     if (onChange) {
@@ -23,9 +23,10 @@ const PenModSelect: React.FC<Props> = ({ active, onChange }) => {
 
   async function getAddress(): Promise<void> {
     try {
-      const res = await axios.get<{ results: Adress[] }>(API);
+      const res = await axios.get<{ results: Address[] }>(API);
       if (Array.isArray(res.data.results)) {
         setAddress(res.data.results);
+        console.log(res.data.results);
       } else {
         console.error("Unexpected data format", res.data);
         setAddress([]);

@@ -17,6 +17,7 @@ export interface HouseState {
   square_footage: number;
   price: number;
   image: string;
+  images: HouseImage[];
 }
 
 export interface HouseStateById {
@@ -44,12 +45,18 @@ export interface HouseStateById {
   clubhouse: boolean;
   laundry: boolean;
   image: string;
-  images: HouseImageState[];
+  images: HouseImage[];
 }
 
-interface HouseImageState {
+export interface HouseImage {
   id: number;
   image: string;
+  house: number;
+}
+
+
+export interface HouseImageState {
+  image: File;
   house: number;
 }
 

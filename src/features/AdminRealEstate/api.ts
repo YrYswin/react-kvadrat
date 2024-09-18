@@ -1,7 +1,7 @@
 import { apiRoot, axiosWithFile } from "../../app/api";
 import TokenService from "../../utils";
 import { FilterSliceState } from "../Filters/store/types";
-import { PostHouseState } from "./store/types";
+import { HouseImageState, PostHouseState } from "./store/types";
 
 function encodeIfInvalid(searchString: string) {
   const invalidCharacters = /[^a-zA-Z0-9-_.~]/;
@@ -56,4 +56,8 @@ export const patchHouseReq = (data: PostHouseState, id: number) => {
 
 export const deleteHouseReq = (id: number) => {
   return apiRoot.delete(`/houses/${id}/`);
+};
+
+export const postHouseImageReq = (data: HouseImageState) => {
+  return axiosWithFile.post("/images/", data);
 };

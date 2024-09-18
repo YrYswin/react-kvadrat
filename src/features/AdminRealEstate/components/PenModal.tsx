@@ -9,7 +9,7 @@ import ModalUI from "../../../shared/helpers/ModalUI";
 import { getHouseById, postHouse, patchHouse } from "../store/action";
 import { itemClear, selectHouses } from "../store/slice";
 import CustomCheckbox from "./CheckboxUI";
-import { PostHouseState } from "../store/types";
+import {  PostHouseState } from "../store/types";
 import Selectors from "./Selectors";
 import PenModSelect from "./PenModSelect";
 import EstateType from "./EstateType";
@@ -19,7 +19,7 @@ const PenModal: React.FC = () => {
   const navigate = useNavigate();
   const { houseId } = useParams();
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [image, setImage] = useState<File | null>(null);
+  const [images, setImages] = useState<File[]>([]);
   const [activeAddress, setActiveAddress] = useState<string>("");
   const [estate, setEstate] = useState<string>("");
   const [checkboxState, setCheckboxState] = useState({
@@ -64,10 +64,13 @@ const PenModal: React.FC = () => {
     defaultValues: isEditing && item ? item : {},
   });
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setImage(file);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files);
+      const newImages = filesArray.map((file) => (file));
+  
+      setImages((prevImages) => [...prevImages, ...newImages]);
     }
   };
 
@@ -82,7 +85,7 @@ const PenModal: React.FC = () => {
     const formData = {
       ...data,
       ...checkboxState,
-      image: image,
+      image: images[0],
       category: estate,
       city: activeAddress,
     };
@@ -98,7 +101,8 @@ const PenModal: React.FC = () => {
     } else {
       dispatch(
         postHouse({
-          data: formData,
+          house: formData,
+          images: images.slice(1),
           navigate,
         })
       );
@@ -274,7 +278,6 @@ const PenModal: React.FC = () => {
 
           <div className="flex-1">
             <div className="flex md:flex-col md:items-center gap-1 h-[150px] md:h-[430px]">
-              {/* {item?.image && <img className="w-[230px] h-[130px] object-cover" src={item.image} alt="image" />} */}
               <div
                 className="w-[170px] md:w-[230px] h-[70px] bg-[#262626] flex items-center justify-evenly cursor-pointer"
                 onClick={() => inputRef.current?.click()}
@@ -282,10 +285,15 @@ const PenModal: React.FC = () => {
                 <img src="/svg/upload.svg" alt="upload" className="w-[20px] h-[20px] md:w-[30px] md:h-[30px]" />
                 <div>
                   <p className="text-[8px] md:text-xs">Добавить фото</p>
-                  <input type="file" className="hidden" ref={inputRef} onChange={handleImageChange} />
+                  <input type="file" className="hidden" ref={inputRef} onChange={handleFileChange} />
                 </div>
               </div>
-              {image && <img className="w-[230px] h-[130px] object-cover" src={URL.createObjectURL(image)} alt="image preview" />}
+                <div className="image-preview">
+                  {images.map((image,i) => (
+                    <img key={i} src={URL.createObjectURL(image)} alt={`House Image ${i}`} width="100" />
+                  ))}
+                </div>
+
             </div>
 
             <div className="flex justify-end gap-2">
