@@ -22,14 +22,14 @@ export const getHousesReqCategory = (page: number, category: string) => {
 export const getHousesReqFilter = (params: FilterSliceState, page: number) => {
   const { price, typeHouse, comfort } = params;
   const type = typeHouse === "Все" ? "" : typeHouse;
+  const { garden, elevator, close_area, open_area, fenced_yard, playground, insulated, cross_layout } = comfort;
 
   return apiRoot.get(
-    `/houses/?limit=9&offset=${page}&has_pool=${comfort.pool ? "true" : ""}&has_gym=${comfort.gym ? "true" : ""}&has_garage=${
-      comfort.garage ? "true" : ""
-    }&has_parking=${comfort.parking ? "true" : ""}&has_garden=${comfort.garden ? "true" : ""}&has_fireplace=${
-      comfort.fireplace ? "true" : ""
-    }&has_elevator=${comfort.elevator ? "true" : ""}&has_clubhouse=${
-      comfort.clubhouse ? "true" : ""
+    `/houses/?limit=9&offset=${page}&garden=${garden || ""}&elevator=${elevator || ""}&close_area=${close_area || ""}&open_area=${
+      open_area || ""
+    }
+    &fenced_yard=${fenced_yard || ""}&playground=${playground || ""}&insulated=${insulated || ""}&cross_layout=${
+      cross_layout || ""
     }&has_pool_no_gym=&category=${encodeIfInvalid(type)}&min_price=${price.min || ""}&max_price=${
       price.max || ""
     }&min_square_footage=&max_square_footage=`

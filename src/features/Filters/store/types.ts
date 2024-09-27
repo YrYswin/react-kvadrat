@@ -10,14 +10,12 @@ export interface FilterSliceState {
 }
 
 interface ComfortState {
-  pool: boolean;
-  gym: boolean;
-  garage: boolean;
-  parking: boolean;
   garden: boolean;
-  fireplace: boolean;
   elevator: boolean;
-  clubhouse: boolean;
-  laundry: boolean;
-  area: boolean;
+  close_area: boolean;
+  open_area: boolean;
+  fenced_yard: boolean;
+  playground: boolean;
+  insulated: boolean;
+  cross_layout: boolean;
 }

@@ -5,16 +5,14 @@ import { useAppDispatch } from "../../../app/store";
 import {
   setPriceClear,
   clearTypeHouse,
-  setPool,
-  setGym,
-  setGarage,
-  setParking,
   setGarden,
-  setFireplace,
   setElevator,
-  setClubhouse,
-  setLaundry,
-  setArea,
+  setOpenArea,
+  setCloseArea,
+  setFencedYard,
+  setPlayground,
+  setInsulated,
+  setCrossLayout,
   setClearFilter,
   selectFilter,
 } from "../store/slice";
@@ -28,16 +26,14 @@ const FilterName = () => {
     const hasActiveFilter =
       !!price ||
       !!typeHouse ||
-      !!comfort.pool ||
-      !!comfort.gym ||
-      !!comfort.garage ||
-      !!comfort.parking ||
       !!comfort.garden ||
-      !!comfort.fireplace ||
       !!comfort.elevator ||
-      !!comfort.clubhouse ||
-      !!comfort.laundry ||
-      !!comfort.area;
+      !!comfort.open_area ||
+      !!comfort.close_area ||
+      !!comfort.fenced_yard ||
+      !!comfort.playground ||
+      !!comfort.insulated ||
+      !!comfort.cross_layout;
     setFiltered(hasActiveFilter);
   }, [price, typeHouse, comfort]);
 
@@ -67,16 +63,14 @@ const FilterName = () => {
         <div className="flex flex-wrap gap-4 lg:w-[550px] xl:w-full md:w-[290px]">
           <GetFilters set={setPriceClear} filter={price.max && price.min} name={price.label} />
           <GetFilters set={clearTypeHouse} filter={typeHouse} name={typeHouse} />
-          <GetFilters set={setPool} filter={comfort.pool} name={"Бассейн"} />
-          <GetFilters set={setGym} filter={comfort.gym} name={"Тренажерный зал"} />
-          <GetFilters set={setGarage} filter={comfort.garage} name={"Гараж"} />
-          <GetFilters set={setParking} filter={comfort.parking} name={"Парковка"} />
           <GetFilters set={setGarden} filter={comfort.garden} name={"Сад"} />
-          <GetFilters set={setFireplace} filter={comfort.fireplace} name={"Камин"} />
           <GetFilters set={setElevator} filter={comfort.elevator} name={"Лифт"} />
-          <GetFilters set={setClubhouse} filter={comfort.clubhouse} name={"Клуб"} />
-          <GetFilters set={setLaundry} filter={comfort.laundry} name={"Прачечная"} />
-          <GetFilters set={setArea} filter={comfort.area} name={"Площадка"} />
+          <GetFilters set={setOpenArea} filter={comfort.open_area} name={"Открытая территория"} />
+          <GetFilters set={setCloseArea} filter={comfort.close_area} name={"Закрытая территория"} />
+          <GetFilters set={setFencedYard} filter={comfort.fenced_yard} name={"Забор огорожен"} />
+          <GetFilters set={setPlayground} filter={comfort.playground} name={"Дектская площадка"} />
+          <GetFilters set={setInsulated} filter={comfort.insulated} name={"Утеплен"} />
+          <GetFilters set={setCrossLayout} filter={comfort.cross_layout} name={"Сквозная планировка"} />
         </div>
         <div className="relative inline-block whitespace-nowrap">
           {filtered && (

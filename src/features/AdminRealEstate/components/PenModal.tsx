@@ -25,16 +25,14 @@ const PenModal: React.FC = () => {
   const [images, setImages] = useState<File[]>([]);
   const [estate, setEstate] = useState<string>("");
   const [checkboxState, setCheckboxState] = useState({
-    pool: false,
-    gym: false,
-    garage: false,
-    parking: false,
     garden: false,
-    fireplace: false,
     elevator: false,
-    clubhouse: false,
-    laundry: false,
-    area: false,
+    close_area: false,
+    open_area: false,
+    fenced_yard: false,
+    playground: false,
+    insulated: false,
+    cross_layout: false,
   });
 
   const isEditing = Boolean(houseId);
@@ -117,16 +115,14 @@ const PenModal: React.FC = () => {
     if (item) {
       reset(item);
       setCheckboxState({
-        pool: item.pool || false,
-        gym: item.gym || false,
-        garage: item.garage || false,
-        parking: item.parking || false,
         garden: item.garden || false,
-        fireplace: item.fireplace || false,
         elevator: item.elevator || false,
-        clubhouse: item.clubhouse || false,
-        laundry: item.laundry || false,
-        area: item.area || false,
+        close_area: item.close_area || false,
+        open_area: item.open_area || false,
+        fenced_yard: item.fenced_yard || false,
+        playground: item.playground || false,
+        insulated: item.insulated || false,
+        cross_layout: item.cross_layout || false,
       });
     }
   }, [item, reset]);
@@ -215,16 +211,10 @@ const PenModal: React.FC = () => {
               </div>
               <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 gap-[6px] my-2 ">
                 <CustomCheckbox
-                  name={"area"}
-                  title={"Площадь"}
-                  checked={checkboxState.area}
-                  onChange={() => onCheckboxChange("area")}
-                />
-                <CustomCheckbox
-                  name={"clubhouse"}
-                  title={"Клубное здание"}
-                  checked={checkboxState.clubhouse}
-                  onChange={() => onCheckboxChange("clubhouse")}
+                  name={"garden"}
+                  title={"Сад"}
+                  checked={checkboxState.garden}
+                  onChange={() => onCheckboxChange("garden")}
                 />
                 <CustomCheckbox
                   name={"elevator"}
@@ -233,48 +223,40 @@ const PenModal: React.FC = () => {
                   onChange={() => onCheckboxChange("elevator")}
                 />
                 <CustomCheckbox
-                  name={"fireplace"}
-                  title={"Камин"}
-                  checked={checkboxState.fireplace}
-                  onChange={() => onCheckboxChange("fireplace")}
+                  name={"open_area"}
+                  title={"Открытая территория"}
+                  checked={checkboxState.open_area}
+                  onChange={() => onCheckboxChange("open_area")}
                 />
                 <CustomCheckbox
-                  name={"garage"}
-                  title={"Гараж"}
-                  checked={checkboxState.garage}
-                  onChange={() => onCheckboxChange("garage")}
+                  name={"close_area"}
+                  title={"Закрытая территория"}
+                  checked={checkboxState.close_area}
+                  onChange={() => onCheckboxChange("close_area")}
                 />
                 <CustomCheckbox
-                  name={"garden"}
-                  title={"Сад"}
-                  checked={checkboxState.garden}
-                  onChange={() => onCheckboxChange("garden")}
+                  name={"fenced_yard"}
+                  title={"Забор огорожен"}
+                  checked={checkboxState.fenced_yard}
+                  onChange={() => onCheckboxChange("fenced_yard")}
                 />
                 <CustomCheckbox
-                  name={"gym"}
-                  title={"Тренажерный зал"}
-                  checked={checkboxState.gym}
-                  onChange={() => onCheckboxChange("gym")}
+                  name={"playground"}
+                  title={"Детская площадка"}
+                  checked={checkboxState.playground}
+                  onChange={() => onCheckboxChange("playground")}
                 />
                 <CustomCheckbox
-                  name={"laundry"}
-                  title={"Прачечная"}
-                  checked={checkboxState.laundry}
-                  onChange={() => onCheckboxChange("laundry")}
+                  name={"insulated"}
+                  title={"Утеплен"}
+                  checked={checkboxState.insulated}
+                  onChange={() => onCheckboxChange("insulated")}
                 />
                 <CustomCheckbox
-                  name={"parking"}
-                  title={"Парковка"}
-                  checked={checkboxState.parking}
-                  onChange={() => onCheckboxChange("parking")}
-                  isDoubleOne={true}
-                />
-                <CustomCheckbox
-                  name={"pool"}
-                  title={"Бассейн"}
-                  checked={checkboxState.pool}
-                  onChange={() => onCheckboxChange("pool")}
-                  isDoubleTwo={true}
+                  name={"cross_layout"}
+                  title={"Сквозная планировка"}
+                  checked={checkboxState.cross_layout}
+                  onChange={() => onCheckboxChange("cross_layout")}
                 />
               </div>
             </div>
@@ -286,15 +268,27 @@ const PenModal: React.FC = () => {
                 className="w-[170px] md:w-[230px] h-[70px] bg-[#262626] flex items-center justify-evenly cursor-pointer"
                 onClick={() => inputRef.current?.click()}
               >
-                <img src="/svg/upload.svg" alt="upload" className="w-[20px] h-[20px] md:w-[30px] md:h-[30px]" />
-                <div>
-                  <p className="text-[8px] md:text-xs">Добавить фото</p>
-                  <input type="file" className="hidden" ref={inputRef} onChange={handleFileChange} />
-                </div>
+                {images.length >= 8 ? (
+                  <p className="text-[8px] md:text-xs text-center">Достигнуто максимальное количество фото</p>
+                ) : (
+                  <>
+                    <img src="/svg/upload.svg" alt="upload" className="w-[20px] h-[20px] md:w-[30px] md:h-[30px]" />
+                    <div>
+                      <p className="text-[8px] md:text-xs">Добавить фото</p>
+                      <input type="file" className="hidden" ref={inputRef} onChange={handleFileChange} />
+                    </div>
+                  </>
+                )}
               </div>
-              <div className="image-preview">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-[6px]">
                 {images.map((image, i) => (
-                  <img key={i} src={URL.createObjectURL(image)} alt={`House Image ${i}`} width="100" />
+                  <div key={i} className="w-[120px] h-[80px] overflow-auto">
+                    <img
+                      className="border border-red-700 w-full h-full object-cover"
+                      src={URL.createObjectURL(image)}
+                      alt={`House Image ${i}`}
+                    />
+                  </div>
                 ))}
               </div>
             </div>

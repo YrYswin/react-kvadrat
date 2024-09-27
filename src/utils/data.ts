@@ -26,6 +26,11 @@ export const services: serviceState[] = [
   },
   {
     id: 4,
+    image: "/svg/monay.svg",
+    description: "Подобрать недвижимость",
+  },
+  {
+    id: 5,
     image: "/svg/ava.svg",
     description: "Юридическое сопровождение",
   },

@@ -3,16 +3,14 @@ import { useAppDispatch } from "../../../app/store";
 import {
   setPrice,
   setTypeHouse,
-  setPool,
-  setGym,
-  setGarage,
-  setParking,
-  setGarden,
-  setFireplace,
   setElevator,
-  setClubhouse,
-  setLaundry,
-  setArea,
+  setOpenArea,
+  setCloseArea,
+  setFencedYard,
+  setPlayground,
+  setInsulated,
+  setCrossLayout,
+  setGarden,
   selectFilter,
   setPlace,
 } from "../store/slice";
@@ -111,43 +109,35 @@ const Type: React.FC<Props> = ({ open }) => {
               <p>Сад</p>
             </div>
             <div className="flex gap-3">
-              <input type="checkbox" checked={comfort.gym} onChange={() => dispatch(setGym())} />
-              <p>Спортзал</p>
-            </div>
-            <div className="flex gap-3">
               <input type="checkbox" checked={comfort.elevator} onChange={() => dispatch(setElevator())} />
               <p>Лифт</p>
             </div>
             <div className="flex gap-3">
-              <input type="checkbox" checked={comfort.garage} onChange={() => dispatch(setGarage())} />
-              <p>Гаражи</p>
+              <input type="checkbox" checked={comfort.open_area} onChange={() => dispatch(setOpenArea())} />
+              <p>Oткрытая территория</p>
             </div>
             <div className="flex gap-3">
-              <input type="checkbox" checked={comfort.parking} onChange={() => dispatch(setParking())} />
-              <p>Стоянка</p>
+              <input type="checkbox" checked={comfort.close_area} onChange={() => dispatch(setCloseArea())} />
+              <p>Закрытая территория</p>
             </div>
           </div>
 
           <div className="pt-5">
             <div className="flex gap-3">
-              <input type="checkbox" checked={comfort.fireplace} onChange={() => dispatch(setFireplace())} />
-              <p>Камин</p>
+              <input type="checkbox" checked={comfort.fenced_yard} onChange={() => dispatch(setFencedYard())} />
+              <p>Забор огорожен</p>
             </div>
             <div className="flex gap-3">
-              <input type="checkbox" checked={comfort.pool} onChange={() => dispatch(setPool())} />
-              <p>Бассейн</p>
+              <input type="checkbox" checked={comfort.playground} onChange={() => dispatch(setPlayground())} />
+              <p>Дектская площадка</p>
             </div>
             <div className="flex gap-3">
-              <input type="checkbox" checked={comfort.area} onChange={() => dispatch(setArea())} />
-              <p>Детская площадка</p>
+              <input type="checkbox" checked={comfort.insulated} onChange={() => dispatch(setInsulated())} />
+              <p>Утеплен</p>
             </div>
             <div className="flex gap-3">
-              <input type="checkbox" checked={comfort.clubhouse} onChange={() => dispatch(setClubhouse())} />
-              <p>Клубный дом</p>
-            </div>
-            <div className="flex gap-3">
-              <input type="checkbox" checked={comfort.laundry} onChange={() => dispatch(setLaundry())} />
-              <p>Прачечная</p>
+              <input type="checkbox" checked={comfort.cross_layout} onChange={() => dispatch(setCrossLayout())} />
+              <p>Сквозная планировка</p>
             </div>
           </div>
         </div>

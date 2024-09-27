@@ -36,8 +36,8 @@ const PaginateMenu: React.FC<PaginateMenuProps> = ({ changePage, active, maxvalu
         <button
           key={i}
           className={`${
-            obj.page === active ? "bg-green-400" : ""
-          } w-10 h-10 rounded flex justify-center items-center bg-slate-600 cursor-pointer text-xl disabled:bg-slate-400`}
+            obj.page === active ? "bg-green-400" : "bg-slate-600"
+          } w-10 h-10 rounded flex justify-center items-center  cursor-pointer text-xl disabled:bg-slate-400`}
           onClick={() => changePage(obj.page)}
         >
           {i + 1}

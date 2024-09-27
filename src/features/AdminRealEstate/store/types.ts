@@ -34,18 +34,16 @@ export interface HouseStateById {
   garage_how_many: number;
   kitchen: number;
   bathroom: number;
-  gym: boolean;
-  area: boolean;
-  garage: boolean;
-  parking: boolean;
-  garden: boolean;
-  fireplace: boolean;
-  pool: boolean;
-  elevator: boolean;
-  clubhouse: boolean;
-  laundry: boolean;
   image: string;
   images: HouseImage[];
+  garden: boolean;
+  elevator: boolean;
+  close_area: boolean;
+  open_area: boolean;
+  fenced_yard: boolean;
+  playground: boolean;
+  insulated: boolean;
+  cross_layout: boolean;
 }
 
 export interface HouseImage {
@@ -53,7 +51,6 @@ export interface HouseImage {
   image: string;
   house: number;
 }
-
 
 export interface HouseImageState {
   image: File;
@@ -66,15 +63,14 @@ export interface PostHouseState {
   category: string;
   description: string;
   city: string;
-  pool: boolean;
-  gym: boolean;
-  garage: boolean;
-  parking: boolean;
   garden: boolean;
-  fireplace: boolean;
-  area: boolean;
   elevator: boolean;
-  clubhouse: boolean;
+  close_area: boolean;
+  open_area: boolean;
+  fenced_yard: boolean;
+  playground: boolean;
+  insulated: boolean;
+  cross_layout: boolean;
   bedrooms: number;
   rooms: number;
   garage_how_many: number;
@@ -82,5 +78,4 @@ export interface PostHouseState {
   image: File | null | string;
   square_footage: number;
   bathroom: number;
-  laundry: boolean;
 }

@@ -10,16 +10,14 @@ const initialState: FilterSliceState = {
   typeHouse: "Все",
   place: "Все",
   comfort: {
-    pool: false,
-    gym: false,
-    garage: false,
-    parking: false,
     garden: false,
-    fireplace: false,
     elevator: false,
-    clubhouse: false,
-    laundry: false,
-    area: false,
+    close_area: false,
+    open_area: false,
+    fenced_yard: false,
+    playground: false,
+    insulated: false,
+    cross_layout: false,
   },
 };
 
@@ -59,35 +57,29 @@ const filterSlice = createSlice({
     },
 
     // comfort
-    setPool: (state) => {
-      state.comfort.pool = !state.comfort.pool;
-    },
-    setGym: (state) => {
-      state.comfort.gym = !state.comfort.gym;
-    },
-    setGarage: (state) => {
-      state.comfort.garage = !state.comfort.garage;
-    },
-    setParking: (state) => {
-      state.comfort.parking = !state.comfort.parking;
-    },
     setGarden: (state) => {
       state.comfort.garden = !state.comfort.garden;
-    },
-    setFireplace: (state) => {
-      state.comfort.fireplace = !state.comfort.fireplace;
     },
     setElevator: (state) => {
       state.comfort.elevator = !state.comfort.elevator;
     },
-    setClubhouse: (state) => {
-      state.comfort.clubhouse = !state.comfort.clubhouse;
+    setFencedYard: (state) => {
+      state.comfort.fenced_yard = !state.comfort.fenced_yard;
     },
-    setLaundry: (state) => {
-      state.comfort.laundry = !state.comfort.laundry;
+    setOpenArea: (state) => {
+      state.comfort.open_area = !state.comfort.open_area;
     },
-    setArea: (state) => {
-      state.comfort.area = !state.comfort.area;
+    setCloseArea: (state) => {
+      state.comfort.close_area = !state.comfort.close_area;
+    },
+    setPlayground: (state) => {
+      state.comfort.playground = !state.comfort.playground;
+    },
+    setInsulated: (state) => {
+      state.comfort.insulated = !state.comfort.insulated;
+    },
+    setCrossLayout: (state) => {
+      state.comfort.cross_layout = !state.comfort.cross_layout;
     },
 
     // clear filter
@@ -106,17 +98,15 @@ export const {
   setPrice,
   setTypeHouse,
   setPlace,
-  setPool,
-  setGym,
-  setGarage,
-  setParking,
-  setGarden,
-  setFireplace,
-  setElevator,
-  setClubhouse,
-  setLaundry,
-  setArea,
   setClearFilter,
   setPriceClear,
+  setGarden,
+  setElevator,
+  setFencedYard,
+  setOpenArea,
+  setCloseArea,
+  setPlayground,
+  setInsulated,
+  setCrossLayout,
 } = filterSlice.actions;
 export default filterSlice;

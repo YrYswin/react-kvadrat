@@ -1,24 +1,22 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { getHouseById } from "../../AdminRealEstate/store/action";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../app/store";
-import {  useParams } from "react-router-dom";
-import chackedSVG from "../../../shared/assets/checked.svg"
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { useParams } from "react-router-dom";
+import chackedSVG from "../../../shared/assets/checked.svg";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import Container from "../../../shared/helpers/Container";
 import { selectHouse } from "../../AdminRealEstate/store/slice";
 
 const checkbox = [
-  { label: "Спортзал", name: "gym" },
-  { label: "Клубный зал", name: "clubhouse" },
-  { label: "Лифт", name: "elevator" },
-  { label: "Камин", name: "fireplace" },
-  { label: "Гараж", name: "garage" },
   { label: "Сад", name: "garden" },
-  { label: "Бассейн", name: "pool" },
-  { label: "Парковка", name: "parking" },
-  { label: "Площадка", name: "area" },
-  { label: "Прачечная", name: "laundry" },
+  { label: "Лифт", name: "elevator" },
+  { label: "Открытая территория", name: "open_area" },
+  { label: "Закрытая территория", name: "close_area" },
+  { label: "Забор огорожен", name: "fenced_yard" },
+  { label: "Дектская площадка", name: "playground" },
+  { label: "Утеплен", name: "insulated" },
+  { label: "Сквозная планировка", name: "cross_layout" },
 ];
 
 interface HandleType {
@@ -26,8 +24,8 @@ interface HandleType {
 }
 
 const handleClickBack: HandleType = () => {
-  window.history.go(-1)
-}
+  window.history.go(-1);
+};
 
 const ProductInfo: React.FC = () => {
   const house = useSelector(selectHouse);
@@ -35,7 +33,7 @@ const ProductInfo: React.FC = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams();
   // console.log(house);
-  
+
   React.useEffect(() => {
     dispatch(getHouseById(Number(id)));
     setImage(house?.image as string);
@@ -76,22 +74,25 @@ const ProductInfo: React.FC = () => {
       });
     }
 
-
     const styleTW = checked ? "bg-green-700" : "bg-[#262626] border border-gray-600";
 
     return (
-      <div key={index} className={`flex gap-2 items-center text-sm text-white ${styleTW} rounded-lg py-2 px-5 cursor-default select-none`}>
+      <div
+        key={index}
+        className={`flex gap-2 items-center text-sm text-white ${styleTW} rounded-lg py-2 px-5 cursor-default select-none`}
+      >
         <p>{label}</p>
         {checked && <img className="w-5 h-5" src={chackedSVG} alt="Checked Icon" />}
       </div>
     );
   });
+  console.log(house);
 
   return (
     <Container>
       <div className="py-[30px] flex flex-col  gap-7">
         <div onClick={handleClickBack} className="cursor-pointer">
-          <KeyboardBackspaceIcon fontSize="large" sx={{color: "white",}}/>
+          <KeyboardBackspaceIcon fontSize="large" sx={{ color: "white" }} />
         </div>
         <div className="flex flex-col px-[10px]  sm:px-[30px] py-[26px] justify-between  bg-zinc-800 md:w-[611px]  w-full rounded-md gap-3 sm:gap-6">
           <div className="flex items-center justify-between ">
@@ -128,11 +129,12 @@ const ProductInfo: React.FC = () => {
                 className="md:w-[313px] md:h-[159px] sm:w-[295px] sm:h-[100px] w-[103px] h-[68px] cursor-pointer"
                 alt={`thumbnail-${obj.id}`}
               />
-              
             ))}
             <img
               className="md:w-[313px] md:h-[159px] sm:w-[295px] sm:h-[100px] w-[103px] h-[68px] cursor-pointer"
-              onClick={() => setImage(house?.image ?? "")} src={house?.image}/>
+              onClick={() => setImage(house?.image ?? "")}
+              src={house?.image}
+            />
           </div>
         </div>
         <div className="flex flex-col gap-3 text-white ">
@@ -142,9 +144,7 @@ const ProductInfo: React.FC = () => {
           </p>
         </div>
         <div className="bg-[#262626] py-3 px-5 rounded-xl">
-          <h1 className="text-xl text-white font-medium ml-5 pb-5">
-            ОБЗОР НЕДВИЖИМОСТИ
-          </h1>
+          <h1 className="text-xl text-white font-medium ml-5 pb-5">ОБЗОР НЕДВИЖИМОСТИ</h1>
           <div className="grid grid-cols-2 gap-4">
             {types.map((obj, index) => (
               <div
@@ -157,23 +157,16 @@ const ProductInfo: React.FC = () => {
                   className="p-2 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-14 lg:h-14 xl:w-16 xl:h-16"
                 />
                 <div className="flex flex-col items-start justify-center text-center">
-                  <h1 className="text-white text-[15px] md:text-xl lg:text-lg xl:text-xl font-bold">
-                    {obj.name}
-                  </h1>
-                  <p className="text-gray-100 text-xl sm:text-lg md:text-2xl lg:text-xl xl:text-2xl">
-                    {obj.number}
-                  </p>
+                  <h1 className="text-white text-[15px] md:text-xl lg:text-lg xl:text-xl font-bold">{obj.name}</h1>
+                  <p className="text-gray-100 text-xl sm:text-lg md:text-2xl lg:text-xl xl:text-2xl">{obj.number}</p>
                 </div>
               </div>
             ))}
           </div>
-
         </div>
         <div className="bg-[#262626] py-3 px-5 rounded-xl">
           <h1 className="text-xl font-medium text-white ml-10">УДОБСТВА</h1>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 py-5 gap-4">
-            {checkContainer}
-          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 py-5 gap-4">{checkContainer}</div>
         </div>
       </div>
     </Container>
