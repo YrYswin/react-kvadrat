@@ -48,7 +48,7 @@ const Header = () => {
           <Link to={"/"}>
             <img src="/svg/logo.svg" alt="logo" />
           </Link>
-          <img className="visible cursor-pointer md:hidden" src="/svg/burger.svg" onClick={() => setIsOpen(!isOpen)} alt="menu" />
+          <img className="visible cursor-pointer md:hidden" src="/svg/burger.svg" onClick={() => {event?.stopPropagation(); setIsOpen(prevState => !prevState);}} alt="menu" />
           <div className="items-center justify-between hidden text-white md:flex gap-7 text-md">
             <Link to="/">Главная</Link>
             <p className="cursor-pointer" onClick={() => handleScroll("products")}>

@@ -86,7 +86,6 @@ const ProductInfo: React.FC = () => {
       </div>
     );
   });
-  console.log(house);
 
   return (
     <Container>

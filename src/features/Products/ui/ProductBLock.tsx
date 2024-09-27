@@ -26,7 +26,7 @@ const ProductBLock: React.FC<HouseState> = ({ image, price, title, id, square_fo
           </div>
           <div className="flex justify-between text-[14px] md:text-[20px] font-medium px-2">
             <b>Цена:</b>
-            <b>$ {price}</b>
+            <b>$ {price.toString().slice(0, -3)}</b>
           </div>
         </div>
         <div className="flex justify-center">

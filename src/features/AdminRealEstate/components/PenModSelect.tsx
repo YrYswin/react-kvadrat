@@ -26,7 +26,6 @@ const PenModSelect: React.FC<Props> = ({ active, onChange }) => {
       const res = await axios.get<{ results: Address[] }>(API);
       if (Array.isArray(res.data.results)) {
         setAddress(res.data.results);
-        console.log(res.data.results);
       } else {
         console.error("Unexpected data format", res.data);
         setAddress([]);
