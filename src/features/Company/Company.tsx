@@ -1,12 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Container from "../../shared/helpers/Container";
 
+
 const Company: React.FC = () => {
+  const navigate = useNavigate();
+
+  const enterAdmin = () => {
+    navigate("/admin");
+  };
   return (
     <div className="text-[22px] text-white">
       <div className=" h-[47px] flex justify-between mt-[74px]">
         <div className="w-screen h-[20px] border-b border-gray-400"></div>
-        <div className="text-white w-[455px] h-[47px] text-center font-medium text-[22px] uppercase">О компании</div>
+        <div onDoubleClick={enterAdmin} className="text-white w-[455px] h-[47px] text-center font-medium text-[22px] uppercase">О компании</div>
         <div className="w-full h-[20px] border-b border-gray-400"></div>
       </div>
       <Container>
