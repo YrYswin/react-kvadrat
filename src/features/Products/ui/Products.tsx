@@ -63,7 +63,7 @@ const Products: React.FC = () => {
       </div>
       <div className="flex justify-center p-5">
         <Link to={"/watch"} onClick={scrollToTop}>
-          <button className="bg-[red] text-white py-3 px-7 text-xl rounded-full">Смотреть все</button>
+          <button className="bg-[red] text-white py-3 px-7 text-xl rounded-full hover:bg-[#ff4545]">Смотреть все</button>
         </Link>
       </div>
     </Container>

@@ -50,22 +50,22 @@ const Header = () => {
           </Link>
           <img className="visible cursor-pointer md:hidden" src="/svg/burger.svg" onClick={() => {event?.stopPropagation(); setIsOpen(prevState => !prevState);}} alt="menu" />
           <div className="items-center justify-between hidden text-white md:flex gap-7 text-md">
-            <Link to="/">Главная</Link>
-            <p className="cursor-pointer" onClick={() => handleScroll("products")}>
+            <Link className="hover:opacity-70 hover:underline" to="/">Главная</Link>
+            <p className="cursor-pointer hover:opacity-70 hover:underline" onClick={() => handleScroll("products")}>
               Купить недвижимость
             </p>
-            <p className="cursor-pointer" onClick={() => handleScroll("uslugi")}>
+            <p className="cursor-pointer hover:opacity-70 hover:underline" onClick={() => handleScroll("uslugi")}>
               Услуги
             </p>
-            <Link onClick={() => window.scrollTo( 0,0)} to="/AboutCompany">О компании</Link>
-            <p className="cursor-pointer" onClick={() => handleScroll("faq")}>
+            <Link className="hover:opacity-70 hover:underline" onClick={() => window.scrollTo( 0,0)} to="/AboutCompany">О компании</Link>
+            <p className="cursor-pointer hover:opacity-70 hover:underline" onClick={() => handleScroll("faq")}>
               FAQ
             </p>
           </div>
         </div>
         {isOpen && (
           <div ref={modalRef}>
-            <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
+            <Modal isOpen={isOpen} setIsOpen={setIsOpen}/>
           </div>
         )}
       </Container>

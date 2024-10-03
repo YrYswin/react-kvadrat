@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/store";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { adminLogin } from "./store/action";
 import { loginState } from "./store/types";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"; 
 
 const SignIn: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
   const { handleSubmit, register } = useForm<loginState>();
+  
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<loginState> = (values) => {
-    dispatch(adminLogin({ data: values, navigate }));
+    setIsLoading(true); 
+    dispatch(adminLogin({ data: values, navigate }))
+      .finally(() => setIsLoading(false)); 
   };
 
   return (
@@ -33,25 +38,28 @@ const SignIn: React.FC = () => {
         </div>
         <div className="flex flex-col gap-1">
           <label className="text-gray-500 text-[12px] md:text-[16px]">Введите пароль*</label>
-          <input
-            type="password"
-            {...register("password")}
-            className="bg-white rounded-md pl-[24px] py-[5px] md:py-[15px] placeholder:text-[10px] md:placeholder:text-[16px]"
-            placeholder="password"
-          />
-        </div>
-        <div className="flex items-center gap-2">
-          <input className="cursor-pointer" type="checkbox" />
-          <span className="flex gap-1 text-white ">
-            <p className="text-gray-500 text-[10px] md:text-[17px]">Я согласен с </p>{" "}
-            <p className="text-[10px] md:text-[17px]">Условиями предоставления услуг</p>
-          </span>
+          <div className="relative bg-white">
+            <input
+              type={showPassword ? "text" : "password"} 
+              {...register("password")}
+              className="bg-white w-[100%] rounded-md pl-[24px] py-[5px] md:py-[15px] placeholder:text-[10px] md:placeholder:text-[16px] pr-10" 
+              placeholder="password"
+            />
+            <button
+              type="button"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2" 
+              onClick={() => setShowPassword(!showPassword)} 
+            >
+              {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />} 
+            </button>
+          </div>
         </div>
         <button
           type="submit"
-          className="w-full text-white bg-red-600 rounded-full hover:bg-red-700 align-center py-[8px] md:py-[15px] mt-[15px] md:mt-[19px]"
+          className={`w-full text-white rounded-full align-center py-[8px] md:py-[15px] mt-[15px] md:mt-[19px] ${isLoading ? "bg-gray-500" : "bg-red-600 hover:bg-red-700"}`}
+          disabled={isLoading} 
         >
-          Войти
+          {isLoading ? "Загрузка..." : "Войти"} 
         </button>
       </form>
     </div>

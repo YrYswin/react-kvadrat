@@ -3,6 +3,7 @@ import { apiRoot } from "../../../app/api";
 import { loginState } from "./types";
 import { NavigateFunction } from "react-router-dom";
 import TokenService from "../../../utils";
+import { toast } from "react-toastify";
 
 const adminLoginReq = (data: loginState) => {
   return apiRoot.post("api/admin/login/", data);
@@ -17,7 +18,7 @@ export const adminLogin = createAsyncThunk(
       if (res.status === 200) {
         TokenService.setUserLS(data);
         navigate("/admin");
-        alert("Вы успешно вошли в систему");
+        alert("Вы успешно вошли в аккаунт");
         return data;
       } else {
         return res.data;
