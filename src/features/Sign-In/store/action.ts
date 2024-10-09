@@ -3,7 +3,6 @@ import { apiRoot } from "../../../app/api";
 import { loginState } from "./types";
 import { NavigateFunction } from "react-router-dom";
 import TokenService from "../../../utils";
-import { toast } from "react-toastify";
 
 const adminLoginReq = (data: loginState) => {
   return apiRoot.post("api/admin/login/", data);
