@@ -12,7 +12,7 @@ const ProductBLock: React.FC<HouseState> = ({ image, price, title, id, square_fo
   };
   const imagesArray = [...images.map((image) => image.image), image];
   return (
-    <div className="mw-[30cwq]  rounded-lg overflow-hidden bg-[#eee]">
+    <div onClick={() => clickInfo(id)} className="mw-[30cwq] rounded-lg overflow-hidden bg-[#eee] transition-transform duration-300 ease-in-out hover:scale-105">
       <div className="w-[100%]">
         <CarouselPro images={imagesArray} />
       </div>

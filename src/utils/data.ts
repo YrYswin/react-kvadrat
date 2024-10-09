@@ -86,13 +86,15 @@ export const testimonials: testimonialsState[] = [
 
 export const priceVariable: PriceVariableState[] = [
   { id: 0, label: "Без ограничения", min: null, max: null },
-  { id: 1, label: "до 1млн", min: 0, max: 1_000_000 },
-  { id: 2, label: "от 1млн до 2млн", min: 1_000_000, max: 2_000_000 },
-  { id: 3, label: "от 2млн до 3млн", min: 2_000_000, max: 3_000_000 },
-  { id: 4, label: "от 3млн до 4млн", min: 3_000_000, max: 4_000_000 },
-  { id: 5, label: "от 4млн до 5млн", min: 4_000_000, max: 5_000_000 },
-  { id: 6, label: "от 5млн", min: 5_000_000, max: null },
+  { id: 1, label: "до 100 тыс.", min: 0, max: 100_000 },
+  { id: 2, label: "от 100 тыс. до 200 тыс.", min: 100_000, max: 200_000 },
+  { id: 3, label: "от 200 тыс. до 300 тыс.", min: 200_000, max: 300_000 },
+  { id: 4, label: "от 300 тыс. до 400 тыс.", min: 300_000, max: 400_000 },
+  { id: 5, label: "от 400 тыс. до 500 тыс.", min: 400_000, max: 500_000 },
+  { id: 6, label: "от 500 тыс. до 700 тыс.", min: 500_000, max: 700_000 },
+  { id: 7, label: "от 700 тыс.", min: 700_000, max: null },
 ];
+
 
 export const addressArray: string[] = [
   "Микрорайоны",
